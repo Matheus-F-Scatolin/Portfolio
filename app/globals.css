@@ -9,8 +9,18 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-[var(--background)] text-[var(--foreground)];
+    @apply text-[var(--foreground)];
     @apply antialiased;
+    background: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #0a0a0a 100%);
+  }
+
+  ::selection {
+    background: #3b82f6;
+    color: white;
   }
 }
