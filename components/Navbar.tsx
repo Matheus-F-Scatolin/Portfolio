@@ -7,6 +7,7 @@ const navigation = [
   { name: 'Experience', href: '/#experience' },
   { name: 'Projects', href: '/#projects' },
   { name: 'About', href: '/#about' },
+  { name: 'Awards', href: '/#awards' },
 ];
 
 export default function Navbar() {

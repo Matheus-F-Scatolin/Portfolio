@@ -4,15 +4,15 @@ import { motion } from 'framer-motion';
 import { Globe, Plane, Dumbbell } from 'lucide-react';
 
 const highlights = [
-  { icon: Globe, label: '23 Countries Visited' },
+  { icon: Globe, label: '24 Countries Visited' },
   { icon: Plane, label: '6 Months in Canada' },
   { icon: Dumbbell, label: 'Gym & Soccer' },
 ];
 
 const skills = {
-  core: ['Python (Expert)', 'Java', 'C', 'VHDL', 'RISC-V'],
-  aiData: ['PyTorch', 'Pandas', 'Graph-RAG', 'LLMs', 'RAPIDS', 'Neo4j'],
-  security: ['RSA/AES', 'Padding Oracle', 'Network Security'],
+  core: ['Python (Expert)', 'Java', 'C', 'VHDL', 'RISC-V', 'SQL', 'HTML/CSS', 'JavaScript'],
+  aiData: ['PyTorch', 'Pandas', 'RAG', 'LLMs', 'Neo4j', 'SKLearn', 'NumPy'],
+  softskills: ['Teamwork', 'Communication', 'Problem-Solving', 'Adaptability', 'Leadership'],
 };
 
 export default function About() {
@@ -43,15 +43,15 @@ export default function About() {
               Beyond engineering, I have a global perspective developed by visiting{' '}
               <span className="text-white font-medium">24 countries</span> and living abroad in{' '}
               <span className="text-white font-medium">Canada</span> (High School) and{' '}
-              <span className="text-white font-medium">Abu Dhabi</span> (MBZUAI Research). This
-              experience allows me to collaborate effectively in multicultural
+              <span className="text-white font-medium">Abu Dhabi</span> (MBZUAI Research). These
+              experiences allow me to collaborate effectively in multicultural
               environments.
             </p>
 
             <p>
-              To maintain peak performance, I'm an avid gym-goer and soccer
+              To maintain peak performance, I'm a regular gym-goer and soccer
               player. When I'm offline, I'm likely watching Palmeiras, following
-              soccer, or catching up on series.
+              soccer, or catching up on TV Shows.
             </p>
           </div>
 
@@ -105,13 +105,13 @@ export default function About() {
             </div>
           </div>
 
-          {/* Security */}
+          {/* Soft Skills */}
           <div>
             <h3 className="text-zinc-500 uppercase text-[10px] tracking-widest mb-3">
-              Security
+              Soft Skills
             </h3>
             <div className="flex flex-wrap gap-2">
-              {skills.security.map((skill) => (
+              {skills.softskills.map((skill) => (
                 <span
                   key={skill}
                   className="bg-neutral-900 border border-neutral-800 text-neutral-300 px-3 py-1.5 rounded-md text-xs"
