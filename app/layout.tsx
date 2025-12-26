@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Matheus Ferracciú Scatolin | AI Researcher",
     description: "Building autonomous systems and quantitative models.",
-    url: "https://matheus-scatolin.vercel.app",
+    url: "https://portfolio-aojosta5h-matheus-scatolins-projects.vercel.app",
     siteName: "Matheus F. Scatolin Portfolio",
     locale: "en_US",
     type: "website",
