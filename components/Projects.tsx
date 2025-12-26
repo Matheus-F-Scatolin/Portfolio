@@ -18,7 +18,7 @@ const projects = [
       '2nd Place in Itaú Quant AI Challenge. Generalizes pairs trading via non-linear causality networks.',
     tags: ['Python', 'Time-Series', 'Network Theory'],
     link: 'https://www.linkedin.com/posts/matheus-scatolin_desafioquantai2025-itaaeqasset-finanaexasquantitativas-activity-7406379037675294720-anxi',
-    image: '/previews/quant.png',
+    image: '/previews/quant__.png',
   },
   {
     title: 'BookExchangePlatform',
@@ -50,7 +50,7 @@ const projects = [
       'Implemented Padding Oracle Attacks and RSA factorization scripts to expose vulnerabilities in secure systems.',
     tags: ['Cybersecurity', 'RSA/AES', 'Python'],
     link: 'https://github.com/Matheus-F-Scatolin/Cryptography1-Stanford-University',
-    image: '/previews/cryptography.png',
+    image: '/previews/criptography__.png',
   },
   {
     title: 'Low-Level Design Labs',
@@ -66,7 +66,7 @@ const projects = [
       'Pokemon game that implements core Pokemon battle mechanics, allowing two players to choose their Pokemon and battle each other.',
     tags: ['Java', 'OOP', 'Game Logic'],
     link: 'https://github.com/Matheus-F-Scatolin/MC322-Pokemon_Game_Project',
-    image: '/previews/pokemon-game.png',
+    image: '/previews/pokemon-game.jpeg',
   },
 ];
 
@@ -122,7 +122,7 @@ export default function Projects() {
             />
 
             {/* Gradient Overlay for Text Legibility */}
-            <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-black/80 to-black/40" />
+            <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-black/80 to-black/40 transition-all duration-500 group-hover:from-black/70 group-hover:via-black/50 group-hover:to-black/20" />
 
             {/* Header: Title & Arrow */}
             <div className="relative z-20 flex items-start justify-between mb-2">
