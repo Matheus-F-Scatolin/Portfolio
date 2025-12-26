@@ -33,7 +33,7 @@ function LenisAnchorHandler() {
         if (href?.startsWith('/#') || href?.startsWith('#')) {
           e.preventDefault();
           const targetId = href.replace('/#', '#');
-          const targetElement = document.querySelector(targetId);
+          const targetElement = document.querySelector(targetId) as HTMLElement | null;
           
           if (targetElement) {
             lenis.scrollTo(targetElement, {

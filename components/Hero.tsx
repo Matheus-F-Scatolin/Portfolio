@@ -21,7 +21,7 @@ const itemVariants = {
     y: 0,
     transition: {
       duration: 0.5,
-      ease: 'easeOut',
+      ease: 'easeOut' as const,
     },
   },
 };
@@ -38,7 +38,7 @@ const blurVariants = {
     transition: {
       duration: 0.6,
       delay: i * 0.08,
-      ease: 'easeOut',
+      ease: 'easeOut' as const,
     },
   }),
 };
