@@ -19,6 +19,17 @@ function LenisAnchorHandler() {
       
       if (anchor) {
         const href = anchor.getAttribute('href');
+        
+        // Handle home link "/" - scroll to top
+        if (href === '/') {
+          e.preventDefault();
+          lenis.scrollTo(0, {
+            duration: 1.5,
+          });
+          return;
+        }
+        
+        // Handle anchor links
         if (href?.startsWith('/#') || href?.startsWith('#')) {
           e.preventDefault();
           const targetId = href.replace('/#', '#');
