@@ -3,6 +3,7 @@ import Experience from '@/components/Experience';
 import Awards from '@/components/Awards';
 import Projects from '@/components/Projects';
 import About from '@/components/About';
+import Gallery from '@/components/Gallery';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
         <Projects />
         <About />
         <Awards />
+        <Gallery />
         <Footer />
       </div>
     </main>

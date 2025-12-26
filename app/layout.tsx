@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import ScrollProgress from "@/components/ScrollProgress";
 import Navbar from "@/components/Navbar";
+import CustomCursor from "@/components/CustomCursor";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -43,6 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} scroll-smooth`}>
       <body className={inter.className}>
+        <CustomCursor />
         <ScrollProgress />
         <Navbar />
         {children}

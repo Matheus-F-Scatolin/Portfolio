@@ -5,11 +5,12 @@ import { ArrowUpRight } from 'lucide-react';
 
 const projects = [
   {
-    title: 'STELLAR (AI Architecture)',
+    title: 'STELLAR (LLM Architecture)',
     description:
       'Structured, Trustworthy, and Explainable LLM-Led Architecture. Replaces monolithic calls with 9-module DAG logic.',
     tags: ['Python', 'RAG', 'Vector DB', 'DAG'],
     link: 'https://github.com/Matheus-F-Scatolin/STELLAR',
+    image: '/previews/stellar.png',
   },
   {
     title: 'KernelNet (Quant Finance)',
@@ -17,6 +18,7 @@ const projects = [
       '2nd Place in Itaú Quant AI Challenge. Generalizes pairs trading via non-linear causality networks.',
     tags: ['Python', 'Time-Series', 'Network Theory'],
     link: 'https://www.linkedin.com/posts/matheus-scatolin_desafioquantai2025-itaaeqasset-finanaexasquantitativas-activity-7406379037675294720-anxi',
+    image: '/previews/quant.png',
   },
   {
     title: 'BookExchangePlatform',
@@ -24,6 +26,7 @@ const projects = [
       'web platform developed with Django that connects university students for donating used books.',
     tags: ['Python', 'Django', 'Web Development'],
     link: 'https://github.com/Matheus-F-Scatolin/BookExchangePlatform',
+    image: '/previews/BookExchangePlatform.png',
   },
   {
     title: 'PDF Data Extraction System',
@@ -31,6 +34,7 @@ const projects = [
       'Complete PDF data extraction system using LLMs, with multi-layer caching, pattern learning, and intelligent fallback.',
     tags: ['AI', 'Caching', 'Python', 'PDF Extraction'],
     link: 'https://github.com/Matheus-F-Scatolin/ai-fellowship-project-matheus-scatolin',
+    image: '/previews/ai-fellowship.png',
   },
   {
     title: 'Agri-Food Analysis (Databases)',
@@ -38,6 +42,7 @@ const projects = [
       'Dual-database architecture (PostgreSQL + Neo4j) analyzing land concentration vs. food security using FAOSTAT data.',
     tags: ['SQL', 'Cypher', 'Python', 'Neo4j'],
     link: 'https://github.com/Matheus-F-Scatolin/MC536-Database-Project-FoodSecurity',
+    image: '/previews/Database-Project-FoodSecurity.png',
   },
   {
     title: 'Applied Cryptography Labs',
@@ -45,6 +50,7 @@ const projects = [
       'Implemented Padding Oracle Attacks and RSA factorization scripts to expose vulnerabilities in secure systems.',
     tags: ['Cybersecurity', 'RSA/AES', 'Python'],
     link: 'https://github.com/Matheus-F-Scatolin/Cryptography1-Stanford-University',
+    image: '/previews/cryptography.png',
   },
   {
     title: 'Low-Level Design Labs',
@@ -52,6 +58,7 @@ const projects = [
       'Designed ALU, Cache Memory, and SDRAM controllers in VHDL. Implemented RISC-V assembly solutions.',
     tags: ['VHDL', 'Assembly', 'RISC-V'],
     link: 'https://github.com/Matheus-F-Scatolin/MC613-Digital-Circuits-Laboratory',
+    image: '/previews/Digital-Circuits-Laboratory.png',
   },
   {
     title: 'Pokemon Game',
@@ -59,6 +66,7 @@ const projects = [
       'Pokemon game that implements core Pokemon battle mechanics, allowing two players to choose their Pokemon and battle each other.',
     tags: ['Java', 'OOP', 'Game Logic'],
     link: 'https://github.com/Matheus-F-Scatolin/MC322-Pokemon_Game_Project',
+    image: '/previews/pokemon-game.png',
   },
 ];
 
@@ -104,10 +112,20 @@ export default function Projects() {
             target="_blank"
             rel="noopener noreferrer"
             variants={itemVariants}
-            className="group relative overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/50 p-6 transition-all hover:border-neutral-700 hover:bg-neutral-900"
+            className="group relative overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900 p-6 transition-all hover:border-neutral-700"
           >
+            {/* Background Image - Reveal on Hover */}
+            <img
+              src={project.image}
+              alt=""
+              className="absolute inset-0 z-0 h-full w-full object-cover opacity-0 scale-110 grayscale transition-all duration-500 group-hover:opacity-30 group-hover:scale-100 group-hover:grayscale-0"
+            />
+
+            {/* Gradient Overlay for Text Legibility */}
+            <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-black/80 to-black/40" />
+
             {/* Header: Title & Arrow */}
-            <div className="flex items-start justify-between mb-2">
+            <div className="relative z-20 flex items-start justify-between mb-2">
               <h3 className="text-lg font-semibold text-white">
                 {project.title}
               </h3>
@@ -121,12 +139,12 @@ export default function Projects() {
             </div>
 
             {/* Description */}
-            <p className="text-neutral-400 text-sm leading-relaxed mt-2 mb-6">
+            <p className="relative z-20 text-neutral-400 text-sm leading-relaxed mt-2 mb-6">
               {project.description}
             </p>
 
             {/* Tags */}
-            <div className="flex flex-wrap gap-2">
+            <div className="relative z-20 flex flex-wrap gap-2">
               {project.tags.map((tag) => (
                 <span
                   key={tag}

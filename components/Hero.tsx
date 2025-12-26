@@ -26,7 +26,27 @@ const itemVariants = {
   },
 };
 
+// Blur reveal animation for text
+const blurVariants = {
+  hidden: {
+    opacity: 0,
+    filter: 'blur(10px)',
+  },
+  visible: (i: number) => ({
+    opacity: 1,
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.6,
+      delay: i * 0.08,
+      ease: 'easeOut',
+    },
+  }),
+};
+
 export default function Hero() {
+  const name = 'Matheus Ferracciú Scatolin';
+  const words = name.split(' ');
+
   return (
     <section className="min-h-[80vh] flex flex-col justify-center">
       <motion.div
@@ -35,13 +55,21 @@ export default function Hero() {
         animate="visible"
         className="space-y-6 text-left"
       >
-        {/* Name */}
-        <motion.h1
-          variants={itemVariants}
-          className="text-4xl md:text-6xl font-bold tracking-tighter text-foreground"
-        >
-          Matheus Ferracciú Scatolin
-        </motion.h1>
+        {/* Name with Blur Reveal */}
+        <h1 className="text-4xl md:text-6xl font-bold tracking-tighter text-foreground">
+          {words.map((word, i) => (
+            <motion.span
+              key={i}
+              custom={i}
+              variants={blurVariants}
+              initial="hidden"
+              animate="visible"
+              className="inline-block mr-3 md:mr-4"
+            >
+              {word}
+            </motion.span>
+          ))}
+        </h1>
 
         {/* Headline */}
         <motion.p
@@ -65,12 +93,28 @@ export default function Hero() {
           variants={itemVariants}
           className="flex items-center gap-4 pt-2"
         >
-          {/* Primary Button */}
+          {/* Shimmer Button */}
           <Link
             href="#projects"
-            className="px-5 py-2.5 bg-white text-black text-sm font-medium rounded-md hover:opacity-80 transition-opacity"
+            className="group relative overflow-hidden bg-neutral-900 border border-neutral-800 text-white text-sm font-medium rounded-md px-6 py-3 transition-all hover:border-neutral-700"
           >
-            View Projects
+            <span className="relative z-10">View Projects</span>
+            {/* Shimmer Effect */}
+            <motion.span
+              className="absolute inset-0 z-0"
+              initial={{ x: '-100%' }}
+              animate={{ x: '200%' }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                repeatDelay: 3,
+                ease: 'linear',
+              }}
+              style={{
+                background:
+                  'linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent)',
+              }}
+            />
           </Link>
 
           {/* Social Icons */}
