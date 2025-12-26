@@ -9,10 +9,6 @@
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-
   body {
     @apply text-[var(--foreground)];
     @apply antialiased;

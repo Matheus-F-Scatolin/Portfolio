@@ -4,6 +4,7 @@ import "./globals.css";
 import ScrollProgress from "@/components/ScrollProgress";
 import Navbar from "@/components/Navbar";
 import CustomCursor from "@/components/CustomCursor";
+import SmoothScroll from "@/components/SmoothScroll";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -42,12 +43,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} scroll-smooth`}>
+    <html lang="en" className={inter.variable}>
       <body className={inter.className}>
-        <CustomCursor />
-        <ScrollProgress />
-        <Navbar />
-        {children}
+        <SmoothScroll>
+          <CustomCursor />
+          <ScrollProgress />
+          <Navbar />
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );
