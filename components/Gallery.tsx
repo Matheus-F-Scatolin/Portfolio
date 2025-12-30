@@ -37,8 +37,8 @@ const images = [
   // Row 3: 4 squares
   {
     id: 6,
-    src: '/images/medalhas.jpeg',
-    caption: 'Receiving 3 Gold Medals',
+    src: '/images/interview.jpg',
+    caption: 'Interview at MBZUAI',
     span: 'col-span-1',
   },
   {
