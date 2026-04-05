@@ -4,6 +4,20 @@ import { motion } from 'framer-motion';
 
 const experiences = [
   {
+    company: 'Enter',
+    role: 'AI Fellow',
+    date: 'Mar 2026 – Present',
+    description:
+      'Part of a selective fellowship connecting academic excellence to real-world AI implementation, contributing to high-impact AI solutions for major Latin American enterprises while helping position Brazil as a global AI powerhouse.',
+  },
+  {
+    company: 'XP Inc.',
+    role: 'Summer Intern',
+    date: 'Jan 2026 – Feb 2026',
+    description:
+      'Built an end-to-end ML MVP to identify HNW clients at risk of churn, combining robust data engineering, XGBoost modeling, STL-based temporal analysis, and feature optimization to support retention strategies with projected impact in the hundreds of millions of BRL.',
+  },
+  {
     company: 'Instituto Kunumi',
     role: 'AI Researcher',
     date: 'Aug 2025 – Present',
