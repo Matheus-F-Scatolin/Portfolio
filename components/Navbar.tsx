@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import CopyProfileButton from './CopyProfileButton';
 
 const navigation = [
   { name: 'Experience', href: '/#experience' },
@@ -38,6 +39,7 @@ export default function Navbar() {
               {item.name}
             </Link>
           ))}
+          <CopyProfileButton />
         </div>
       </nav>
     </motion.header>
