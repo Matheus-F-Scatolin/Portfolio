@@ -4,11 +4,18 @@ import { motion } from 'framer-motion';
 
 const experiences = [
   {
+    company: 'Valor Capital Group',
+    role: 'AI Engineer',
+    date: 'Jun 2026 – Present',
+    description:
+      'Selected for the Tech Summer program in San Francisco, working directly with the Head of AI. Building agentic systems, data pipelines, and intelligence infrastructure for venture operations and investment analysis, plus technical diligence on early and growth-stage startups.',
+  },
+  {
     company: 'Enter',
     role: 'AI Fellow',
-    date: 'Mar 2026 – Present',
+    date: 'Mar 2026 – Jun 2026',
     description:
-      'Part of a selective fellowship connecting academic excellence to real-world AI implementation, contributing to high-impact AI solutions for major Latin American enterprises while helping position Brazil as a global AI powerhouse.',
+      "AI Fellowship at LatAm's largest AI startup ($1.2B unicorn). Architected a distributed, concurrent pipeline (FastAPI, Hatchet, React, LLMs) that processed thousands of judicial decisions, and built an automated framework for evolving enterprise argument taxonomies with embeddings and LLMs.",
   },
   {
     company: 'XP Inc.',
@@ -20,9 +27,9 @@ const experiences = [
   {
     company: 'Instituto Kunumi',
     role: 'AI Researcher',
-    date: 'Aug 2025 – Present',
+    date: 'Aug 2025 – Aug 2026',
     description:
-      'Building pipelines for automatic Knowledge Graph generation and Graph-RAG architectures.',
+      'One-year undergraduate research position on automatic Knowledge Graph generation and Graph-RAG techniques, building entity/relation extraction pipelines and Graph-RAG question-answering prototypes.',
   },
   {
     company: 'MBZUAI (Abu Dhabi)',

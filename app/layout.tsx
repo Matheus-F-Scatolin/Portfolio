@@ -29,6 +29,11 @@ export const metadata: Metadata = {
     "Graph-RAG",
     "Deep Learning",
   ],
+  alternates: {
+    types: {
+      "text/markdown": "/llms.txt",
+    },
+  },
   openGraph: {
     title: "Matheus Ferracciú Scatolin | AI Researcher",
     description: "Building autonomous systems and quantitative models.",

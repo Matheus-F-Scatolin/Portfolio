@@ -1,0 +1,390 @@
+# Matheus Ferracciú Scatolin
+
+**Master Profile: everything in one place**
+
+AI Engineer @ Valor Capital Group | Computer Engineering @ Unicamp (Ranked 1st of 102) | Fellow Estudar '25 | Published AI Researcher
+
+*Last updated: August 2026*
+
+---
+
+## Contact & Profiles
+
+- **LinkedIn:** https://www.linkedin.com/in/matheus-scatolin
+- **GitHub:** https://github.com/Matheus-F-Scatolin
+- **Google Scholar:** https://scholar.google.com/citations?hl=en&authuser=2&user=ieyEKR4AAAAJ
+- **ResearchGate:** https://www.researchgate.net/profile/Matheus-Ferracciu-Scatolin
+- **ORCID:** https://orcid.org/0009-0003-2014-356X
+- **Home base:** Campinas, São Paulo, Brazil (in San Francisco, CA for the Valor Capital Group Tech Summer 2026)
+
+## At a Glance
+
+- Top-ranked Computer Engineering student at Unicamp: **1st of 102**, GPA **3.94/4.0**
+- **AI Engineer at Valor Capital Group** (Tech Summer 2026, San Francisco), working directly with the firm's Head of AI
+- **Fellow Estudar '25**: one of Brazil's most prestigious merit-based scholarships (Fundação Estudar)
+- **4 scientific publications**: first author of a journal paper (Journal of the Brazilian Computer Society), co-author of 2 MICCAI 2025 LNCS chapters, co-first author of an arXiv challenge paper
+- **2nd place, Itaú Asset Quant AI Challenge 2025**, among ~1,000 teams and 2,500+ participants
+- **Best Team Award, MBZUAI UGRIP 2025** (selected in the top 3% of 2,000+ international applicants)
+- **7 olympiad gold medals and 2 honorable mentions** across national and international competitions
+- Demo Day finalist at IE University's Santander program in Madrid (90 selected from ~105,000 applicants)
+- Dual **Brazilian and Italian citizenship**; Portuguese (native), English (fluent, EF SET C2)
+- Long-term goal: founding an AI company
+
+## Summary
+
+Top-ranked Computer Engineering student at Unicamp (1st of 102), focused on LLMs and machine learning. Works across LLM research, multi-agent systems, and software development, combining strong technical skills with a history of academic awards and impactful projects. Self-driven and disciplined, motivated by building technologies that create real value and push the boundaries of what's possible. Current professional focus areas include agentic AI pipelines, knowledge graphs, Graph-RAG, and MCP-based tooling.
+
+---
+
+## Education
+
+### Universidade Estadual de Campinas (UNICAMP), Campinas, Brazil
+**B.Sc. in Computer Engineering** | Feb 2023 - Dec 2027 (expected)
+
+- Ranked **1st out of 102** students in the program, with a GPA of **3.94/4.0**
+- Admitted straight from high school to both Unicamp (Engineering) and USP (Law), choosing Unicamp
+- Skills developed: Natural Language Processing (NLP), Statistics, and 23+ others
+
+### IE University, Madrid, Spain
+**Innovation, Artificial Intelligence & Entrepreneurship** | 2026
+
+- **Santander Open Academy: Innovation & AI Experience**, a fully funded, intensive two-week in-person program by Banco Santander and IE University
+- Selected as **one of 90 participants from 13 countries out of ~105,000 applicants**
+- **Demo Day finalist (top 3 of 15 teams)** with an AI-resistant, voice-based knowledge-assessment platform for high schools: teachers upload their course materials and the platform generates AI-resistant voice assessments plus a per-topic mastery dashboard
+- **Led the technical build**: a working two-sided prototype (teacher authoring flow + student voice-tutor session)
+
+### Lindsay Thurber Comprehensive High School, Red Deer, Alberta, Canada
+**Grade 12 (international exchange semester)** | Jan 2022 - Jun 2022
+
+- Overall average of **96%**: 99% in Calculus, 97% in Physics 30, 93% in Theory of Knowledge (IB), 92% in English
+- Member of the soccer team; developed leadership and perfected English speaking, reading, and writing
+
+### Ilimit Educacional, Brazil
+**Primary and Secondary Education** | Feb 2016 - Dec 2022 | Grade: 99%
+
+- **Class Valedictorian at both Middle School (9th grade) and High School (12th grade)** graduations
+- Recognized as the highest-ranking student in his class for academic performance
+- Completed a bilingual program with additional afternoon classes fully taught in English
+- Active in academic olympiads, soccer, and volleyball
+- Invited back in 2023 to join a podcast about his academic journey and university admissions
+
+---
+
+## Professional Experience
+
+### Valor Capital Group | AI Engineer, Tech Summer | Jun 2026 - Present | San Francisco, CA
+Selected as part of an elite cohort of engineers for the Tech Summer program (San Francisco and São Paulo), working directly with the Head of AI to build systems and infrastructure for venture operations and investment analysis.
+
+- **Agentic workflows:** designing and deploying autonomous agentic systems to streamline internal firm operations
+- **Data & intelligence layers:** developing data pipelines and intelligence infrastructure to support investment decision-making
+- **Technical diligence:** evaluating the technical stack, architecture, and scalability of early and growth-stage technology startups
+- Day-to-day work spans agentic AI pipelines, knowledge graphs, and MCP-based tooling
+
+### Instituto Kunumi (kunuminst COLABS) | AI Researcher | Aug 2025 - Aug 2026 | Campinas, Brazil
+One-year undergraduate research position.
+
+- Research on the **automatic generation of Knowledge Graphs** and new techniques for **Graph-RAG** systems
+- Developing pipelines for entity/relation extraction and prototypes for Graph-RAG-based question answering
+
+### Enter | AI Fellow | Mar 2026 - Jun 2026 | São Paulo, Brazil
+Selected for the AI Fellowship at Enter, the **largest AI startup in Latin America and a $1.2B unicorn**; a highly selective program designed to bridge advanced AI research and production-grade enterprise software engineering.
+
+- Architected and deployed a **distributed, asynchronous, and concurrent web pipeline** using **FastAPI, Hatchet, React, and LLMs**, transforming a local script into a resilient, production-grade system that processed **thousands of judicial decisions**
+- Developed a **novel automated framework for the continuous evolution of enterprise argument taxonomies** using text embeddings and LLMs, enabling dynamic and scalable knowledge discovery
+- Shifted engineering focus from isolated model training to robust backend infrastructure: system architecture boundaries, high-concurrency execution, and deployment pipelines
+- Featured on Enter's blog: https://www.blog.getenter.ai/en/posts/ai-fellowship
+
+### XP Inc. | Machine Learning Summer Intern | Jan 2026 - Feb 2026 | São Paulo, Brazil
+High-impact 4-week Summer Internship focused on mitigating customer churn in the High-Net-Worth (HNW) segment.
+
+- Defined an operational churn metric and built a robust dataset consolidating dozens of features across registration, suitability, digital engagement, and macroeconomic indicators
+- Developed a predictive MVP with **XGBoost**, selected after benchmarking against CatBoost and LightGBM; applied **STL decomposition** (Seasonal-Trend decomposition using LOESS) to analyze temporal patterns and reduce noise
+- Conducted rigorous feature selection and temporal feature engineering (max/min, trend, amplitude) to capture shifts in investor behavior
+- Validated results through **Out-of-Sample (OOS) and Out-of-Time (OOT)** testing; potential retention impact quantified in the **hundreds of millions of BRL**
+
+### MBZUAI (Mohamed bin Zayed University of Artificial Intelligence) | UGRIP Research Intern | Jun 2025 - Sep 2025 | Abu Dhabi, UAE
+
+- Selected among the **top 3% of 2,000+ international applicants** for UGRIP 2025, a fully funded AI research program
+- Collaborated on a complete AI pipeline for **multimodal 3D brain tumor segmentation, missing-modality synthesis (latent diffusion), and tumor response classification**, contributing to the BraTS 2025 Challenge under the supervision of Dr. Mohammad Yaqub
+- Served as one of the final presenters; the team received the **Best Team Award** (top group out of 15)
+- **Authored 3 papers** (1 as co-first author, 2 as co-author) on medical imaging and tumor-response modelling
+
+### Semantix AI | Research Fellow / AI Researcher | Mar 2024 - Aug 2025 | Campinas, Brazil
+
+- Designed, developed, and led **STELLAR** (Structured, Trustworthy, and Explainable LLM-Led Architecture for Reliable Customer Support): a production-ready LLM architecture built as a **Directed Acyclic Graph (DAG)** of nine specialized modules and eleven predefined workflows, integrating few-shot classification, **RAG**, sentiment analysis, urgency-aware human escalation, compliance verification, user interaction validation, and semi-automated knowledge base refinement. **Published in the Journal of the Brazilian Computer Society**
+- Built a **hallucination benchmark evaluating 7 models across 90,000+ questions** in English and Portuguese
+- Researched and implemented advanced RAG techniques; engineered specialized data pipelines for RAG-based retrieval, enhancing customer support workflows
+
+### Hyundai Motor Company | Data Analysis & Machine Learning Summer Intern | Jan 2025 - Feb 2025 | São Paulo, Brazil
+7-week Data Science program analyzing complex market data to predict trends and identify sales opportunities.
+
+- Enhanced the lead segmentation/conversion ML model, **boosting the F1 score from 21% to 39%** while enabling dynamic targeting
+- Designed a deterministic algorithm to scale predictions across larger datasets, enhancing marketing efficiency
+- Created a recommendation system for car models/versions based on purchase history and financial profile, boosting repurchase rates
+- **Cut monthly data processing time from 3 days to 3 minutes** by automating data aggregation and visualization pipelines, preventing manual errors
+
+---
+
+## Research & Publications
+
+**Profiles:** [Google Scholar](https://scholar.google.com/citations?hl=en&authuser=2&user=ieyEKR4AAAAJ) | [ResearchGate](https://www.researchgate.net/profile/Matheus-Ferracciu-Scatolin) | [ORCID](https://orcid.org/0009-0003-2014-356X)
+
+### 1. STELLAR: A Structured, Trustworthy, and Explainable LLM-Led Architecture for Reliable Customer Support (First author)
+Scatolin, M. F., & Pedrini, H. (2026). *Journal of the Brazilian Computer Society*, 32(1), 128-144. The journal is Qualis A2 and Scopus-indexed.
+
+- Novel architectural blueprint for reliable, explainable LLM-based customer support: DAG structure, nine specialized modules, eleven predefined workflows, RAG, compliance checks, and human-in-the-loop escalation
+- DOI: https://doi.org/10.5753/jbcs.2026.6044
+- Paper page: https://journals-sol.sbc.org.br/index.php/jbcs/article/view/6044
+
+### 2. Predicting Brain Tumor Response to Therapy using a Hybrid Deep Learning and Radiomics Approach (Co-first author)
+Tikhonov, D., Scatolin, M., Banerjee, M., Ji, Q., Jaheen, A., Salem, M., Elsayed, A., Wang, H., Hashmi, S., & Yaqub, M. (2025). Submitted to the BraTS-Lighthouse 2025 Challenge (MICCAI 2025).
+
+- Hybrid framework fusing fine-tuned ResNet-18 deep features with 4,800+ radiomic and clinically driven features; a CatBoost classifier reaches a mean ROC AUC of 0.81 in the 4-class RANO response prediction task
+- arXiv: https://arxiv.org/abs/2509.06511
+
+### 3. EMedNeXt: An Enhanced Brain Tumor Segmentation Framework for Sub-Saharan Africa Using MedNeXt V2 with Deep Supervision (Co-author)
+Jaheen, A., Elsayed, A., Kim, D., Tikhonov, D., Scatolin, M., Banerjee, M., Ji, Q., Salem, M., Wang, H., Hashmi, S., & Yaqub, M. (2026). In *Segmentation, Classification, and Synthesis for Brain Tumors and Traumatic Brain Injuries* (MICCAI 2025 / BraTS-Lighthouse), Lecture Notes in Computer Science, vol. 16376, pp. 224-236. Springer, Cham.
+
+- Enhanced MedNeXt V2 framework with deep supervision for robust glioma segmentation in sub-Saharan Africa; average LesionWise DSC of 0.897 on the hidden validation set
+- DOI: https://doi.org/10.1007/978-3-032-16365-3_21
+- Code: https://github.com/BioMedIA-MBZUAI/EMedNeXt-BraTS-SSA-2025
+
+### 4. MISFIT: Modality Inference via Style Fusion and Invertible Translation for Cross-Modality Synthesis of 3D MRI Volumes (Co-author)
+Banerjee, M., Ji, Q., Hashmi, S., Elsayed, A., Tikhonov, D., Scatolin, M. F., Jaheen, A., Kim, D., Wang, H., Salem, M., & Yaqub, M. (2026). In *Segmentation, Classification, and Synthesis for Brain Tumors and Traumatic Brain Injuries* (MICCAI 2025 / BraTS-Lighthouse), Lecture Notes in Computer Science, vol. 16377, pp. 42-53. Springer, Cham.
+
+- Two-stage generative framework for 3D brain MRI synthesis operating entirely in the wavelet domain (conditional wavelet diffusion with CAFF and Multi-Switchable SPADE), for the BraSyn task
+- DOI: https://doi.org/10.1007/978-3-032-16370-7_4
+- Code: https://github.com/mohrsalt/MISFIT
+
+**Additional research:** automatic Knowledge Graph generation and Graph-RAG techniques (Instituto Kunumi, 2025-2026).
+
+---
+
+## Awards & Honors
+
+### 2nd Place (Silver Medal), Itaú Asset Quant AI Challenge 2025
+Itaú Asset Management | Dec 2025
+
+- 2nd place out of **nearly 1,000 teams and 2,500+ participants** in Brazil's largest challenge for undergraduate students, which also featured Brazilian competitors from top global institutions (MIT, Stanford, Berkeley)
+- Strategy developed: **KernelNet**, a market-neutral algorithmic trading strategy that generalizes pairs trading by replacing static correlations with nonlinear causality networks
+- Performance: **Sharpe Ratio of 1.29** and **54.85% annualized return** (vs the benchmark's 22.78%), demonstrating robustness across different market regimes
+
+### Best Team Award, UGRIP AI Research Internship
+MBZUAI | Jul 2025
+
+- Top award among **15 research groups** at the conclusion of UGRIP 2025 (~60 students selected from 2,000+ international applicants, a 3% acceptance rate)
+- Awarded for the team's solution to the BraTS 2025 Challenge under the supervision of Dr. Mohammad Yaqub
+
+### 4x Gold Medalist, Brazilian Olympiad of Astronomy and Astronautics (OBA)
+Brazilian Astronomical Society (SAB) & Brazilian Space Agency (AEB) | 2018-2021
+
+- Gold Medal (highest distinction, typically top 2-3% nationwide) for **four consecutive years**:
+  - 2018: ~774,000 participants
+  - 2019: ~884,000 participants
+  - 2020: ~437,000 participants (virtual edition)
+  - 2021: ~481,000 participants (hybrid edition)
+
+### 2x Gold Medalist, Math Kangaroo Brazil (Canguru de Matemática)
+Association Kangourou sans Frontières (AKSF) | 2019 and 2021
+
+- Gold Medal, awarded exclusively to the **top 1% of students nationwide**, in the largest international mathematics competition in the world (6M+ students from 80+ countries annually)
+  - 2019: top 1% among 300,000+ participants in Brazil
+  - 2021: top 1% among 400,000+ participants in Brazil
+
+### Gold Medal, National Science Olympiad (ONC) 2020
+Ministry of Science, Technology and Innovation (MCTI) | Mar 2021
+
+- Highest distinction in an edition with **over 2 million participants** nationwide; medals are awarded only to the top 5% of finalists
+- Multidisciplinary excellence across five disciplines: Physics, Chemistry, Biology, Astronomy, and History
+- Credential ID 1SAE5TO8, verification: https://certificados.onciencias.org/certificate/47?q=1SAE5TO8
+
+### 2 Honorable Mentions, Brazilian Mathematics Olympiad for Public Schools (OBMEP)
+Instituto de Matemática Pura e Aplicada (IMPA) | 2018 and 2019
+
+- Distinction in Brazil's largest academic competition and one of the largest in the world
+  - 2018 (14th edition): ~18.2 million participants; ~46,000 Honorable Mentions nationwide (0.25%)
+  - 2019 (15th edition): ~18.1 million participants; ~49,000 Honorable Mentions nationwide (0.27%)
+
+### Other Distinctions
+
+- **1st Place (twice)** in Poliedro's academic competitions (15,000+ participants)
+- **Class Valedictorian** at both Middle School and High School graduations (Ilimit Educacional)
+- Completed the **entire Kumon Mathematics Program at age 15**, a curriculum that progresses from basic arithmetic to university-level calculus and differential equations
+
+---
+
+## Fellowships & Selective Programs
+
+### Fundação Estudar, Fellow Estudar '25 | Jul 2025 - Present
+Selected for one of Brazil's most prestigious merit-based scholarships. The program, founded by Jorge Paulo Lemann, Marcel Telles, and Beto Sicupira, supports future leaders through financial aid, a high-impact community, mentorship, and career development.
+
+- Appointed **Campus Ambassador at Unicamp (2026)** to lead selection process outreach
+- **Speaker at the opening event (Onboarding) of the 2026 fellowship class**, where he led the "Pauta de Comunidade" session. Post by Fundação Estudar's CEO: https://www.linkedin.com/feed/update/urn:li:activity:7425146504094531584/?originalSubdomain=pt
+- Completed the 26-hour **"Execução de Alta Performance"** program by Na Prática (Fundação Estudar's education arm)
+
+### Other highly selective programs
+
+- **Santander Open Academy Innovation & AI Experience at IE University**: 90 selected from ~105,000 applicants (see Education)
+- **Enter AI Fellowship**: highly selective fellowship at LatAm's largest AI startup (see Experience)
+- **MBZUAI UGRIP 2025**: top 3% of 2,000+ international applicants (see Experience)
+- **Valor Capital Group Tech Summer**: elite engineering cohort (see Experience)
+
+---
+
+## Leadership, Teaching & Community
+
+- **Projects Coordinator, Unicamp Portas Abertas (UPA):** Unicamp's largest outreach event, which receives **50,000+ visitors yearly**. Selected and coordinated a **40-person team** based on the quality of their projects
+- **Voluntary Python course:** organized and taught a Python course for high school students at his former school
+- **Moderator and speaker** at AI research events connecting Brazilian students to international research opportunities (see Talks & Media)
+
+---
+
+## Talks, Media & Public Appearances
+
+- **Invited Speaker, BaIA 2026 (AI community at the Federal University of Bahia, UFBA):** talk on frontier AI research, covering the structure of high-impact research programs, international research opportunities, and the path from undergraduate studies to frontier AI development. Post: https://www.instagram.com/liaoufba/p/DX9yWwGEWch/
+- **Invited Speaker, TAIL Tech Talk (Technology and Artificial Intelligence League, UFPB):** research experience at MBZUAI (UGRIP), covering medical AI projects in image segmentation, missing-modality generation, and brain tumor progression classification. Post: https://www.instagram.com/tailufpb/p/DOVinAWDtmD/
+- **Online talk on AI research at MBZUAI** (video): https://www.youtube.com/watch?v=JSAjhqnRJvM
+- **Invited Speaker & Moderator, AI Research Interview with MBZUAI Faculty and Graduate Students:** moderated a live interview-style session with a professor and two graduate students on AI research, academic life in graduate school, and building state-of-the-art AI systems
+- **Talk about Fundação Estudar** (video): https://www.youtube.com/watch?v=mVNtLJ_Ja9Q
+- **Featured in the official UGRIP 2025 video** (first to speak and give an interview): https://www.youtube.com/watch?v=bOXytFmEahU
+- **Podcast episode (2023):** invited by his former school to discuss admission to Engineering at Unicamp and acceptance to both Unicamp and USP (Law) straight from high school, including preparation strategies and long-term focus: https://www.youtube.com/watch?v=ZQEfC8QxtQQ
+- **Featured on Enter's blog** (AI Fellowship): https://www.blog.getenter.ai/en/posts/ai-fellowship
+
+---
+
+## Certifications
+
+- **Execução de Alta Performance**, Na Prática (Fundação Estudar) | May 2026. 26-hour high-performance execution program (in-person and live online) on driving results, personal productivity, and strategic decision-making. Credential ID 2988912A4FAB636318095070. Verify: https://e-certificado.com/login/autenticar?c=2988912A4FAB636318095070
+- **Academy Accreditation: Databricks Fundamentals**, Databricks | Jan 2026. Credential ID 171748371. Verify: https://credentials.databricks.com/9d425012-ae64-46f8-96e7-fcedf73af412
+- **Knowledge Badge: Get Started with Databricks for Data Engineering**, Databricks | Jan 2026. Credential ID 171673080. Verify: https://credentials.databricks.com/36676ce5-3b42-436d-b286-a69b8fff7b1c
+- **Fundamentals of Accelerated Data Science**, NVIDIA | Nov 2025. Credential ID P7Hq1rEUS6OwvnVGGaNDow
+- **EF SET English Certificate, Level C2**, EF SET | Aug 2025. Verify: https://cert.efset.org/pt/pi5VdP
+- **Cryptography I**, Stanford University (via Coursera) | Feb 2024. Credential ID Y5DLLKUDQHJR. Verify: https://www.coursera.org/account/accomplishments/records/Y5DLLKUDQHJR
+- **Hackers do Bem: Cybersecurity Training (Leveling Module, 80h)**, Ministério da Ciência, Tecnologia e Inovação (MCTI) | Feb 2024. Verify: https://ava.hackersdobem.org.br/mod/customcert/verify_certificate.php?contextid=366&code=3YByGfiYGA&qrcode=1
+- **Wadhwani Foundation Next-Generation Program** (with Semesp) | Aug 2021. Certification in Design, Innovation and Leadership in Entrepreneurship
+- **Introduction to Project Management**, Fundação Bradesco | Jan 2021. 10-hour course. Credential ID 0AAF56A5-3DDB-4592-837D-83C9CBD31E78
+- **Kumon Math Program Completer**, Kumon Brasil | Aug 2020. Completed the entire program at age 15
+
+---
+
+## Technical Skills
+
+- **Programming languages:** Python, Java, C, JavaScript, SQL, HTML/CSS, RISC-V Assembly, VHDL
+- **AI & Machine Learning:** PyTorch, Pandas, NumPy, Scikit-learn, LLMs, RAG and Graph-RAG, multi-agent systems, sentiment analysis, gradient boosting (XGBoost, CatBoost, LightGBM)
+- **Systems & backend:** FastAPI, Hatchet (distributed orchestration), React, distributed/asynchronous/concurrent pipelines
+- **Developer tools:** Git, Jupyter Notebooks, Linux, PostgreSQL, Neo4j, VS Code, Claude Code, Codex, Cursor, Antigravity
+- **Focus areas:** agentic AI, knowledge graphs, MCP-based tooling, LLM system architecture
+- **Spoken languages:** Portuguese (native), English (fluent, EF SET C2)
+
+---
+
+## Personal
+
+- Brazilian, from Campinas, São Paulo; holds **dual Brazilian and Italian citizenship**
+- Interests: photography, attending live sports events, and exploring cities on foot
+- Played soccer and volleyball through school, including on the soccer team during the exchange semester in Canada
+- Long-term goal: founding an AI company
+
+---
+
+## Application-Ready Material
+
+*Written in first person, in my own voice, so it can be pasted directly into application forms.*
+
+### Motivation (short, ~100 words)
+
+What drives me is simple: building products that people love using and that make their lives a bit better. The technology is a means; the point is the person on the other side. I chose Computer Engineering because programming is the highest-leverage way I know to reach many people with real solutions, and every step since (LLM research, medical AI in Abu Dhabi, engineering at Latin America's largest AI startup, AI systems at a VC in San Francisco) has been picked for two things: learning fast and working with people I genuinely admire. Long term, I want to build products that carry my own signature, at an early-stage startup or by founding my own.
+
+### Motivation (long version)
+
+I won't pretend there was a lightning-bolt moment. I got into AI gradually: it sounded like the future, I took a first research opportunity at Semantix, and one door opened the next. What kept me, though, had nothing to do with hype. It was discovering the feeling of someone actually using something I built.
+
+I got the first taste at Hyundai, where a model I developed was adopted by the team and people were genuinely happy with it. But the moment it really clicked was at Enter, Latin America's largest AI startup, where my role was closer to end-to-end software engineering than to research. I built a report generation tool, and when people started generating reports with it and telling me how much they loved it, I understood exactly what I want from my career. That feedback loop, someone's day getting easier because of something I shipped, is the thing I chase.
+
+That is also why I am more focused on impact than on the technology behind it. I chose Computer Engineering over other majors because programming lets me reach more people and build solutions that help more of them. And it is why the startup path feels like a natural conclusion rather than a leap: a good startup is, at its core, solving a big problem that lots of people have. I want to build things that carry my face and my feel, and that level of ownership only exists with real independence, at an early-stage startup or founding my own.
+
+Research and teaching both fit into this picture, each in its own way. Research is a powerful means to that end: at MBZUAI I co-authored three papers and my team won the Best Team Award, and I valued it precisely because it creates new ways of generating value for people. Teaching is something I genuinely love: I learn the most when I explain, which is why I taught a voluntary Python course at my former school, coordinated a 40-person team for Unicamp's largest outreach event, and keep giving talks that help Brazilian students access international opportunities.
+
+I have a special feeling for Brazil, but I like helping people regardless of geography. And at this stage of my career, I optimize for exactly two things when choosing where to go: working with people I genuinely admire, who have done work I respect, and maximizing how fast I learn. Everything else is secondary.
+
+### What drives me, ranked (for "what motivates you" questions)
+
+1. **People using what I build.** Products that solve real problems and make lives better; the user's reaction is the reward
+2. **Teaching and community.** I love teaching, and explaining a concept is when I learn it best
+3. **Shipping production systems.** I enjoy the craft, but the pleasure is not the shipping itself; it is what happens after, when people use it
+4. **Research novelty.** An awesome way of generating value for people, and a means to an end rather than the end itself
+5. **Measurable business impact.** Useful evidence that something works, but not what gets me up in the morning
+
+### Why startups and independence
+
+- A good startup is solving a big problem that lots of people have, which is exactly what I want my career to be about
+- I want to build things with my own signature, "my face and my feel," and that requires the independence found at early-stage startups or in founding my own
+- I am not dogmatic about founding first: joining an exceptional early-stage team as an early employee is an open door
+
+### How I choose opportunities (early career)
+
+- **People:** working with genuinely admirable people who have done work I respect
+- **Learning:** maximizing learning speed
+- Everything else (prestige, compensation, geography) is currently secondary
+
+### Career goals
+
+- **Short term:** build products end to end alongside people I admire, at the intersection of AI and product engineering, learning as fast as possible
+- **Medium term:** take real ownership of products in high-independence environments (early-stage startups, founder programs)
+- **Long term:** found a company whose products make many people's lives better
+
+### Signature stories (for behavioral questions)
+
+- **Product impact (the "click" moment):** at Enter, built a report generation tool end to end; hearing users' feedback as they adopted it and loved it crystallized why I do this work
+- **Leadership at scale:** as Projects Coordinator of Unicamp Portas Abertas (50,000+ visitors yearly), selected and coordinated a 40-person team based on project quality
+- **Technical ownership:** at Enter, transformed a localized script into a resilient, distributed, production-grade pipeline (FastAPI, Hatchet, React, LLMs) processing thousands of judicial decisions
+- **Performing under pressure:** at MBZUAI, delivered a complete 3D medical imaging pipeline in one summer, served as a final presenter, co-authored 3 papers, and won Best Team among 15 groups
+- **Building from zero, fast:** at IE University, led the technical build of a two-sided AI assessment prototype in two weeks, reaching the Demo Day finals (top 3 of 15)
+- **Competitive excellence:** designed KernelNet (Sharpe 1.29, 54.85% annualized return) and placed 2nd among ~1,000 teams in the Itaú Quant AI Challenge
+- **Giving back:** taught a voluntary Python course at my former high school; led the "Pauta de Comunidade" session at Fundação Estudar's 2026 Onboarding
+- **Failure and course correction:** at Enter, coming from an ML/research background into a software engineering role and pressured to ship fast, I over-delegated technical decisions to AI coding tools. When my boss asked me to explain my own architecture, I couldn't. From that day on, I own every technical decision deeply and use AI as leverage, never as a substitute for understanding
+- **"Bring the cake half-baked":** after arriving at an architecture discussion with only ideas, my boss taught me to always bring a working first version to the table. I now make every discussion tangible: a v1 to react to, instead of abstractions to debate
+
+### Logistics for application forms
+
+- **Expected graduation:** December 2027 (B.Sc. Computer Engineering, Unicamp)
+- **Citizenship / work authorization:** Brazilian and Italian (EU passport, eligible to work in the EU without sponsorship)
+- **Languages:** Portuguese (native), English (fluent, EF SET C2)
+- **Location:** Campinas, Brazil; open to international relocation
+- **Availability:** internships during Brazilian summer (Dec-Feb) and mid-year breaks; full time after graduation
+
+---
+
+## Complete Link Index
+
+**Profiles**
+- LinkedIn: https://www.linkedin.com/in/matheus-scatolin
+- GitHub: https://github.com/Matheus-F-Scatolin
+- Google Scholar: https://scholar.google.com/citations?hl=en&authuser=2&user=ieyEKR4AAAAJ
+- ResearchGate: https://www.researchgate.net/profile/Matheus-Ferracciu-Scatolin
+- ORCID: https://orcid.org/0009-0003-2014-356X
+
+**Publications**
+- STELLAR (JBCS): https://journals-sol.sbc.org.br/index.php/jbcs/article/view/6044 | DOI: https://doi.org/10.5753/jbcs.2026.6044
+- Tumor response prediction (arXiv): https://arxiv.org/abs/2509.06511
+- EMedNeXt (Springer, MICCAI 2025): https://link.springer.com/chapter/10.1007/978-3-032-16365-3_21 | Code: https://github.com/BioMedIA-MBZUAI/EMedNeXt-BraTS-SSA-2025
+- MISFIT (Springer, MICCAI 2025): https://link.springer.com/chapter/10.1007/978-3-032-16370-7_4 | Code: https://github.com/mohrsalt/MISFIT
+
+**Media & Talks**
+- Enter AI Fellowship blog post: https://www.blog.getenter.ai/en/posts/ai-fellowship
+- UFPB (TAIL) talk post: https://www.instagram.com/tailufpb/p/DOVinAWDtmD/
+- UFBA (BaIA/LIA) talk post: https://www.instagram.com/liaoufba/p/DX9yWwGEWch/
+- MBZUAI research talk (video): https://www.youtube.com/watch?v=JSAjhqnRJvM
+- Fundação Estudar talk (video): https://www.youtube.com/watch?v=mVNtLJ_Ja9Q
+- University admissions podcast: https://www.youtube.com/watch?v=ZQEfC8QxtQQ
+- Official UGRIP 2025 video (first interviewee): https://www.youtube.com/watch?v=bOXytFmEahU
+- Fundação Estudar 2026 Onboarding (CEO's post): https://www.linkedin.com/feed/update/urn:li:activity:7425146504094531584/?originalSubdomain=pt
+
+**Credential verifications**
+- ONC Gold Medal: https://certificados.onciencias.org/certificate/47?q=1SAE5TO8
+- Execução de Alta Performance: https://e-certificado.com/login/autenticar?c=2988912A4FAB636318095070
+- Databricks Fundamentals: https://credentials.databricks.com/9d425012-ae64-46f8-96e7-fcedf73af412
+- Databricks Data Engineering badge: https://credentials.databricks.com/36676ce5-3b42-436d-b286-a69b8fff7b1c
+- EF SET C2: https://cert.efset.org/pt/pi5VdP
+- Cryptography I (Coursera): https://www.coursera.org/account/accomplishments/records/Y5DLLKUDQHJR
+- Hackers do Bem: https://ava.hackersdobem.org.br/mod/customcert/verify_certificate.php?contextid=366&code=3YByGfiYGA&qrcode=1
