@@ -42,7 +42,7 @@ Top-ranked Computer Engineering student at Unicamp (1st of 102), focused on LLMs
 **B.Sc. in Computer Engineering** | Feb 2023 - Dec 2027 (expected)
 
 - Ranked **1st out of 102** students in the program, with a GPA of **3.94/4.0**
-- Admitted straight from high school to both Unicamp (Engineering) and USP (Law), choosing Unicamp
+- Admitted straight from high school to Computer Engineering at both Unicamp and USP, Brazil's two best universities (USP ranks higher overall; Unicamp is stronger in Computer Science), choosing Unicamp
 - Skills developed: Natural Language Processing (NLP), Statistics, and 23+ others
 
 ### IE University, Madrid, Spain
@@ -247,7 +247,7 @@ Selected for one of Brazil's most prestigious merit-based scholarships. The prog
 - **Invited Speaker & Moderator, AI Research Interview with MBZUAI Faculty and Graduate Students:** moderated a live interview-style session with a professor and two graduate students on AI research, academic life in graduate school, and building state-of-the-art AI systems
 - **Talk about Fundação Estudar** (video): https://www.youtube.com/watch?v=mVNtLJ_Ja9Q
 - **Featured in the official UGRIP 2025 video** (first to speak and give an interview): https://www.youtube.com/watch?v=bOXytFmEahU
-- **Podcast episode (2023):** invited by his former school to discuss admission to Engineering at Unicamp and acceptance to both Unicamp and USP (Law) straight from high school, including preparation strategies and long-term focus: https://www.youtube.com/watch?v=ZQEfC8QxtQQ
+- **Podcast episode (2023):** invited by his former school and recorded with a friend who studies Law, discussing his admission straight from high school to Computer Engineering at both USP and Unicamp, Brazil's two best universities, including preparation strategies and long-term focus: https://www.youtube.com/watch?v=ZQEfC8QxtQQ
 - **Featured on Enter's blog** (AI Fellowship): https://www.blog.getenter.ai/en/posts/ai-fellowship
 
 ---
