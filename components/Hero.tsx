@@ -9,13 +9,13 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.12,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
     y: 0,
@@ -26,27 +26,7 @@ const itemVariants = {
   },
 };
 
-// Blur reveal animation for text
-const blurVariants = {
-  hidden: {
-    opacity: 0,
-    filter: 'blur(10px)',
-  },
-  visible: (i: number) => ({
-    opacity: 1,
-    filter: 'blur(0px)',
-    transition: {
-      duration: 0.6,
-      delay: i * 0.08,
-      ease: 'easeOut' as const,
-    },
-  }),
-};
-
 export default function Hero() {
-  const name = 'Matheus Ferracciú Scatolin';
-  const words = name.split(' ');
-
   return (
     <section className="min-h-[80vh] flex flex-col justify-center">
       <motion.div
@@ -55,21 +35,13 @@ export default function Hero() {
         animate="visible"
         className="space-y-6 text-left"
       >
-        {/* Name with Blur Reveal */}
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tighter text-foreground">
-          {words.map((word, i) => (
-            <motion.span
-              key={i}
-              custom={i}
-              variants={blurVariants}
-              initial="hidden"
-              animate="visible"
-              className="inline-block mr-3 md:mr-4"
-            >
-              {word}
-            </motion.span>
-          ))}
-        </h1>
+        {/* Name */}
+        <motion.h1
+          variants={itemVariants}
+          className="font-display text-4xl md:text-6xl font-bold tracking-tight text-foreground"
+        >
+          Matheus Ferracciú Scatolin
+        </motion.h1>
 
         {/* Headline */}
         <motion.p
@@ -93,28 +65,11 @@ export default function Hero() {
           variants={itemVariants}
           className="flex items-center gap-4 pt-2"
         >
-          {/* Shimmer Button */}
           <Link
             href="#projects"
-            className="group relative overflow-hidden bg-neutral-900 border border-neutral-800 text-white text-sm font-medium rounded-md px-6 py-3 transition-all hover:border-neutral-700"
+            className="bg-neutral-900 border border-neutral-800 text-white text-sm font-medium rounded-md px-6 py-3 transition-colors hover:border-neutral-600 hover:bg-neutral-800 active:scale-[0.98]"
           >
-            <span className="relative z-10">View Projects</span>
-            {/* Shimmer Effect */}
-            <motion.span
-              className="absolute inset-0 z-0"
-              initial={{ x: '-100%' }}
-              animate={{ x: '200%' }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                repeatDelay: 3,
-                ease: 'linear',
-              }}
-              style={{
-                background:
-                  'linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent)',
-              }}
-            />
+            View Projects
           </Link>
 
           {/* Social Icons */}

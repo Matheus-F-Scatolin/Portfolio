@@ -1,8 +1,8 @@
-'use client';
-
-import { Github, Linkedin, Mail, MapPin } from 'lucide-react';
+import { Github, Linkedin, Mail, MapPin, GraduationCap } from 'lucide-react';
 
 export default function Footer() {
+  const year = new Date().getFullYear();
+
   return (
     <footer className="py-12 border-t border-neutral-800">
       <div className="flex flex-col items-center space-y-6">
@@ -41,11 +41,26 @@ export default function Footer() {
           >
             <Linkedin size={20} />
           </a>
+          <a
+            href="https://scholar.google.com/citations?hl=en&authuser=2&user=ieyEKR4AAAAJ"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-neutral-500 hover:text-neutral-300 transition-colors"
+            aria-label="Google Scholar"
+          >
+            <GraduationCap size={20} />
+          </a>
         </div>
 
         {/* Copyright */}
         <p className="text-neutral-500 text-sm text-center">
-          © 2025 Matheus Ferracciú Scatolin. Engineered in Next.js.
+          © {year} Matheus Ferracciú Scatolin. Engineered in Next.js.{' '}
+          <a
+            href="/llms.txt"
+            className="underline underline-offset-2 hover:text-neutral-300 transition-colors"
+          >
+            llms.txt
+          </a>
         </p>
       </div>
     </footer>
