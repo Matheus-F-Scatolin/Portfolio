@@ -21,18 +21,18 @@ const awards = [
       "Awarded 'Best Team' among 15 research groups for a solution to the BraTS 2025 Challenge. Selected for this fully funded program from a pool of over 2,000 international applicants (top 3% selection rate).",
   },
   {
-    title: 'Gold Medal - Math Kangaroo Brazil (Canguru de Matemática)',
-    issuingOrganization: 'Association Kangourou sans Frontières (AKSF)',
-    issueDate: 'Jul 2021',
+    title: '4x Gold Medal - Brazilian Olympiad of Astronomy and Astronautics (OBA)',
+    issuingOrganization: 'Brazilian Astronomical Society (SAB) & Brazilian Space Agency (AEB)',
+    issueDate: '2018 - 2021',
     description:
-      "Awarded the Gold Medal (top 1% nationwide) in the world's largest international mathematics competition. Over 400,000 participants in the 2021 Brazilian edition.",
+      'Gold Medal (highest distinction, awarded to the top 2-3% nationwide) for four consecutive years, in editions ranging from roughly 437,000 to 884,000 participants.',
   },
   {
-    title: 'Gold Medal - Brazilian Olympiad of Astronomy and Astronautics (OBA)',
-    issuingOrganization: 'SAB & AEB',
-    issueDate: 'Oct 2021',
+    title: '2x Gold Medal - Math Kangaroo Brazil (Canguru de Matemática)',
+    issuingOrganization: 'Association Kangourou sans Frontières (AKSF)',
+    issueDate: '2019 & 2021',
     description:
-      'Highest distinction awarded to the top 2-3% of participants nationwide. 2021 edition featured approximately 481,000 participants.',
+      "Gold Medal (top 1% nationwide) in the world's largest international mathematics competition, in Brazilian editions with 300,000+ (2019) and 400,000+ (2021) participants.",
   },
   {
     title: 'Gold Medal - National Science Olympiad (ONC)',
@@ -42,46 +42,11 @@ const awards = [
       'Achieved the highest distinction in the 2020 edition among over 2 million students. Demonstrated advanced proficiency across Physics, Chemistry, Biology, Astronomy, and History.',
   },
   {
-    title: 'Gold Medal - Brazilian Olympiad of Astronomy and Astronautics (OBA)',
-    issuingOrganization: 'SAB & AEB',
-    issueDate: 'Oct 2020',
-    description:
-      'Highest distinction (top 2-3% nationwide). 2020 Virtual Edition featured approximately 437,000 participants.',
-  },
-  {
-    title: 'Honorable Mention - OBMEP (Mathematics Olympiad)',
+    title: '2x Honorable Mention - OBMEP (Mathematics Olympiad)',
     issuingOrganization: 'IMPA',
-    issueDate: 'Dec 2019',
+    issueDate: '2018 & 2019',
     description:
-      'Achieved distinction in the 15th edition among 18.1 million participants. Awarded to the top 0.27% of students nationwide.',
-  },
-  {
-    title: 'Gold Medal - Brazilian Olympiad of Astronomy and Astronautics (OBA)',
-    issuingOrganization: 'SAB & AEB',
-    issueDate: 'Oct 2019',
-    description:
-      'Highest distinction (top 2-3% nationwide). 2019 edition featured approximately 884,000 participants.',
-  },
-  {
-    title: 'Gold Medal - Math Kangaroo Brazil (Canguru de Matemática)',
-    issuingOrganization: 'Association Kangourou sans Frontières (AKSF)',
-    issueDate: 'Jul 2019',
-    description:
-      'Awarded the Gold Medal (top 1% nationwide). Over 300,000 participants in the 2019 Brazilian edition.',
-  },
-  {
-    title: 'Honorable Mention - OBMEP (Mathematics Olympiad)',
-    issuingOrganization: 'IMPA',
-    issueDate: 'Dec 2018',
-    description:
-      'Achieved distinction in the 14th edition among 18.2 million participants. Awarded to the top 0.25% of students nationwide.',
-  },
-  {
-    title: 'Gold Medal - Brazilian Olympiad of Astronomy and Astronautics (OBA)',
-    issuingOrganization: 'SAB & AEB',
-    issueDate: 'Oct 2018',
-    description:
-      'Highest distinction (top 2-3% nationwide). 2018 edition featured approximately 774,000 participants.',
+      "Distinction in Brazil's largest academic competition, with roughly 18 million participants per edition; awarded to about the top 0.25% of students nationwide.",
   },
 ];
 
@@ -90,15 +55,15 @@ export default function Awards() {
 
   return (
     <section id="awards" className="py-20">
-      <h2 className="text-2xl font-bold tracking-tight mb-12 text-white">
+      <h2 className="font-display text-2xl md:text-3xl font-bold tracking-tight mb-12 text-white">
         Honors & Awards
       </h2>
 
       <div className="space-y-4">
         {awards.map((award, index) => (
           <motion.div
-            key={index}
-            className="border border-neutral-800 bg-neutral-900/30 rounded-lg overflow-hidden transition-all hover:border-neutral-700"
+            key={award.title}
+            className="border border-neutral-800 bg-neutral-900/30 rounded-lg overflow-hidden transition-colors hover:border-neutral-700"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

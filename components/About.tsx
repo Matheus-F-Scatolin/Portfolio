@@ -27,7 +27,7 @@ export default function About() {
       >
         {/* Left Column: Narrative */}
         <div>
-          <h2 className="text-2xl font-bold text-white mb-6">About Me</h2>
+          <h2 className="font-display text-2xl md:text-3xl font-bold tracking-tight text-white mb-6">About Me</h2>
 
           <div className="space-y-4 text-neutral-400 text-sm leading-relaxed">
             <p>

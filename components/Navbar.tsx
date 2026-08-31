@@ -4,9 +4,10 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import CopyProfileButton from './CopyProfileButton';
 
-const navigation = [
+const navigation: { name: string; href: string; desktopOnly?: boolean }[] = [
   { name: 'Experience', href: '/#experience' },
   { name: 'Projects', href: '/#projects' },
+  { name: 'Research', href: '/#research', desktopOnly: true },
   { name: 'About', href: '/#about' },
   { name: 'Awards', href: '/#awards' },
 ];
@@ -34,7 +35,9 @@ export default function Navbar() {
             <Link
               key={item.name}
               href={item.href}
-              className="text-xs text-zinc-400 hover:text-white transition-colors md:text-sm"
+              className={`text-xs text-zinc-400 hover:text-white transition-colors md:text-sm ${
+                item.desktopOnly ? 'hidden sm:inline' : ''
+              }`}
             >
               {item.name}
             </Link>

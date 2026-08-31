@@ -1,114 +1,92 @@
 'use client';
 
+import Image, { StaticImageData } from 'next/image';
 import { motion } from 'framer-motion';
 
-const images = [
-  // Row 1-2: Feature image + 4 squares
+import mbzuaiBestTeam from '@/public/gallery/mbzuai-best-team.jpg';
+import mbzuaiEntrance from '@/public/gallery/mbzuai-entrance.jpg';
+import mbzuaiInterview from '@/public/gallery/mbzuai-interview.jpg';
+import itauQuantAward from '@/public/gallery/itau-quant-award.jpg';
+import itauQuantStage from '@/public/gallery/itau-quant-stage.jpg';
+import unicampAdmission from '@/public/gallery/unicamp-admission.jpg';
+import upaCoordination from '@/public/gallery/upa-coordination.jpg';
+import hyundaiInterns from '@/public/gallery/hyundai-interns.jpg';
+import estudarEvent from '@/public/gallery/estudar-event.jpg';
+import volleyballTeam from '@/public/gallery/volleyball-team.jpg';
+
+interface GalleryImage {
+  src: StaticImageData;
+  caption: string;
+  span: string;
+  sizes: string;
+}
+
+const singleSizes = '(min-width: 768px) 184px, 50vw';
+const wideSizes = '(min-width: 768px) 376px, 100vw';
+
+const images: GalleryImage[] = [
+  // Rows 1-2: feature + tall portrait + 2 squares
   {
-    id: 1,
-    src: '/images/Best_team.JPEG',
+    src: mbzuaiBestTeam,
     caption: 'Best Team Award (UGRIP)',
     span: 'col-span-2 row-span-2',
+    sizes: wideSizes,
   },
   {
-    id: 2,
-    src: '/images/quant_1.jpeg',
-    caption: 'Itaú Quant AI Challenge Team',
-    span: 'col-span-1',
-  },
-  {
-    id: 3,
-    src: '/images/UGRIP_1.jpeg',
+    src: mbzuaiEntrance,
     caption: 'MBZUAI Main Entrance',
-    span: 'col-span-1',
+    span: 'col-span-1 row-span-2',
+    sizes: singleSizes,
   },
   {
-    id: 4,
-    src: '/images/quant_2.jpeg',
-    caption: 'Itaú Quant AI Challenge Final Presentation',
-    span: 'col-span-1',
-  },
-  {
-    id: 5,
-    src: '/images/UGRIP_2.jpeg',
-    caption: 'Final Presentation at MBZUAI',
-    span: 'col-span-1',
-  },
-  // Row 3: 4 squares
-  {
-    id: 6,
-    src: '/images/interview.jpg',
+    src: mbzuaiInterview,
     caption: 'Interview at MBZUAI',
     span: 'col-span-1',
+    sizes: singleSizes,
   },
   {
-    id: 7,
-    src: '/images/Uni.jpeg',
+    src: itauQuantAward,
+    caption: 'Itaú Quant AI Challenge Team',
+    span: 'col-span-1',
+    sizes: singleSizes,
+  },
+  // Row 3
+  {
+    src: unicampAdmission,
     caption: 'Passing the University Entrance Exam',
     span: 'col-span-1',
+    sizes: singleSizes,
   },
   {
-    id: 8,
-    src: '/images/Hyundai_1.jpeg',
-    caption: 'Final Presentation at Hyundai',
-    span: 'col-span-1',
-  },
-  {
-    id: 9,
-    src: '/images/Hyundai_2.jpeg',
-    caption: 'Hyundai Team',
-    span: 'col-span-1',
-  },
-  // Row 4: 2 wide images
-  {
-    id: 10,
-    src: '/images/Hyundai_3.JPG',
+    src: hyundaiInterns,
     caption: 'Summer Interns at Hyundai',
-    span: 'col-span-2',
+    span: 'col-span-1',
+    sizes: singleSizes,
   },
   {
-    id: 11,
-    src: '/images/UPA.JPEG',
+    src: upaCoordination,
     caption: 'Projects Coordinator at UPA (UNICAMP)',
     span: 'col-span-2',
+    sizes: wideSizes,
   },
-  // Row 5: 4 squares
+  // Row 4
   {
-    id: 12,
-    src: '/images/FE.JPEG',
+    src: estudarEvent,
     caption: 'Annual Event "Fundação Estudar"',
-    span: 'col-span-1',
+    span: 'col-span-2',
+    sizes: wideSizes,
   },
   {
-    id: 13,
-    src: '/images/FE_2.JPEG',
-    caption: 'Onboarding "Fundação Estudar"',
+    src: itauQuantStage,
+    caption: 'Itaú Quant AI Challenge Final Presentation',
     span: 'col-span-1',
+    sizes: singleSizes,
   },
   {
-    id: 14,
-    src: '/images/Orador.JPG',
-    caption: 'High School Class Valedictorian',
-    span: 'col-span-1',
-  },
-  {
-    id: 15,
-    src: '/images/volei.JPG',
+    src: volleyballTeam,
     caption: 'University Volleyball Team',
     span: 'col-span-1',
-  },
-  // Row 6: 2 ultra-wide images
-  {
-    id: 16,
-    src: '/images/Fut_Can.JPG',
-    caption: 'High School Soccer Team (Canada)',
-    span: 'col-span-2',
-  },
-  {
-    id: 17,
-    src: '/images/Hyundai_4.JPG',
-    caption: 'Summer Interns at Hyundai',
-    span: 'col-span-2',
+    sizes: singleSizes,
   },
 ];
 
@@ -136,7 +114,7 @@ const itemVariants = {
 export default function Gallery() {
   return (
     <section id="gallery" className="py-20">
-      <h2 className="text-2xl font-bold tracking-tight mb-12 text-white">
+      <h2 className="font-display text-2xl md:text-3xl font-bold tracking-tight mb-12 text-white">
         Gallery
       </h2>
 
@@ -149,15 +127,17 @@ export default function Gallery() {
       >
         {images.map((image) => (
           <motion.div
-            key={image.id}
+            key={image.caption}
             variants={itemVariants}
             className={`group relative overflow-hidden rounded-xl bg-neutral-900 border border-neutral-800 ${image.span}`}
           >
-            {/* Image */}
-            <img
+            <Image
               src={image.src}
               alt={image.caption}
-              className="h-full w-full object-cover transition-all duration-500 grayscale group-hover:grayscale-0 group-hover:scale-110"
+              fill
+              sizes={image.sizes}
+              placeholder="blur"
+              className="object-cover transition duration-500 grayscale group-hover:grayscale-0 group-hover:scale-105"
             />
 
             {/* Gradient Overlay with Caption */}
