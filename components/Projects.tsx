@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
+import TiltCard from './effects/TiltCard';
 
 interface Project {
   title: string;
@@ -158,6 +159,24 @@ function CardContent({ project }: { project: Project }) {
           </span>
         )}
       </div>
+
+      {/* Border ring that lights up where the cursor is (--mx/--my set by TiltCard) */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-30 rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          padding: 1,
+          background:
+            'radial-gradient(180px circle at var(--mx, 50%) var(--my, 50%), rgba(96, 165, 250, 0.55), transparent 70%)',
+          WebkitMaskImage:
+            'linear-gradient(#fff 0 0), linear-gradient(#fff 0 0)',
+          WebkitMaskClip: 'content-box, border-box',
+          WebkitMaskComposite: 'xor',
+          maskImage: 'linear-gradient(#fff 0 0), linear-gradient(#fff 0 0)',
+          maskClip: 'content-box, border-box',
+          maskComposite: 'exclude',
+        }}
+      />
     </>
   );
 }
@@ -180,21 +199,23 @@ export default function Projects() {
           const cardClass =
             'group relative overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900 p-6 transition-colors hover:border-neutral-700';
           return (
-            <motion.div key={project.title} variants={itemVariants}>
-              {project.caseStudy ? (
-                <Link href={project.caseStudy} className={`${cardClass} block h-full`}>
-                  <CardContent project={project} />
-                </Link>
-              ) : (
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`${cardClass} block h-full`}
-                >
-                  <CardContent project={project} />
-                </a>
-              )}
+            <motion.div key={project.title} variants={itemVariants} className="h-full">
+              <TiltCard className="h-full">
+                {project.caseStudy ? (
+                  <Link href={project.caseStudy} className={`${cardClass} block h-full`}>
+                    <CardContent project={project} />
+                  </Link>
+                ) : (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${cardClass} block h-full`}
+                  >
+                    <CardContent project={project} />
+                  </a>
+                )}
+              </TiltCard>
             </motion.div>
           );
         })}

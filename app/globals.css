@@ -13,6 +13,13 @@ html {
   scroll-padding-top: 5rem;
 }
 
+/* The hero's full-bleed effect canvas breaks out of the content column;
+   clip so it can never introduce horizontal scroll. */
+html,
+body {
+  overflow-x: clip;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

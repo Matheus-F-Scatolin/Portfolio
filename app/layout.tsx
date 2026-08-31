@@ -3,6 +3,7 @@ import { Inter, Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import MotionProvider from "@/components/MotionProvider";
+import CursorSpotlight from "@/components/effects/CursorSpotlight";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
@@ -64,6 +65,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${bricolage.variable}`}>
       <body className={inter.className}>
+        <CursorSpotlight />
         <MotionProvider>
           <Navbar />
           {children}

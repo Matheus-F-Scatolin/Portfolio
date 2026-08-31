@@ -1,8 +1,13 @@
 'use client';
 
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import { Github, Linkedin } from 'lucide-react';
+
+const BinaryField = dynamic(() => import('./effects/BinaryField'), {
+  ssr: false,
+});
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -28,12 +33,13 @@ const itemVariants = {
 
 export default function Hero() {
   return (
-    <section className="min-h-[80vh] flex flex-col justify-center">
+    <section className="relative min-h-[80vh] flex flex-col justify-center">
+      <BinaryField />
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="space-y-6 text-left"
+        className="relative space-y-6 text-left"
       >
         {/* Name */}
         <motion.h1
