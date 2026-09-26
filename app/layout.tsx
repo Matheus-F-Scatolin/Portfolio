@@ -1,38 +1,40 @@
 import type { Metadata } from "next";
-import { Inter, Bricolage_Grotesque } from "next/font/google";
+import { Schibsted_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+import Nav from "@/components/Nav";
+import IntroCurtain from "@/components/IntroCurtain";
 import MotionProvider from "@/components/MotionProvider";
-import CursorSpotlight from "@/components/effects/CursorSpotlight";
 import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
-const inter = Inter({
+const sans = Schibsted_Grotesk({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-sans",
 });
 
-const bricolage = Bricolage_Grotesque({
+const mono = IBM_Plex_Mono({
   subsets: ["latin"],
+  weight: ["400", "500"],
   display: "swap",
-  variable: "--font-display",
+  variable: "--font-mono",
 });
 
 export const metadata: Metadata = {
-  title: "Matheus Ferracciú Scatolin | AI Researcher & Engineer",
+  metadataBase: new URL("https://matheus-scatolin.vercel.app"),
+  title: "Matheus Ferracciú Scatolin | AI Engineer and Researcher",
   description:
-    "Portfolio of a Computer Engineer specializing in AI, Quantitative Finance, and Cybersecurity. 1st/102 at UNICAMP.",
+    "AI Engineer at Valor Capital Group and Computer Engineering student at Unicamp, ranked 1st of 102. Agentic AI, knowledge graphs, Graph-RAG and LLM system architecture.",
   keywords: [
-    "AI Researcher",
-    "Computer Engineer",
-    "UNICAMP",
-    "Machine Learning",
-    "Cybersecurity",
     "Matheus Scatolin",
-    "Quantitative Finance",
+    "AI Engineer",
+    "AI Researcher",
+    "Unicamp",
+    "Knowledge Graphs",
     "Graph-RAG",
-    "Deep Learning",
+    "Agentic AI",
+    "LLM",
+    "Machine Learning",
   ],
   alternates: {
     types: {
@@ -40,22 +42,25 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Matheus Ferracciú Scatolin | AI Researcher",
-    description: "Building autonomous systems and quantitative models.",
+    title: "Matheus Ferracciú Scatolin | AI Engineer and Researcher",
+    description: "Agentic AI, knowledge graphs and LLM systems, from paper to production.",
     url: "https://matheus-scatolin.vercel.app",
     siteName: "Matheus F. Scatolin",
-    images: [
-      {
-        url: "https://matheus-scatolin.vercel.app/og.png",
-        width: 1200,
-        height: 630,
-        alt: "Matheus Ferracciú Scatolin",
-      },
-    ],
     locale: "en_US",
     type: "website",
   },
 };
+
+// Runs before first paint: the intro curtain plays only on the homepage, so
+// deep links (case pages) skip it, as do repeat visits in the same session
+// and reduced-motion users, so it never flashes. On a first visit, mark the
+// intro done once the hero choreography has finished, so a client-side
+// return to the homepage does not wait on the curtain again.
+const introScript = `try{var d=document.documentElement;if(location.pathname!=='/'||sessionStorage.getItem('ms-intro')||matchMedia('(prefers-reduced-motion: reduce)').matches){d.dataset.intro='done'}else{sessionStorage.setItem('ms-intro','1');setTimeout(function(){d.dataset.intro='done'},3400)}}catch(e){document.documentElement.dataset.intro='done'}`;
+
+// Without JS, framer-motion never runs, so scroll reveals would stay at their
+// server-rendered start state (hidden). Force them visible.
+const noscriptStyle = `<style>[data-reveal]{opacity:1!important;transform:none!important;clip-path:none!important}</style>`;
 
 export default function RootLayout({
   children,
@@ -63,11 +68,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${bricolage.variable}`}>
-      <body className={inter.className}>
-        <CursorSpotlight />
+    <html lang="en" className={`${sans.variable} ${mono.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: introScript }} />
+        <noscript dangerouslySetInnerHTML={{ __html: noscriptStyle }} />
+      </head>
+      <body className="font-sans">
+        <IntroCurtain />
         <MotionProvider>
-          <Navbar />
+          <Nav />
           {children}
         </MotionProvider>
         <Analytics />
