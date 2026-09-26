@@ -81,7 +81,6 @@ export default async function Image() {
 
         <div style={{ display: 'flex', width: 400, height: 502, borderRadius: 24, overflow: 'hidden', background: color.panel }}>
           {/* satori renders a plain img; next/image does not apply here. */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={`data:image/jpeg;base64,${portrait.toString('base64')}`}
             alt=""
