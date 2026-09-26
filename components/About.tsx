@@ -49,8 +49,8 @@ export default function About() {
             </p>
 
             <p>
-              To maintain peak performance, I'm a regular gym-goer and soccer
-              player. When I'm offline, I'm likely watching Palmeiras, following
+              To maintain peak performance, I&apos;m a regular gym-goer and soccer
+              player. When I&apos;m offline, I&apos;m likely watching Palmeiras, following
               soccer, or catching up on TV Shows.
             </p>
           </div>
