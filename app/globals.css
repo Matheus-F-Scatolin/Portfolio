@@ -2,39 +2,198 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ------------------------------------------------------------------ */
+/* Tokens. RGB triplets so Tailwind opacity modifiers work.            */
+/* Light-only on purpose: the white opening is part of the brief.      */
+/* ------------------------------------------------------------------ */
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --accent: #3b82f6;
+  --paper: 252 252 251;
+  --panel: 243 244 246;
+  --line: 229 230 233;
+  --ink: 14 15 17;
+  --ink-2: 58 61 68;
+  --muted: 104 109 118; /* 5.1:1 on paper */
+  --tone: 138 143 152; /* second clause of two-tone headings, large text only */
+
+  --stage: 16 17 19;
+  --stage-2: 26 28 31;
+  --stage-ink: 242 243 245;
+  --stage-label: 196 200 207;
+  --stage-muted: 150 156 165;
+
+  /* The only accent. On paper it is used for marks and tints, never for
+     small text. On the stage it may be used for text. */
+  --signal: 255 90 31;
+
+  /* Delay before hero choreography starts; 0 once the intro has played. */
+  --intro-delay: 1.75s;
+}
+
+html[data-intro="done"] {
+  --intro-delay: 0s;
 }
 
 html {
+  /* framer-motion's useScroll measures offsets against a positioned container. */
+  position: relative;
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 5.5rem;
+  scrollbar-gutter: stable;
 }
 
-/* The hero's full-bleed effect canvas breaks out of the content column;
-   clip so it can never introduce horizontal scroll. */
 html,
 body {
   overflow-x: clip;
+}
+
+@layer base {
+  body {
+    @apply bg-paper text-ink antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  ::selection {
+    background: rgb(var(--signal) / 0.22);
+    color: rgb(var(--ink));
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--signal));
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Intro curtain: white, once per session, under 2s. Pure CSS so it     */
+/* runs before hydration. Skipped by the inline script in layout.tsx   */
+/* on repeat visits and under reduced motion.                          */
+/* ------------------------------------------------------------------ */
+.intro-curtain {
+  position: fixed;
+  inset: -64px;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: rgb(var(--paper));
+  pointer-events: none;
+  animation: curtain-out 1.75s linear both;
+}
+
+.intro-curtain__inner {
+  animation: curtain-text-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+}
+
+html[data-intro="done"] .intro-curtain {
+  display: none;
+}
+
+@keyframes curtain-out {
+  0%,
+  68% {
+    opacity: 1;
+    filter: blur(0);
+    animation-timing-function: cubic-bezier(0.7, 0, 0.84, 0);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(20px);
+    visibility: hidden;
+  }
+}
+
+@keyframes curtain-text-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Hero choreography (CSS, pre-hydration).                             */
+/* .rise-line > span   masked line rise, transform only (LCP-safe)     */
+/* .fade-up            small fade + rise for supporting copy           */
+/* Use style={{ '--d': '120ms' }} to offset each element.              */
+/* ------------------------------------------------------------------ */
+.rise-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+
+.rise-line > span {
+  display: block;
+  animation: rise 0.95s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--intro-delay) + var(--d, 0ms));
+}
+
+.fade-up {
+  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--intro-delay) + var(--d, 0ms));
+}
+
+.fade-in {
+  animation: fade-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--intro-delay) + var(--d, 0ms));
+}
+
+/* Transform-only settle for the hero photo: visible from first paint, so it
+   never delays LCP. */
+.settle {
+  animation: settle 1.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--intro-delay) + var(--d, 0ms));
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(105%);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes settle {
+  from {
+    transform: scale(1.06);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-}
 
-@layer base {
-  body {
-    @apply text-[var(--foreground)];
-    @apply antialiased;
-    background: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #0a0a0a 100%);
+  .intro-curtain {
+    display: none;
   }
 
-  ::selection {
-    background: #3b82f6;
-    color: white;
+  .rise-line > span,
+  .fade-up,
+  .fade-in,
+  .settle {
+    animation: none;
+  }
+}
+
+/* Scroll reveals (components/ui/Reveal.tsx, SectionHeading.tsx) always
+   server-render their hidden start state so hydration matches. Under reduced
+   motion, show them at once instead of waiting for them to enter view. */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
   }
 }
