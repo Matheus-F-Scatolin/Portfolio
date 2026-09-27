@@ -20,7 +20,7 @@ AI Engineer @ Valor Capital Group | Computer Engineering @ Unicamp (Ranked 1st o
 ## At a Glance
 
 - Top-ranked Computer Engineering student at Unicamp: **1st of 102**, GPA **3.94/4.0**
-- **AI Engineer at Valor Capital Group** (Tech Summer 2026, San Francisco), working directly with the firm's Head of AI
+- **AI Engineer at Valor Capital Group** (Tech Summer 2026, San Francisco), working directly with José, the firm's Head of AI
 - **Fellow Estudar '25**: one of Brazil's most prestigious merit-based scholarships (Fundação Estudar)
 - **4 scientific publications**: first author of a journal paper (Journal of the Brazilian Computer Society), co-author of 2 MICCAI 2025 LNCS chapters, co-first author of an arXiv challenge paper
 - **2nd place, Itaú Asset Quant AI Challenge 2025**, among ~1,000 teams and 2,500+ participants
@@ -73,7 +73,7 @@ Top-ranked Computer Engineering student at Unicamp (1st of 102), focused on LLMs
 ## Professional Experience
 
 ### Valor Capital Group | AI Engineer, Tech Summer | Jun 2026 - Present | San Francisco, CA
-Selected as part of an elite cohort of engineers for the Tech Summer program (San Francisco and São Paulo), working directly with the Head of AI to build systems and infrastructure for venture operations and investment analysis.
+Selected as part of an elite cohort of engineers for the Tech Summer program (San Francisco and São Paulo), working directly with José, the firm's Head of AI, to build systems and infrastructure for venture operations and investment analysis.
 
 - **Agentic workflows:** designing and deploying autonomous agentic systems to streamline internal firm operations
 - **Data & intelligence layers:** developing data pipelines and intelligence infrastructure to support investment decision-making

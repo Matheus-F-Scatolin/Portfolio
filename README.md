@@ -21,7 +21,7 @@ Built with Next.js 14 (App Router), TypeScript, Tailwind CSS 3 and framer-motion
 app/
   layout.tsx            fonts, metadata, intro curtain script
   page.tsx              homepage composition
-  projects/*/page.tsx   case studies (STELLAR, KernelNet, brain tumor AI)
+  projects/*/page.tsx   case studies (STELLAR, KernelNet, Brain MRI Pipeline)
 components/
   Nav.tsx               floating nav, flips to dark over data-surface="dark"
   IntroCurtain.tsx      white intro curtain (CSS only)
