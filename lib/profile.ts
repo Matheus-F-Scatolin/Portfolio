@@ -26,6 +26,14 @@ export const proof = [
   { value: "90", field: "of ~105,000", label: "Selected for the Santander Open Academy at IE University" },
 ] as const;
 
+export type Photo = {
+  src: string;
+  alt: string;
+  // object-position for the crop; "contain" shows diagrams whole on white.
+  position?: string;
+  fit?: "cover" | "contain";
+};
+
 export type Role = {
   org: string;
   title: string;
@@ -33,6 +41,8 @@ export type Role = {
   place: string;
   kind: "industry" | "research";
   summary: string;
+  metrics: string[];
+  photo: Photo;
 };
 
 // Newest first.
@@ -45,6 +55,12 @@ export const roles: Role[] = [
     kind: "industry",
     summary:
       "Agentic workflows, data pipelines and technical diligence, working directly with the firm's Head of AI.",
+    metrics: ["Agentic workflows", "Data pipelines", "Technical diligence"],
+    photo: {
+      src: "/gallery/valor-sf.jpg",
+      alt: "Matheus at brunch in San Francisco with four others during the Tech Summer",
+      position: "50% 40%",
+    },
   },
   {
     org: "Enter",
@@ -54,6 +70,12 @@ export const roles: Role[] = [
     kind: "industry",
     summary:
       "Turned a local script into a distributed production pipeline (FastAPI, Hatchet, React, LLMs) that processed thousands of judicial decisions.",
+    metrics: ["FastAPI, Hatchet, React, LLMs", "Featured on Enter's blog"],
+    photo: {
+      src: "/gallery/enter-fellowship.jpg",
+      alt: "Matheus with the Enter AI Fellowship cohort in front of the Enter logo",
+      position: "50% 45%",
+    },
   },
   {
     org: "XP Inc.",
@@ -63,6 +85,12 @@ export const roles: Role[] = [
     kind: "industry",
     summary:
       "Churn prediction MVP for high-net-worth clients with XGBoost, validated out-of-sample and out-of-time.",
+    metrics: ["XGBoost", "Out-of-sample and out-of-time"],
+    photo: {
+      src: "/gallery/xp-office.jpg",
+      alt: "Matheus taking a selfie with Guilherme Benchimol, founder of XP Inc., in São Paulo",
+      position: "50% 40%",
+    },
   },
   {
     org: "Instituto Kunumi",
@@ -72,6 +100,12 @@ export const roles: Role[] = [
     kind: "research",
     summary:
       "Automatic knowledge graph generation and Graph-RAG question answering.",
+    metrics: ["Knowledge graphs", "Graph-RAG", "Entity and relation extraction"],
+    photo: {
+      src: "/gallery/kunumi-work.jpg",
+      alt: "Matheus working on a laptop at a shared table",
+      position: "50% 22%",
+    },
   },
   {
     org: "MBZUAI",
@@ -80,7 +114,13 @@ export const roles: Role[] = [
     place: "Abu Dhabi, UAE",
     kind: "research",
     summary:
-      "3D brain tumor segmentation, missing-modality synthesis and response prediction. 3 papers and the Best Team Award.",
+      "3D brain tumor segmentation, missing-modality synthesis and response prediction, for the BraTS 2025 Challenge.",
+    metrics: ["3 papers", "Best Team of 15", "Top 3% of 2,000+"],
+    photo: {
+      src: "/gallery/mbzuai-entrance.jpg",
+      alt: "Matheus wearing a Brazilian flag at the main entrance of MBZUAI in Abu Dhabi",
+      position: "50% 72%",
+    },
   },
   {
     org: "Hyundai Motor Company",
@@ -90,6 +130,11 @@ export const roles: Role[] = [
     kind: "industry",
     summary:
       "Lead conversion model from 21% to 39% F1. Monthly data processing from 3 days to 3 minutes.",
+    metrics: ["F1 21% → 39%", "3 days → 3 minutes"],
+    photo: {
+      src: "/gallery/hyundai-interns.jpg",
+      alt: "The Hyundai summer interns in front of the Hyundai logo",
+    },
   },
   {
     org: "Semantix AI",
@@ -99,23 +144,99 @@ export const roles: Role[] = [
     kind: "research",
     summary:
       "Designed and led STELLAR. Built a hallucination benchmark of 7 models across 90,000+ questions.",
+    metrics: ["STELLAR, JBCS 2026", "7 models", "90,000+ questions"],
+    photo: {
+      src: "/previews/stellar.png",
+      alt: "STELLAR module diagram: a directed acyclic graph of nine specialized LLM modules",
+      fit: "contain",
+    },
   },
 ];
 
-export const education = [
+export type School = {
+  id: string;
+  name: string;
+  // For the index row under the paragraph.
+  short: string;
+  years: string;
+  program: string;
+  dates: string;
+  place: string;
+  detail: string;
+  photo?: Photo;
+};
+
+// In the order the Education paragraph (below) mentions them.
+export const schools: School[] = [
   {
-    org: "Unicamp",
-    title: "B.Sc. Computer Engineering",
+    id: "unicamp",
+    short: "Unicamp",
+    years: "2023 - 2027",
+    name: "Unicamp",
+    program: "B.Sc. Computer Engineering",
     dates: "Feb 2023 - Dec 2027 (expected)",
-    note: "Ranked 1st of 102, GPA 3.94/4.0",
+    place: "Campinas, Brazil",
+    detail: "1st of 102 · GPA 3.94/4.0",
+    photo: {
+      src: "/gallery/unicamp-admission.jpg",
+      alt: "Four students, Matheus among them, with universities and courses painted on their arms after the entrance exams",
+      position: "50% 35%",
+    },
   },
   {
-    org: "IE University",
-    title: "Santander Open Academy: Innovation & AI Experience",
-    dates: "2026",
-    note: "90 selected from ~105,000 applicants. Demo Day finalist, top 3 of 15 teams.",
+    id: "ilimit",
+    short: "Ilimit Educacional",
+    years: "2016 - 2022",
+    name: "Ilimit Educacional",
+    program: "Primary and secondary education, bilingual program",
+    dates: "Feb 2016 - Dec 2022",
+    place: "Brazil",
+    detail: "Valedictorian in 9th and 12th grade · Final grade 99%",
   },
-] as const;
+  {
+    id: "canada",
+    short: "Lindsay Thurber",
+    years: "2022",
+    name: "Lindsay Thurber Comprehensive High School",
+    program: "Grade 12 exchange semester",
+    dates: "Jan 2022 - Jun 2022",
+    place: "Red Deer, Alberta, Canada",
+    detail: "96% average · 99% in Calculus",
+    photo: {
+      src: "/gallery/canada-flag.jpg",
+      alt: "A Canadian flag marked Red Deer, AB, 2022, covered in goodbye messages from classmates",
+    },
+  },
+  {
+    id: "ie",
+    short: "IE University",
+    years: "2026",
+    name: "IE University",
+    program: "Santander Open Academy: Innovation & AI Experience",
+    dates: "2026",
+    place: "Madrid, Spain",
+    detail: "90 of ~105,000 applicants · Demo Day top 3 of 15",
+    photo: {
+      src: "/gallery/ie-team.jpg",
+      alt: "Matheus with five others on the IE University stage in Madrid",
+      position: "50% 40%",
+    },
+  },
+];
+
+// The Education paragraph, first person like the hero. A segment with a
+// school id is a link that opens that school's card.
+export const educationStory: { text: string; school?: School["id"] }[] = [
+  { text: "I study Computer Engineering at " },
+  { text: "Unicamp", school: "unicamp" },
+  { text: ", ranked 1st of 102 with a 3.94 GPA. I got into both Unicamp and USP straight from high school, after being valedictorian twice at " },
+  { text: "Ilimit", school: "ilimit" },
+  { text: " and spending a Grade 12 semester in " },
+  { text: "Red Deer, Canada", school: "canada" },
+  { text: ", with a 96% average. In 2026, Santander and " },
+  { text: "IE University", school: "ie" },
+  { text: " picked 90 of about 105,000 applicants for two weeks in Madrid. I was one of them, and my team reached the Demo Day final." },
+];
 
 export type Work = {
   slug: string;
