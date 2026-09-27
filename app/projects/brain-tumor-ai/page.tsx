@@ -50,13 +50,13 @@ export default function BrainTumorCaseStudy() {
         figures={[
           {
             src: '/gallery/mbzuai-best-team.jpg',
-            alt: 'Matheus and his UGRIP teammates holding Best Team certificates in front of an MBZUAI screen.',
+            alt: 'Me and my UGRIP teammates holding our Best Team certificates in front of an MBZUAI screen.',
             aspect: '3/2',
             caption: 'Best Team Award, UGRIP 2025.',
           },
           {
             src: '/gallery/mbzuai-entrance.jpg',
-            alt: 'Matheus wearing a Brazilian flag at the main entrance of MBZUAI in Abu Dhabi.',
+            alt: 'Me wearing a Brazilian flag at the main entrance of MBZUAI in Abu Dhabi.',
             aspect: '3/4',
           },
         ]}

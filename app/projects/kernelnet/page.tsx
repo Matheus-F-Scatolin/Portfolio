@@ -66,13 +66,13 @@ export default function KernelNetCaseStudy() {
         figures={[
           {
             src: '/gallery/itau-quant-stage.jpg',
-            alt: 'Matheus speaking into a microphone on stage next to his two teammates, in front of the Desafio Quant AI backdrop.',
+            alt: 'Me speaking into a microphone on stage next to my two teammates, in front of the Desafio Quant AI backdrop.',
             aspect: '3/4',
             caption: 'Presenting KernelNet at the final of the Itaú Asset Quant AI Challenge.',
           },
           {
             src: '/gallery/itau-quant-award.jpg',
-            alt: 'Matheus and his two teammates holding Desafio Quant AI 2025 trophies in front of the Itaú Asset Management sign.',
+            alt: 'Me and my two teammates holding our Desafio Quant AI 2025 trophies in front of the Itaú Asset Management sign.',
             aspect: '4/3',
           },
         ]}
