@@ -11,6 +11,11 @@ const items = [
   { name: 'Research', href: '/#research' },
 ];
 
+// A thin band across the middle of the pill (40-48px from the top). Pixels,
+// not a percentage, so it holds on short viewports.
+const BAND_TOP = 40;
+const BAND_BOTTOM = 48;
+
 // Floating glass pill. Flips to dark glass while it sits over any element
 // marked data-surface="dark" (one IntersectionObserver, color transition only).
 export default function Nav() {
@@ -36,14 +41,18 @@ export default function Nav() {
       io = new IntersectionObserver(
         (entries) => {
           for (const e of entries) {
-            if (e.isIntersecting) hits.add(e.target);
+            // The band's bottom margin comes from innerHeight when the
+            // observer is built. On iOS the viewport grows while Safari's
+            // toolbar collapses, stretching the band until the resize
+            // rebuild, and the pinned phone stage (76px from the top) would
+            // flip the pill dark. So check the band against the rect too.
+            const r = e.boundingClientRect;
+            if (e.isIntersecting && r.top <= BAND_BOTTOM && r.bottom >= BAND_TOP) hits.add(e.target);
             else hits.delete(e.target);
           }
           setDarkPath(hits.size > 0 ? pathname : null);
         },
-        // A thin band across the middle of the pill (40-48px from the top).
-        // Pixels, not a percentage, so it holds on short viewports.
-        { rootMargin: `-40px 0px -${Math.max(0, window.innerHeight - 48)}px 0px` }
+        { rootMargin: `-${BAND_TOP}px 0px -${Math.max(0, window.innerHeight - BAND_BOTTOM)}px 0px` }
       );
       targets.forEach((t) => io?.observe(t));
     };

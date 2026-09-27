@@ -52,15 +52,18 @@ export const metadata: Metadata = {
 };
 
 // Runs before first paint: the intro curtain plays only on the homepage, so
-// deep links (case pages) skip it, as do repeat visits in the same session
-// and reduced-motion users, so it never flashes. On a first visit, mark the
-// intro done once the hero choreography has finished, so a client-side
-// return to the homepage does not wait on the curtain again.
-const introScript = `try{var d=document.documentElement;if(location.pathname!=='/'||sessionStorage.getItem('ms-intro')||matchMedia('(prefers-reduced-motion: reduce)').matches){d.dataset.intro='done'}else{sessionStorage.setItem('ms-intro','1');setTimeout(function(){d.dataset.intro='done'},3400)}}catch(e){document.documentElement.dataset.intro='done'}`;
+// deep links (case pages, or a section like /#work) skip it, as do repeat
+// visits in the same session and reduced-motion users, so it never flashes.
+// On a first visit, mark the intro done once the hero choreography has
+// finished, so a client-side return to the homepage does not wait on the
+// curtain again. On iOS it also feeds the scroll offset to the intro floor
+// (see globals.css) until then.
+const introScript = `try{var d=document.documentElement;if(location.pathname!=='/'||location.hash||sessionStorage.getItem('ms-intro')||matchMedia('(prefers-reduced-motion: reduce)').matches){d.dataset.intro='done'}else{sessionStorage.setItem('ms-intro','1');var f=function(){d.style.setProperty('--intro-scroll',scrollY+'px')};if(CSS.supports('-webkit-touch-callout','none'))addEventListener('scroll',f,{passive:true});setTimeout(function(){d.dataset.intro='done';removeEventListener('scroll',f)},3400)}}catch(e){document.documentElement.dataset.intro='done'}`;
 
 // Without JS, framer-motion never runs, so scroll reveals would stay at their
-// server-rendered start state (hidden). Force them visible.
-const noscriptStyle = `<style>[data-reveal]{opacity:1!important;transform:none!important;clip-path:none!important}</style>`;
+// server-rendered start state (hidden) and the pinned Graph of Work would
+// never advance. Force the reveals visible and show the static graph.
+const noscriptStyle = `<style>[data-reveal]{opacity:1!important;transform:none!important;clip-path:none!important}[data-graph=pinned]{display:none!important}[data-graph=static]{display:block!important}</style>`;
 
 export default function RootLayout({
   children,

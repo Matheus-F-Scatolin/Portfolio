@@ -4,7 +4,7 @@ import { cubicBezier, motion, useMotionValue, useTransform, type MotionValue } f
 import { useEffect, useId } from 'react';
 import { ease } from '@/lib/motion';
 import {
-  EXCERPT,
+  EXCERPTS,
   LAYOUTS,
   TIMELINE,
   TRACE,
@@ -13,6 +13,7 @@ import {
   edgeLitStep,
   edgeWindow,
   edges,
+  excerptKeyOf,
   labelGeometry,
   mentions,
   nodeAppearAt,
@@ -21,7 +22,7 @@ import {
   nodeRadius,
   nodes,
   rowBaseline,
-  rows,
+  type ExcerptKey,
   type GraphEdge,
   type GraphNode,
   type LayoutKey,
@@ -78,7 +79,7 @@ export default function GraphFigure({
   const id = useId();
   const dim = useTransform(tr, [0, TRACE.dim], [1, 0.2]);
   const mentionFade = useTransform(p, DIM_WINDOW, [1, 0]);
-  const withExcerpt = layout === 'wide';
+  const xk = excerptKeyOf(layout);
 
   return (
     <svg
@@ -91,7 +92,7 @@ export default function GraphFigure({
       <title id={`${id}-title`}>{title}</title>
       <desc id={`${id}-desc`}>{desc}</desc>
 
-      {withExcerpt ? <ExcerptRows p={p} /> : null}
+      {xk ? <ExcerptRows p={p} xk={xk} /> : null}
 
       <g>
         {edges.map((edge, i) => (
@@ -120,16 +121,16 @@ export default function GraphFigure({
       </g>
       <SelfRing layout={layout} trace={tr} />
 
-      {withExcerpt ? (
+      {xk ? (
         <>
           <g>
             {mentions.map((m) => (
-              <MentionMark key={m.index} m={m} p={p} />
+              <MentionMark key={m.index} m={m} p={p} layout={layout} xk={xk} />
             ))}
           </g>
-          <g className="font-mono" fontSize={EXCERPT.fontSize}>
+          <g className="font-mono" fontSize={EXCERPTS[xk].fontSize}>
             {mentions.map((m) => (
-              <MentionText key={m.index} m={m} p={p} fade={mentionFade} />
+              <MentionText key={m.index} m={m} p={p} fade={mentionFade} xk={xk} />
             ))}
           </g>
         </>
@@ -142,25 +143,26 @@ export default function GraphFigure({
 // Chapter 1: the excerpt and its highlights
 // ------------------------------------------------------------------
 
-function ExcerptRows({ p }: { p: MV }) {
+function ExcerptRows({ p, xk }: { p: MV; xk: ExcerptKey }) {
+  const X = EXCERPTS[xk];
   const opacity = useTransform(
     p,
     [DIM_WINDOW[0], DIM_WINDOW[1], TIMELINE.textClear[0], TIMELINE.textClear[1]],
     [1, TIMELINE.textDimTo, TIMELINE.textDimTo, 0]
   );
   return (
-    <motion.g className="font-mono" fontSize={EXCERPT.fontSize} style={{ opacity }}>
-      {rows.map((row, i) => (
+    <motion.g className="font-mono" fontSize={X.fontSize} style={{ opacity }}>
+      {X.rows.map((row, i) => (
         <g key={i}>
           {row.line !== undefined ? (
-            <text x={EXCERPT.numX} y={rowBaseline(i)} textAnchor="end" className="fill-stage-muted">
+            <text x={X.numX} y={rowBaseline(xk, i)} textAnchor="end" className="fill-stage-muted">
               {row.line}
             </text>
           ) : null}
           <text
-            x={EXCERPT.x}
-            y={rowBaseline(i)}
-            textLength={row.text.length * EXCERPT.charW}
+            x={X.x}
+            y={rowBaseline(xk, i)}
+            textLength={row.text.length * X.charW}
             lengthAdjust="spacing"
             className="fill-stage-label"
           >
@@ -174,20 +176,23 @@ function ExcerptRows({ p }: { p: MV }) {
 
 // The highlight behind a mention. In chapter 2 the same rect shrinks and
 // travels to its node at the same tint, then crossfades into the node mark.
-function MentionMark({ m, p }: { m: Mention; p: MV }) {
+function MentionMark({ m, p, layout, xk }: { m: Mention; p: MV; layout: LayoutKey; xk: ExcerptKey }) {
+  const X = EXCERPTS[xk];
   const node = nodeById[m.node];
-  const r = nodeRadius(node.kind, LAYOUTS.wide);
-  const bx = colX(m.col) - 2;
-  const by = rowBaseline(m.row) - 15;
-  const bw = m.text.length * EXCERPT.charW + 4;
-  const bh = 21;
+  const dest = node[layout];
+  const r = nodeRadius(node.kind, LAYOUTS[layout]);
+  const { row, col } = m.at[xk];
+  const bx = colX(xk, col) - X.mark.padX;
+  const by = rowBaseline(xk, row) - X.mark.top;
+  const bw = m.text.length * X.charW + 2 * X.mark.padX;
+  const bh = X.mark.h;
   const d = r * 2;
   const [h0, h1] = m.highlight;
   const [m0, m1] = m.morph;
 
   const width = useTransform(p, [h0, h1, m0, m1], [0, bw, bw, d], { ease: [easeOut, linear, easeInOut] });
-  const x = useTransform(p, [m0, m1], [bx, node.wide.x - r], { ease: easeInOut });
-  const y = useTransform(p, [m0, m1], [by, node.wide.y - r], { ease: easeInOut });
+  const x = useTransform(p, [m0, m1], [bx, dest.x - r], { ease: easeInOut });
+  const y = useTransform(p, [m0, m1], [by, dest.y - r], { ease: easeInOut });
   const height = useTransform(p, [m0, m1], [bh, d], { ease: easeInOut });
   const rx = useTransform(p, [m0, m1], [3, r], { ease: easeInOut });
   const opacity = useTransform(p, [m1 - TIMELINE.swap, m1 + TIMELINE.swap], [1, 0]);
@@ -207,14 +212,15 @@ function MentionMark({ m, p }: { m: Mention; p: MV }) {
 }
 
 // The mention text in stage-ink, laid exactly over the base row.
-function MentionText({ m, p, fade }: { m: Mention; p: MV; fade: MV }) {
+function MentionText({ m, p, fade, xk }: { m: Mention; p: MV; fade: MV; xk: ExcerptKey }) {
   const on = useTransform(p, m.highlight, [0, 1]);
   const opacity = useTransform([on, fade], ([a, b]: number[]) => a * b);
+  const { row, col } = m.at[xk];
   return (
     <motion.text
-      x={colX(m.col)}
-      y={rowBaseline(m.row)}
-      textLength={m.text.length * EXCERPT.charW}
+      x={colX(xk, col)}
+      y={rowBaseline(xk, row)}
+      textLength={m.text.length * EXCERPTS[xk].charW}
       lengthAdjust="spacing"
       className="fill-stage-ink"
       style={{ opacity }}
