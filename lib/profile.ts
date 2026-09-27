@@ -58,7 +58,7 @@ export const roles: Role[] = [
     metrics: ["Agentic workflows", "Data pipelines", "Technical diligence"],
     photo: {
       src: "/gallery/valor-sf.jpg",
-      alt: "Matheus at brunch in San Francisco with four others during the Tech Summer",
+      alt: "Matheus at brunch in San Francisco with his boss, the other Tech Summer intern and a friend",
       position: "50% 40%",
     },
   },
