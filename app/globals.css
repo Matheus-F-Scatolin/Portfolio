@@ -69,13 +69,20 @@ body {
 /* runs before hydration. Skipped by the inline script in layout.tsx   */
 /* on repeat visits and under reduced motion.                          */
 /* ------------------------------------------------------------------ */
+/* iOS Safari clips fixed layers to the viewport between its bars, and paints
+   a fixed layer's color under the bars only when the layer is about the
+   viewport's size (WebKit LocalFrameView::fixedContainerEdges). A negative
+   inset made the curtain too large, so the page showed under the toolbar.
+   The curtain is exactly the viewport; the 64px overhang that keeps the
+   blur's soft edge off screen is a box-shadow, which Safari does not measure. */
 .intro-curtain {
   position: fixed;
-  inset: -64px;
+  inset: 0;
   z-index: 100;
   display: grid;
   place-items: center;
   background: rgb(var(--paper));
+  box-shadow: 0 0 0 64px rgb(var(--paper));
   pointer-events: none;
   animation: curtain-out 1.75s linear both;
 }
@@ -84,7 +91,34 @@ body {
   animation: curtain-text-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
 }
 
-html[data-intro="done"] .intro-curtain {
+/* Backup for an iOS Safari that paints no color under its toolbar: the page
+   shows there, so a paper sheet in the page covers the bottom of the first
+   screen. iOS only (-webkit-touch-callout), so the dissolve is unchanged
+   elsewhere. It starts under the curtain with a feathered top. The intro
+   script feeds it the scroll offset (--intro-scroll), so it stays at the
+   bottom of the screen if the page is scrolled during the intro. */
+.intro-floor {
+  display: none;
+}
+
+@supports (-webkit-touch-callout: none) {
+  .intro-floor {
+    position: absolute;
+    inset-inline: 0;
+    top: calc(100svh - 48px + var(--intro-scroll, 0px));
+    height: 100lvh;
+    z-index: 99;
+    display: block;
+    background: rgb(var(--paper));
+    -webkit-mask-image: linear-gradient(transparent, #000 32px);
+    mask-image: linear-gradient(transparent, #000 32px);
+    pointer-events: none;
+    animation: floor-out 1.75s linear both;
+  }
+}
+
+html[data-intro="done"] .intro-curtain,
+html[data-intro="done"] .intro-floor {
   display: none;
 }
 
@@ -98,6 +132,20 @@ html[data-intro="done"] .intro-curtain {
   100% {
     opacity: 0;
     filter: blur(20px);
+    visibility: hidden;
+  }
+}
+
+/* The curtain's final visibility: hidden is also what makes Safari drop the
+   paper color under its toolbar. */
+@keyframes floor-out {
+  0%,
+  68% {
+    opacity: 1;
+    animation-timing-function: cubic-bezier(0.7, 0, 0.84, 0);
+  }
+  100% {
+    opacity: 0;
     visibility: hidden;
   }
 }
@@ -175,7 +223,8 @@ html[data-intro="done"] .intro-curtain {
     scroll-behavior: auto;
   }
 
-  .intro-curtain {
+  .intro-curtain,
+  .intro-floor {
     display: none;
   }
 

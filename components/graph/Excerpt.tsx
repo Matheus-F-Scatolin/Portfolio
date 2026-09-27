@@ -6,11 +6,8 @@ import { excerptLines, mentions, type ExcerptLine } from './data';
 
 function marked(line: ExcerptLine): ReactNode[] {
   const spans = mentions
-    .filter((m) => line.rowIndexes.includes(m.row))
-    .map((m) => {
-      const start = line.rowStarts[line.rowIndexes.indexOf(m.row)] + m.col;
-      return { start, end: start + m.text.length };
-    })
+    .filter((m) => m.line === line.line)
+    .map((m) => ({ start: m.start, end: m.start + m.text.length }))
     .sort((a, b) => a.start - b.start);
 
   const out: ReactNode[] = [];
