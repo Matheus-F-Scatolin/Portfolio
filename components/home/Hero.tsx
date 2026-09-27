@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import type { CSSProperties } from 'react';
-import { person } from '@/lib/profile';
 
 // Offsets the CSS hero choreography in app/globals.css (.rise-line, .fade-up,
 // .fade-in). Everything here runs before hydration and is static under
@@ -71,7 +70,7 @@ export default function Hero() {
           <div className="relative aspect-[4/5] w-full max-w-[420px] overflow-hidden rounded-surface bg-panel md:ml-auto md:max-w-[max(18rem,calc((100dvh_-_18rem)_*_0.8))]">
             <Image
               src="/portrait.jpg"
-              alt={`Portrait of ${person.name}`}
+              alt="Portrait of me"
               fill
               priority
               sizes="(min-width: 1280px) 484px, (min-width: 768px) 38vw, (min-width: 452px) 420px, calc(100vw - 32px)"

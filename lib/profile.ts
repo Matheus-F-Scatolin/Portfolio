@@ -58,7 +58,7 @@ export const roles: Role[] = [
     metrics: ["Agentic workflows", "Data pipelines", "Technical diligence"],
     photo: {
       src: "/gallery/valor-sf.jpg",
-      alt: "Matheus at brunch in San Francisco with his boss, the other Tech Summer intern and a friend",
+      alt: "Me at brunch in San Francisco with my boss, the other Tech Summer intern and a friend",
       position: "50% 40%",
     },
   },
@@ -73,7 +73,7 @@ export const roles: Role[] = [
     metrics: ["FastAPI, Hatchet, React, LLMs", "Featured on Enter's blog"],
     photo: {
       src: "/gallery/enter-fellowship.jpg",
-      alt: "Matheus with the Enter AI Fellowship cohort in front of the Enter logo",
+      alt: "Me with my Enter AI Fellowship cohort in front of the Enter logo",
       position: "50% 45%",
     },
   },
@@ -88,7 +88,7 @@ export const roles: Role[] = [
     metrics: ["XGBoost", "Out-of-sample and out-of-time"],
     photo: {
       src: "/gallery/xp-office.jpg",
-      alt: "Matheus taking a selfie with Guilherme Benchimol, founder of XP Inc., in São Paulo",
+      alt: "Me taking a selfie with Guilherme Benchimol, founder of XP Inc., in São Paulo",
       position: "50% 40%",
     },
   },
@@ -103,7 +103,7 @@ export const roles: Role[] = [
     metrics: ["Knowledge graphs", "Graph-RAG", "Entity and relation extraction"],
     photo: {
       src: "/gallery/kunumi-work.jpg",
-      alt: "Matheus working on a laptop at a shared table",
+      alt: "Me working on my laptop at a shared table",
       position: "50% 22%",
     },
   },
@@ -118,7 +118,7 @@ export const roles: Role[] = [
     metrics: ["3 papers", "Best Team of 15", "Top 3% of 2,000+"],
     photo: {
       src: "/gallery/mbzuai-entrance.jpg",
-      alt: "Matheus wearing a Brazilian flag at the main entrance of MBZUAI in Abu Dhabi",
+      alt: "Me wearing a Brazilian flag at the main entrance of MBZUAI in Abu Dhabi",
       position: "50% 72%",
     },
   },
@@ -133,7 +133,7 @@ export const roles: Role[] = [
     metrics: ["F1 21% → 39%", "3 days → 3 minutes"],
     photo: {
       src: "/gallery/hyundai-interns.jpg",
-      alt: "The Hyundai summer interns in front of the Hyundai logo",
+      alt: "Me with the other Hyundai summer interns in front of the Hyundai logo",
     },
   },
   {
@@ -179,7 +179,7 @@ export const schools: School[] = [
     detail: "1st of 102 · GPA 3.94/4.0",
     photo: {
       src: "/gallery/unicamp-admission.jpg",
-      alt: "Four students, Matheus among them, with universities and courses painted on their arms after the entrance exams",
+      alt: "Me and three other students with our universities and courses painted on our arms after the entrance exams",
       position: "50% 35%",
     },
   },
@@ -204,7 +204,7 @@ export const schools: School[] = [
     detail: "96% average · 99% in Calculus",
     photo: {
       src: "/gallery/canada-flag.jpg",
-      alt: "A Canadian flag marked Red Deer, AB, 2022, covered in goodbye messages from classmates",
+      alt: "My Canadian flag, marked Red Deer, AB, 2022, covered in goodbye messages from my classmates",
     },
   },
   {
@@ -218,7 +218,7 @@ export const schools: School[] = [
     detail: "90 of ~105,000 applicants · Demo Day top 3 of 15",
     photo: {
       src: "/gallery/ie-team.jpg",
-      alt: "Matheus with five others on the IE University stage in Madrid",
+      alt: "Me with five others on the IE University stage in Madrid",
       position: "50% 40%",
     },
   },
@@ -263,13 +263,13 @@ export const work: Work[] = [
     metrics: ["LesionWise DSC 0.897", "ROC AUC 0.81", "Best Team among 15 groups"],
     image: {
       src: "/gallery/mbzuai-presentation.jpg",
-      alt: "Matheus presenting the response prediction pipeline, ResNet-18 features and radiomics into CatBoost, at MBZUAI",
+      alt: "Me presenting the response prediction pipeline, ResNet-18 features and radiomics into CatBoost, at MBZUAI",
       fit: "cover",
       ratio: 1600 / 1378,
     },
     secondImage: {
       src: "/gallery/mbzuai-best-team.jpg",
-      alt: "The UGRIP team holding Best Team Award certificates at MBZUAI",
+      alt: "Me and my UGRIP team holding our Best Team Award certificates at MBZUAI",
       ratio: 3 / 2,
     },
     href: "/projects/brain-tumor-ai",
@@ -289,7 +289,7 @@ export const work: Work[] = [
     },
     secondImage: {
       src: "/gallery/enter-fellowship.jpg",
-      alt: "Matheus with the Enter AI Fellowship cohort in front of the Enter logo",
+      alt: "Me with my Enter AI Fellowship cohort in front of the Enter logo",
       ratio: 2000 / 1709,
     },
     href: "https://www.blog.getenter.ai/en/posts/ai-fellowship",
@@ -304,13 +304,13 @@ export const work: Work[] = [
     metrics: ["Sharpe 1.29", "54.85% annualized vs 22.78% benchmark", "2nd of ~1,000 teams"],
     image: {
       src: "/gallery/itau-quant-stage.jpg",
-      alt: "Matheus presenting KernelNet on stage at the Itaú Quant AI Challenge final",
+      alt: "Me presenting KernelNet on stage at the Itaú Quant AI Challenge final",
       fit: "cover",
       ratio: 3 / 4,
     },
     secondImage: {
       src: "/gallery/itau-quant-award.jpg",
-      alt: "The KernelNet team holding their Quant AI 2025 trophies at Itaú Asset Management",
+      alt: "Me and my KernelNet teammates holding our Quant AI 2025 trophies at Itaú Asset Management",
       ratio: 4 / 3,
     },
     href: "/projects/kernelnet",
