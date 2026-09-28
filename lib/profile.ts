@@ -54,7 +54,7 @@ export const roles: Role[] = [
     place: "San Francisco, CA",
     kind: "industry",
     summary:
-      "Agentic workflows, data pipelines and technical diligence, working directly with the firm's Head of AI.",
+      "Agentic workflows, data pipelines and technical diligence, working directly with José, the firm's Head of AI.",
     metrics: ["Agentic workflows", "Data pipelines", "Technical diligence"],
     photo: {
       src: "/gallery/valor-sf.jpg",
@@ -256,7 +256,7 @@ export type Work = {
 export const work: Work[] = [
   {
     slug: "brain-tumor-ai",
-    title: "Brain tumor AI",
+    title: "Brain MRI Pipeline",
     context: "MBZUAI UGRIP, 2025",
     summary:
       "A multimodal 3D MRI pipeline for tumor segmentation, missing-modality synthesis and therapy response prediction.",
@@ -276,7 +276,7 @@ export const work: Work[] = [
   },
   {
     slug: "enter-reports",
-    title: "Judicial report pipeline",
+    title: "Legal Report Engine",
     context: "Enter AI Fellowship, 2026",
     summary:
       "A report generation tool that turned a local script into a distributed, concurrent production pipeline over thousands of judicial decisions.",

@@ -8,7 +8,7 @@ import {
   NextCase,
 } from '@/components/CaseStudy';
 
-const title = 'Brain tumor AI | Matheus Ferracciú Scatolin';
+const title = 'Brain MRI Pipeline | Matheus Ferracciú Scatolin';
 const description =
   '3D brain tumor segmentation, missing-modality synthesis and therapy response prediction for the BraTS 2025 Challenge. Best Team Award at MBZUAI UGRIP 2025.';
 
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 export default function BrainTumorCaseStudy() {
   return (
     <CaseShell
-      title="Brain tumor AI"
+      title="Brain MRI Pipeline"
       subtitle="A multimodal 3D MRI pipeline for brain tumor segmentation, missing-modality synthesis and therapy response prediction, built for the BraTS 2025 Challenge."
       meta={['MBZUAI, UGRIP Research Intern, Jun 2025 - Sep 2025', 'Supervised by Dr. Mohammad Yaqub']}
     >
