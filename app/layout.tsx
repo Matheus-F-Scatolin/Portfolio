@@ -21,7 +21,7 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://matheus-scatolin.vercel.app"),
+  metadataBase: new URL("https://scatolin.com"),
   title: "Matheus Ferracciú Scatolin | AI Engineer and Researcher",
   description:
     "AI Engineer at Valor Capital Group and Computer Engineering student at Unicamp, ranked 1st of 102. Agentic AI, knowledge graphs, Graph-RAG and LLM system architecture.",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Matheus Ferracciú Scatolin | AI Engineer and Researcher",
     description: "Agentic AI, knowledge graphs and LLM systems, from paper to production.",
-    url: "https://matheus-scatolin.vercel.app",
+    url: "https://scatolin.com",
     siteName: "Matheus F. Scatolin",
     locale: "en_US",
     type: "website",
