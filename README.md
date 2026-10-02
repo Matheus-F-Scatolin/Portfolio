@@ -1,6 +1,6 @@
 # Matheus Ferracciú Scatolin | Portfolio
 
-Personal site of an AI engineer and researcher. Live at [matheus-scatolin.vercel.app](https://matheus-scatolin.vercel.app).
+Personal site of an AI engineer and researcher. Live at [scatolin.com](https://scatolin.com).
 
 Built with Next.js 14 (App Router), TypeScript, Tailwind CSS 3 and framer-motion 12. Native scrolling only; no smooth-scroll library.
 

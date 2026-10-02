@@ -3,7 +3,7 @@
 // llms.txt first, then mirror the change here. Never invent metrics.
 
 export const links = {
-  site: "https://matheus-scatolin.vercel.app",
+  site: "https://scatolin.com",
   llms: "/llms.txt",
   linkedin: "https://www.linkedin.com/in/matheus-scatolin",
   github: "https://github.com/Matheus-F-Scatolin",

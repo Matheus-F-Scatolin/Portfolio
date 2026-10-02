@@ -55,7 +55,7 @@ export default async function Image() {
         >
           <div style={{ display: 'flex', alignItems: 'center', fontFamily: 'IBM Plex Mono', fontSize: 20, color: color.muted }}>
             <div style={{ width: 10, height: 10, borderRadius: 999, background: color.signal, marginRight: 14 }} />
-            matheus-scatolin.vercel.app
+            scatolin.com
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column' }}>
