@@ -500,24 +500,50 @@ def flatten(path, hex_):
 # list the page draws (see film/scrub.html for the types), "appear"/"vanish"
 # map a label key to the frame it fades in / out, "anchors" holds every anchor
 # projected for every frame as [x, y_down, depth].
+#
+# The film plays each scene in half steps: the scripts animate on whole scene
+# frames 1..FRAMES, and film frame o shows scene time 1 + (o - 1) / SUB. Odd
+# film frames are whole scene frames, so a render made at one frame per scene
+# frame stays valid once renumbered (k -> 2k - 1), and only the half steps
+# between them need rendering ("--frames between"). film.json counts film frames.
 
 KEY_OFFSET = (-2.0, -4.5, 7.35)  # the key light sits here relative to the camera target
+SUB = 2  # film frames per scene frame
 
 
-def film_args(default_frames):
+def film_count(frames):
+    """Film frames for a scene animated over `frames` whole frames."""
+    return (frames - 1) * SUB + 1
+
+
+def film_frame(f):
+    """The film frame that shows whole scene frame f."""
+    return (f - 1) * SUB + 1
+
+
+def set_time(scene, o):
+    """Move the scene to film frame o, between whole frames when o is even."""
+    t = 1 + (o - 1) / SUB
+    scene.frame_set(int(t), subframe=t - int(t))
+
+
+def film_args(frames):
     import argparse
     import sys
     argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", required=True)
-    ap.add_argument("--frames", default="", help="film frames: all, a:b:step or a,b,c")
+    ap.add_argument("--frames", default="", help="film frames: all, between, a:b:step or a,b,c")
     ap.add_argument("--pct", type=int, default=50)
     ap.add_argument("--samples", type=int, default=64)
     ap.add_argument("--blend", action="store_true")
     args = ap.parse_args(argv)
     spec = args.frames
+    n = film_count(frames)
     if spec == "all":
-        args.frame_list = list(range(1, default_frames + 1))
+        args.frame_list = list(range(1, n + 1))
+    elif spec == "between":  # only the half steps, next to a render renumbered k -> 2k - 1
+        args.frame_list = [o for o in range(1, n + 1) if (o - 1) % SUB]
     elif ":" in spec:
         a, b, *c = (int(v) for v in spec.split(":"))
         args.frame_list = list(range(a, b + 1, c[0] if c else 1))
@@ -557,24 +583,30 @@ def film_camera(scene, keys):
 
 
 def render_film(scene, cam, anchors, frames, args, labels, appear, vanish=None):
-    """Write film.json (anchors for every frame) and render the requested frames."""
+    """Write film.json (anchors for every film frame) and render the requested film frames.
+
+    `frames`, `appear` and `vanish` are in scene frames; film.json is in film frames.
+    """
     import os
     os.makedirs(args.out, exist_ok=True)
     scene.frame_start, scene.frame_end = 1, frames
+    n = film_count(frames)
     track = {k: [] for k in anchors}
-    for f in range(1, frames + 1):
-        scene.frame_set(f)
+    for o in range(1, n + 1):
+        set_time(scene, o)
         for k, v in project(scene, cam, anchors).items():
             track[k].append(v)
+    appear = {k: film_frame(f) for k, f in appear.items()}
+    vanish = {k: film_frame(f) for k, f in (vanish or {}).items()}
     with open(os.path.join(args.out, "film.json"), "w") as fh:
-        json.dump({"frames": frames, "w": scene.render.resolution_x, "h": scene.render.resolution_y,
-                   "labels": labels, "appear": appear, "vanish": vanish or {}, "anchors": track},
+        json.dump({"frames": n, "w": scene.render.resolution_x, "h": scene.render.resolution_y,
+                   "labels": labels, "appear": appear, "vanish": vanish, "anchors": track},
                   fh, separators=(",", ":"))
     fdir = os.path.join(args.out, "frames")
     os.makedirs(fdir, exist_ok=True)
-    for f in args.frame_list:
-        scene.frame_set(f)
-        scene.render.filepath = os.path.join(fdir, f"{f:04d}.png")
+    for o in args.frame_list:
+        set_time(scene, o)
+        scene.render.filepath = os.path.join(fdir, f"{o:04d}.png")
         bpy.ops.render.render(write_still=True)
     if args.blend:
         bpy.ops.wm.save_as_mainfile(filepath=os.path.join(args.out, "scene.blend"))

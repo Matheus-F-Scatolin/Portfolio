@@ -26,10 +26,10 @@ type FilmData = {
 };
 type Placed = { label: Label; el: HTMLElement; line?: SVGElement; tick?: SVGElement };
 
-const FADE = 5; // frames a label takes to fade in or out
-const STRIDES = [8, 4, 2, 1]; // load a coarse pass of the whole film first, then fill in
+const FADE = 10; // frames a label takes to fade in or out
+const STRIDES = [16, 8, 4, 2, 1]; // load a coarse pass of the whole film first, then fill in
 const WORKERS = 6;
-const NEAR = 6; // frames either side of the current one that load first
+const NEAR = 12; // frames either side of the current one that load first
 const SVG = 'http://www.w3.org/2000/svg';
 const POSTER = `url(/film/${filmChapters[0].slug}/960/0001.webp)`;
 

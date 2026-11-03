@@ -5,7 +5,7 @@ brain with tumor -> MRI scanner -> T1, T1c, T2, FLAIR -> ResNet-18
 
 The chain runs along +X at bore height and one camera travels down it over
 FRAMES frames; the page scrubs those frames with scroll. Run with:
-  Blender -b --factory-startup --python film/brain.py -- --out DIR [--frames all|a:b:step] [--pct 50] [--samples 64]
+  Blender -b --factory-startup --python film/brain.py -- --out DIR [--frames all|between|a:b:step] [--pct 50] [--samples 64]
 """
 
 import math

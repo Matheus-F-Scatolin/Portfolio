@@ -7,7 +7,7 @@ lit at a time) -> analysed documents stack into a paper bar chart -> the bars
 condense into the report page (handoff to 03).
 
 Run with:
-  Blender -b --factory-startup --python film/legal.py -- --out film/out/02-legal [--frames all|a:b:step] [--pct 50] [--samples 64]
+  Blender -b --factory-startup --python film/legal.py -- --out film/out/02-legal [--frames all|between|a:b:step] [--pct 50] [--samples 64]
 """
 
 import math
