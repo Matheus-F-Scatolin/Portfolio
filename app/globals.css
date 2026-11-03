@@ -246,3 +246,17 @@ html[data-intro="done"] .intro-floor {
     clip-path: none !important;
   }
 }
+
+/* The film's frames are flattened onto paper, so it sits on the page with
+   no box. Objects enter and leave the camera sideways, so the sides dissolve
+   into the page; top and bottom only soften over a thin band, enough to take
+   the hard line off without eating into the scenes. Where they meet, the
+   corners fade most. */
+.film-fade {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent),
+    linear-gradient(transparent, #000 3%, #000 97%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent),
+    linear-gradient(transparent, #000 3%, #000 97%, transparent);
+  mask-composite: intersect;
+}

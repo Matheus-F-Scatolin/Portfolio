@@ -1,58 +1,39 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { CSSProperties } from 'react';
-import Reveal from '@/components/ui/Reveal';
 import SectionHeading from '@/components/ui/SectionHeading';
+import { filmChapters } from '@/lib/film';
 import { work, type Work } from '@/lib/profile';
+import WorkFilm from './WorkFilm';
+import WorkPhotosButton from './WorkPhotosButton';
 
 type WorkImage = { src: string; alt: string; ratio: number; fit?: 'cover' | 'contain' };
 
-// Width of the 8-column media track at the 1280px page: 1216px of content
-// with 64px gaps, so 8 x 42.67 + 7 x 64.
-const MEDIA_TRACK = 789;
+// Scroll length of one film frame. Each project's text sits in a segment as
+// tall as its chapter, so the film and the text change project together.
+const VH_PER_FRAME = 1.5;
+// Extra scroll on the last project so the final frame holds before the section ends.
+const HOLD_VH = 30;
+
+// Width of the photos dialog: 64rem less its padding.
+const DIALOG_TRACK = 1000;
 
 // External write-ups open in a new tab, like the paper links in Research.
 const newTab = { target: '_blank', rel: 'noopener noreferrer' } as const;
 
-function WorkMedia({
-  href,
-  external,
-  image,
-  sizes,
-}: {
-  href: string;
-  external: boolean;
-  image: WorkImage;
-  sizes: string;
-}) {
-  const fit =
-    image.fit === 'contain' ? 'object-contain p-5 sm:p-10 lg:p-14' : 'object-cover';
-  // Hover (fine pointers only) on any link in the item scales the image, so
-  // image, title and case study link read as one target. The image link is out
-  // of the tab order; the title and the case study link carry focus. Class
-  // names stay literal so Tailwind's scanner finds them. aria-hidden keeps
-  // screen readers from announcing each item twice.
-  return (
-    <Link
-      href={href}
-      {...(external ? newTab : {})}
-      tabIndex={-1}
-      aria-hidden="true"
-      style={{ aspectRatio: image.ratio }}
-      className="relative isolate block overflow-hidden rounded-surface bg-panel"
-    >
-      <Image
-        src={image.src}
-        alt={image.alt}
-        fill
-        sizes={sizes}
-        className={`${fit} transition-transform duration-[600ms] ease-out [@media(hover:hover)_and_(pointer:fine)]:group-has-[a:hover]/work:scale-[1.03]`}
-      />
-    </Link>
-  );
-}
+// Both stick at the same line, so the text's top lines up with the film's.
+// Desktop centres the film in the viewport, clear of the nav, and runs it
+// past the page column to the window's right edge and into the gutter
+// beside the text, both where it fades out; it stops growing once it would
+// be taller than the window. On phones the film
+// sticks under the nav on a paper band and the text sticks below it.
+const STAGE_STICKY =
+  'sticky top-0 z-10 bg-paper pb-4 pt-[4.75rem] md:z-auto md:col-span-8 md:col-start-5 md:row-start-1 md:-ml-10 md:mr-[calc(-2rem_-_max(0px,(100vw_-_1280px)/2))] md:self-start md:bg-transparent md:p-0 lg:-ml-16 md:top-[max(5.5rem,calc(50vh_-_var(--stage-h,30rem)/2))]';
+const STAGE_SIZE = 'md:max-w-[calc((100vh_-_7rem)*16/9)]';
+const TEXT_STICKY =
+  'sticky top-[calc(var(--stage-h,56vw)+6.75rem)] md:top-[max(5.5rem,calc(50vh_-_var(--stage-h,30rem)/2))]';
 
-// One photo fills the track. Two sit side by side with column widths
+// One photo fills the dialog. Two sit side by side with column widths
 // proportional to their aspect ratios, so both render at the same height
 // without cropping. They stack on phones.
 function WorkPhotos({ item }: { item: Work }) {
@@ -61,11 +42,26 @@ function WorkPhotos({ item }: { item: Work }) {
   const cols = { '--cols': images.map((image) => `${image.ratio.toFixed(4)}fr`).join(' ') } as CSSProperties;
 
   return (
-    <div className="grid gap-4 md:grid-cols-[var(--cols)]" style={cols}>
+    <div className="grid gap-3 md:grid-cols-[var(--cols)] md:gap-4" style={cols}>
       {images.map((image) => {
         const share = image.ratio / total;
-        const sizes = `(min-width: 1280px) ${Math.round(MEDIA_TRACK * share)}px, (min-width: 768px) ${Math.round(64 * share)}vw, 100vw`;
-        return <WorkMedia key={image.src} href={item.href} external={!!item.external} image={image} sizes={sizes} />;
+        const fit = image.fit === 'contain' ? 'object-contain p-5 sm:p-10' : 'object-cover';
+        return (
+          <div
+            key={image.src}
+            style={{ aspectRatio: image.ratio }}
+            className="relative overflow-hidden rounded-[16px] bg-panel"
+          >
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              loading="eager"
+              sizes={`(min-width: 1056px) ${Math.round(DIALOG_TRACK * share)}px, (min-width: 768px) ${Math.round(94 * share)}vw, 100vw`}
+              className={fit}
+            />
+          </div>
+        );
       })}
     </div>
   );
@@ -90,7 +86,7 @@ function WorkText({ item }: { item: Work }) {
           <li key={metric}>{metric}</li>
         ))}
       </ul>
-      <p className="mt-7 text-[15px]">
+      <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3 text-[15px]">
         <Link
           href={item.href}
           {...(item.external ? newTab : {})}
@@ -110,14 +106,19 @@ function WorkText({ item }: { item: Work }) {
           </span>
           {item.external ? <span className="sr-only"> (opens in a new tab)</span> : null}
         </Link>
-      </p>
+        {/* STELLAR has a diagram, not photos */}
+        <WorkPhotosButton label={item.image.fit === 'contain' ? 'Figure' : 'Photos'} title={item.title}>
+          <WorkPhotos item={item} />
+        </WorkPhotosButton>
+      </div>
     </>
   );
 }
 
 export default function SelectedWork() {
+  const frames = Object.fromEntries(filmChapters.map((ch) => [ch.slug, ch.frames]));
   return (
-    <section id="work" aria-labelledby="work-title" className="py-24 md:py-32">
+    <section id="work" aria-labelledby="work-title" className="overflow-x-clip py-24 md:py-32">
       <div className="mx-auto w-full max-w-page px-4 md:px-8">
         <SectionHeading
           id="work-title"
@@ -125,31 +126,27 @@ export default function SelectedWork() {
           tail="Four projects: two published, one in production, one placed 2nd of ~1,000 teams."
         />
 
-        {/* One project per band, ruled above and below, so every photo sits
-            with its own text. Text and photos swap sides from band to band.
-            On phones each band is text first, then photos. */}
-        <div className="mt-14 border-b border-line md:mt-20">
-          {work.map((item, i) => {
-            const flip = i % 2 === 1;
-            return (
-              <Reveal
-                key={item.slug}
-                as="article"
-                className="group/work grid gap-7 border-t border-line py-12 md:grid-cols-12 md:gap-x-10 md:py-16 lg:gap-x-16"
-              >
-                <div
-                  className={`md:col-span-4 md:row-start-1 ${flip ? 'md:col-start-9' : 'md:col-start-1'}`}
-                >
-                  <WorkText item={item} />
+        {/* The film stays pinned while each project's text scrolls past it;
+            WorkFilm reads where the text is to pick the frame. */}
+        <div data-film-track className="grid md:mt-20 md:grid-cols-12 md:gap-x-10 lg:gap-x-16">
+          <div className={STAGE_STICKY}>
+            <div className={STAGE_SIZE}>
+              <WorkFilm />
+            </div>
+          </div>
+          <div className="md:col-span-4 md:col-start-1 md:row-start-1">
+            {work.map((item, i) => {
+              const last = i === work.length - 1;
+              const height = `${(frames[item.slug] ?? 100) * VH_PER_FRAME + (last ? HOLD_VH : 0)}vh`;
+              return (
+                <div key={item.slug} data-film-segment style={{ height }}>
+                  <article className={TEXT_STICKY}>
+                    <WorkText item={item} />
+                  </article>
                 </div>
-                <div
-                  className={`md:col-span-8 md:row-start-1 ${flip ? 'md:col-start-1' : 'md:col-start-5'}`}
-                >
-                  <WorkPhotos item={item} />
-                </div>
-              </Reveal>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
