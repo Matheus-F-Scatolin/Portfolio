@@ -1,0 +1,197 @@
+<!doctype html>
+<!-- Prototype of the scroll-scrubbed film. Copied to film/out/index.html and served
+     from film/out; reads <chapter>/film.json and <chapter>/webp/NNNN.webp for every
+     chapter in CHAPTERS that has been rendered, and plays them as one scroll. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Selected work film</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --page: #F3F4F6; --ink: #1C1D1F; --muted: #8A8F98; --signal: #FF5A1F; }
+  html, body { margin: 0; background: var(--page); color: var(--ink); font-family: 'IBM Plex Mono', monospace; }
+  .pad { height: 70vh; display: grid; place-items: center; color: var(--muted); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
+  .film { position: relative; }
+  .sticky { position: sticky; top: 0; height: 100vh; display: grid; place-items: center; overflow: hidden; }
+  .stage { position: relative; width: min(100vw, 177.78vh); aspect-ratio: 16 / 9; }
+  .stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+  svg line, svg polyline { stroke: var(--ink); stroke-width: 1; fill: none; vector-effect: non-scaling-stroke; }
+  .l, .c, .t { position: absolute; transform: translate(-50%, -50%); white-space: nowrap; pointer-events: none; }
+  .l, .t { font-size: clamp(9px, .78vw, 13px); letter-spacing: .06em; text-transform: uppercase; }
+  .t { color: #55585d; }
+  .c { letter-spacing: .06em; text-transform: uppercase; }
+  .c.good { color: #fff; } .c.bad { color: #55585d; }
+  .corner { position: absolute; left: 2.4%; top: 4.2%; font-size: clamp(10px, .9vw, 15px); }
+  .corner b { font-weight: 400; color: var(--muted); margin-right: 1.2em; }
+  .bar { position: absolute; left: 2.4%; right: 2.4%; bottom: 4%; height: 1px; background: #d6d8dc; }
+  .bar i { position: absolute; left: 0; top: -1px; height: 3px; width: 0; background: var(--signal); }
+  .load { position: absolute; right: 2.4%; top: 4.2%; font-size: 11px; color: var(--muted); }
+</style>
+
+<div class="pad">Graph of work ↑</div>
+<section class="film" id="film">
+  <div class="sticky">
+    <div class="stage" id="stage">
+      <canvas id="cv" width="1920" height="1080"></canvas>
+      <svg id="ink" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
+      <div id="labels"></div>
+      <div class="corner" id="corner"></div>
+      <div class="load" id="load"></div>
+      <div class="bar"><i id="bar"></i></div>
+    </div>
+  </div>
+</section>
+<div class="pad">Contact ↓</div>
+
+<script>
+const CHAPTERS = [
+  { dir: '01-brain', n: '01', title: 'Brain tumor AI' },
+  { dir: '02-legal', n: '02', title: 'Judicial reports' },
+  { dir: '03-kernelnet', n: '03', title: 'KernelNet' },
+  { dir: '04-stellar', n: '04', title: 'STELLAR' },
+];
+const Q = new URLSearchParams(location.search);
+const ONLY = Q.get('ch'); // ?ch=02-legal plays one chapter
+const PIN = Q.has('f') ? +Q.get('f') - 1 : null; // ?f=N shows global frame N without scrolling (for review)
+const FADE = 5; // frames a label takes to fade in or out
+const VH_PER_FRAME = 4.4; // scroll length per frame
+
+const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+const ink = document.getElementById('ink'), box = document.getElementById('labels');
+const stage = document.getElementById('stage'), film = document.getElementById('film');
+let chs = [], seq = [], frames = [], shown = -1, want = 0, cur = 0;
+
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const edge = x => clamp(x / 0.04) * clamp((1 - x) / 0.04); // fade near the stage edge
+
+function el(tag, attrs, parent) {
+  const n = tag === 'line' || tag === 'polyline' ? document.createElementNS('http://www.w3.org/2000/svg', tag) : document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+  parent.appendChild(n);
+  return n;
+}
+
+// Each chapter keeps its own label elements; only the current chapter's are visible.
+function setup(ch) {
+  ch.spec = ch.data.labels.map(s => ({ ...s }));
+  for (const s of ch.spec) {
+    if (s.type === 'point') { s.line = el('line', {}, ink); s.el = el('span', { class: 'l' }, box); s.el.textContent = s.t; }
+    if (s.type === 'span') { s.line = el('polyline', {}, ink); s.tick = el('line', {}, ink); s.el = el('span', { class: 'l' }, box); s.el.textContent = s.t; }
+    if (s.type === 'plus') { s.el = el('span', { class: 'c' }, box); s.el.textContent = '+'; }
+    if (s.type === 'card') { s.el = el('span', { class: 'c ' + s.cls }, box); s.el.textContent = s.t; }
+    if (s.type === 'tag') { s.el = el('span', { class: 't' }, box); s.el.textContent = s.t; }
+  }
+  hide(ch); // until its chapter is on screen
+}
+
+function hide(ch) {
+  for (const s of ch.spec) for (const k of ['el', 'line', 'tick']) if (s[k]) s[k].style.opacity = 0;
+}
+
+function place(ch, f) {
+  const d = ch.data, W = stage.clientWidth;
+  const at = k => { const p = d.anchors[k][f]; return { x: p[0] * 100, y: p[1] * 100, in: p[2] > 0 ? edge(p[0]) * edge(p[1]) : 0 }; };
+  const life = k => {
+    const a = d.appear[k] ?? 1, v = d.vanish[k];
+    let o = a <= 1 ? 1 : clamp((f + 1 - a) / FADE);
+    if (v) o *= clamp((v - (f + 1)) / FADE);
+    return o;
+  };
+  for (const s of ch.spec) {
+    let o = 0;
+    if (s.type === 'point') {
+      const p = at(s.k);
+      o = life(s.k) * p.in;
+      const lx = p.x + s.dx, ly = p.y + s.dy;
+      s.line.setAttribute('x1', p.x); s.line.setAttribute('y1', p.y);
+      s.line.setAttribute('x2', lx); s.line.setAttribute('y2', ly + (s.dy < 0 ? 1.2 : -1.2));
+      s.el.style.left = lx + '%'; s.el.style.top = ly + '%';
+      s.line.style.opacity = o;
+    } else if (s.type === 'span') {
+      const a = at(s.a), b = at(s.b);
+      o = life(s.show) * a.in * b.in;
+      const sg = s.down ? 1 : -1;
+      const yb = s.down ? Math.max(a.y, b.y) + 1.5 : Math.min(a.y, b.y) - 1.5;
+      const mx = (a.x + b.x) / 2;
+      s.line.setAttribute('points', `${a.x},${yb - sg * 0.8} ${a.x},${yb} ${b.x},${yb} ${b.x},${yb - sg * 0.8}`);
+      s.tick.setAttribute('x1', mx); s.tick.setAttribute('y1', yb); s.tick.setAttribute('x2', mx); s.tick.setAttribute('y2', yb + sg * 1.2);
+      s.el.style.left = mx + '%'; s.el.style.top = (yb + sg * 2.6) + '%';
+      s.line.style.opacity = s.tick.style.opacity = o;
+    } else if (s.type === 'plus') {
+      const p = at(s.k);
+      o = life(s.show) * p.in;
+      s.el.style.left = p.x + '%'; s.el.style.top = p.y + '%';
+      s.el.style.fontSize = clamp(W * 0.012, 10, 22) + 'px';
+    } else if (s.type === 'card') {
+      const p = at(s.k), l = at(s.k + '_l'), r = at(s.k + '_r');
+      o = life(s.k) * l.in * r.in;
+      // text scales with the card on screen, so it never runs past its edges
+      s.el.style.fontSize = ((r.x - l.x) / 100 * W * 0.085) + 'px';
+      s.el.style.left = p.x + '%'; s.el.style.top = p.y + '%';
+    } else if (s.type === 'tag') {
+      const p = at(s.k);
+      o = life(s.k) * p.in;
+      s.el.style.left = p.x + '%'; s.el.style.top = p.y + '%';
+    }
+    s.el.style.opacity = o;
+  }
+}
+
+let lastCh = null;
+function draw(g) {
+  if (g === shown || !frames[g] || !frames[g].complete || !frames[g].naturalWidth) return;
+  const { ch, f } = seq[g];
+  ctx.drawImage(frames[g], 0, 0, cv.width, cv.height);
+  if (lastCh && lastCh !== ch) hide(lastCh);
+  place(ch, f);
+  if (lastCh !== ch) document.getElementById('corner').innerHTML = `<b>${ch.n}</b>${ch.title}`;
+  lastCh = ch;
+  shown = g;
+}
+
+function progress() {
+  const r = film.getBoundingClientRect();
+  return clamp(-r.top / (r.height - innerHeight));
+}
+
+function tick() {
+  cur += (want - cur) * 0.25; // a little inertia so wheel steps glide
+  if (Math.abs(want - cur) < 0.02) cur = want;
+  draw(Math.round(cur));
+  document.getElementById('bar').style.width = (progress() * 100) + '%';
+  requestAnimationFrame(tick);
+}
+
+addEventListener('scroll', () => { want = progress() * (seq.length - 1); }, { passive: true });
+addEventListener('resize', () => { shown = -1; });
+
+async function start() {
+  const list = CHAPTERS.filter(c => !ONLY || c.dir === ONLY);
+  for (const c of list) {
+    try {
+      const r = await fetch(`${c.dir}/film.json`);
+      if (!r.ok) continue;
+      chs.push({ ...c, data: await r.json() });
+    } catch (e) { /* not rendered yet */ }
+  }
+  chs.forEach((ch, i) => {
+    setup(ch);
+    // a chapter opens on the frame the previous one closed on, so skip the duplicate
+    for (let f = i ? 1 : 0; f < ch.data.frames; f++) seq.push({ ch, f });
+  });
+  film.style.height = (seq.length * VH_PER_FRAME + 100) + 'vh';
+  const load = document.getElementById('load');
+  let done = 0;
+  seq.forEach(({ ch, f }, g) => {
+    const im = new Image();
+    im.decoding = 'async';
+    im.onload = () => { done++; load.textContent = done < seq.length ? `${done}/${seq.length}` : ''; if (g === Math.round(cur)) { shown = -1; draw(g); } };
+    im.src = `${ch.dir}/webp/${String(f + 1).padStart(4, '0')}.webp`;
+    frames.push(im);
+  });
+  want = cur = progress() * (seq.length - 1);
+  if (PIN !== null) { film.scrollIntoView(); want = cur = PIN; frames[PIN].decode().then(() => { shown = -1; draw(PIN); }); return; }
+  requestAnimationFrame(tick);
+}
+start();
+</script>

@@ -38,3 +38,7 @@ next-env.d.ts
 *.swp
 *.swo
 *~
+
+# Blender film renders (regenerated from film/*.py)
+film/out/
+__pycache__/
