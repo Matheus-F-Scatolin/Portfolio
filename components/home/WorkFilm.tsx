@@ -30,6 +30,11 @@ const FADE = 5; // frames a label takes to fade in or out
 const STRIDES = [8, 4, 2, 1]; // load a coarse pass of the whole film first, then fill in
 const WORKERS = 6;
 const NEAR = 6; // frames either side of the current one that load first
+// Share of the remaining distance to the scroll position covered each paint.
+// Touch scrolling arrives in small uneven steps and a finger's tremor runs it
+// back and forth; easing absorbs both. A jump longer than SNAP goes straight.
+const EASE = 0.3;
+const SNAP = 24;
 const SVG = 'http://www.w3.org/2000/svg';
 const POSTER = `url(/film/${filmChapters[0].slug}/960/0001.webp)`;
 
@@ -63,7 +68,9 @@ export default function WorkFilm() {
     let placed: Placed[][] = [];
     let shownChapter = -1;
     let shown = -1;
-    let target = 0;
+    let target = 0; // fractional frame the scroll is at
+    let pos = 0; // fractional frame on the canvas, easing toward target
+    const ease = matchMedia('(prefers-reduced-motion: reduce)').matches ? 1 : EASE;
     let focus = 0;
     let raf = 0;
     let started = false;
@@ -91,7 +98,7 @@ export default function WorkFilm() {
       const n = filmChapters[c].frames;
       const t = clamp((y - segments[c].getBoundingClientRect().top) / (perFrame * n));
       const s0 = c ? 1 : 0;
-      return first[c] + Math.round(t * (n - 1 - s0));
+      return first[c] + t * (n - 1 - s0);
     }
 
     function nearest(g: number) {
@@ -145,19 +152,24 @@ export default function WorkFilm() {
       }
     }
 
-    function place(c: number, f: number) {
+    // f is a frame of chapter c, u how far toward the next one the canvas has
+    // blended; the labels follow the same in-between position.
+    function place(c: number, f: number, u: number) {
       const d = data![c];
       const W = stage.clientWidth;
       const at = (k: string) => {
         const p = d.anchors[k]?.[f];
         if (!p) return { x: 0, y: 0, in: 0 };
-        return { x: p[0] * 100, y: p[1] * 100, in: edge(p[0]) * edge(p[1]) };
+        const q = d.anchors[k]?.[f + 1];
+        const x = q && u ? p[0] + (q[0] - p[0]) * u : p[0];
+        const y = q && u ? p[1] + (q[1] - p[1]) * u : p[1];
+        return { x: x * 100, y: y * 100, in: edge(x) * edge(y) };
       };
       const life = (k: string) => {
         const a = d.appear[k] ?? 1;
         const v = d.vanish[k];
-        let o = a <= 1 ? 1 : clamp((f + 1 - a) / FADE);
-        if (v) o *= clamp((v - (f + 1)) / FADE);
+        let o = a <= 1 ? 1 : clamp((f + u + 1 - a) / FADE);
+        if (v) o *= clamp((v - (f + u + 1)) / FADE);
         return o;
       };
       for (const { label: s, el, line: ln, tick } of placed[c]) {
@@ -214,19 +226,33 @@ export default function WorkFilm() {
       }
     }
 
+    // Draws the frame under pos, blended into the next by pos's fraction, so
+    // the film moves continuously instead of one frame per scroll step.
     function draw() {
       raf = 0;
       if (!data) return;
-      const g = nearest(target);
-      if (g < 0 || g === shown) return;
-      ctx.clearRect(0, 0, cv.width, cv.height);
+      pos += (target - pos) * ease;
+      if (Math.abs(target - pos) < 0.005) pos = target;
+      if (pos !== target) request();
+      const a = Math.floor(pos);
+      const g = nearest(a);
+      if (g < 0) return;
+      const u = g === a && imgs[a + 1] ? pos - a : 0;
+      const key = g + u;
+      if (key === shown) return;
       ctx.drawImage(imgs[g]!, 0, 0, cv.width, cv.height);
+      if (u) {
+        ctx.globalAlpha = u;
+        ctx.drawImage(imgs[a + 1]!, 0, 0, cv.width, cv.height);
+        ctx.globalAlpha = 1;
+      }
       stage.style.backgroundImage = 'none';
       const { c, f } = seq[g];
       if (shownChapter !== c && shownChapter >= 0) hide(placed[shownChapter]);
       shownChapter = c;
-      place(c, f);
-      shown = g;
+      // across a chapter boundary the next frame belongs to the next chapter's labels
+      place(c, f, seq[a + 1]?.c === c ? u : 0);
+      shown = key;
     }
 
     const request = () => {
@@ -234,9 +260,10 @@ export default function WorkFilm() {
     };
     const onScroll = () => {
       target = frameAt();
+      if (shown < 0 || Math.abs(target - pos) > SNAP) pos = target;
       // Until a frame is drawn the stage shows the opening still, but only
       // in the first chapter: anywhere else it would show the wrong project.
-      if (shown < 0) stage.style.backgroundImage = seq[target].c ? 'none' : POSTER;
+      if (shown < 0) stage.style.backgroundImage = seq[Math.round(target)].c ? 'none' : POSTER;
       request();
     };
 
@@ -269,7 +296,8 @@ export default function WorkFilm() {
       let next = 0;
       const pick = () => {
         for (let d = 0; d <= NEAR; d++) {
-          for (const g of [target + d, target - d]) {
+          const t = Math.round(target);
+          for (const g of [t + d, t - d]) {
             if (queued[g] && !taken[g]) return g;
           }
         }
