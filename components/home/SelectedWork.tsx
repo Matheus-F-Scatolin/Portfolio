@@ -25,10 +25,13 @@ const newTab = { target: '_blank', rel: 'noopener noreferrer' } as const;
 // Desktop centres the film in the viewport, clear of the nav, and runs it
 // past the page column to the window's right edge and into the gutter
 // beside the text, both where it fades out; it stops growing once it would
-// be taller than the window. On phones the film
-// sticks under the nav on a paper band and the text sticks below it.
+// be taller than the window. --vw is the window width without its scrollbar
+// (set by WorkFilm), so the bleed never causes sideways scroll; clipping the
+// section instead makes iOS Safari shake the sticky film and text while a
+// finger drags. On phones the film sticks under the nav on a paper band and
+// the text sticks below it.
 const STAGE_STICKY =
-  'sticky top-0 z-10 bg-paper pb-4 pt-[4.75rem] md:z-auto md:col-span-8 md:col-start-5 md:row-start-1 md:-ml-10 md:mr-[calc(-2rem_-_max(0px,(100vw_-_1280px)/2))] md:self-start md:bg-transparent md:p-0 lg:-ml-16 md:top-[max(5.5rem,calc(50vh_-_var(--stage-h,30rem)/2))]';
+  'sticky top-0 z-10 bg-paper pb-4 pt-[4.75rem] md:z-auto md:col-span-8 md:col-start-5 md:row-start-1 md:-ml-10 md:mr-[calc(-2rem_-_max(0px,(var(--vw,100vw)_-_1280px)/2))] md:self-start md:bg-transparent md:p-0 lg:-ml-16 md:top-[max(5.5rem,calc(50vh_-_var(--stage-h,30rem)/2))]';
 const STAGE_SIZE = 'md:max-w-[calc((100vh_-_7rem)*16/9)]';
 const TEXT_STICKY =
   'sticky top-[calc(var(--stage-h,56vw)+6.75rem)] md:top-[max(5.5rem,calc(50vh_-_var(--stage-h,30rem)/2))]';
@@ -118,7 +121,7 @@ function WorkText({ item }: { item: Work }) {
 export default function SelectedWork() {
   const frames = Object.fromEntries(filmChapters.map((ch) => [ch.slug, ch.frames]));
   return (
-    <section id="work" aria-labelledby="work-title" className="overflow-x-clip py-24 md:py-32">
+    <section id="work" aria-labelledby="work-title" className="py-24 md:py-32">
       <div className="mx-auto w-full max-w-page px-4 md:px-8">
         <SectionHeading
           id="work-title"

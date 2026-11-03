@@ -71,6 +71,7 @@ export default function WorkFilm() {
 
     function measure() {
       track.style.setProperty('--stage-h', `${stage.offsetHeight}px`);
+      track.style.setProperty('--vw', `${document.documentElement.clientWidth}px`);
       const text = segments[0]?.firstElementChild;
       focus = text ? parseFloat(getComputedStyle(text).top) || 0 : 0;
       const w = stage.clientWidth;
