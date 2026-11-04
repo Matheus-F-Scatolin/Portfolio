@@ -472,16 +472,21 @@ export const papers: Paper[] = [
     authors:
       "Leme, G. M., Scatolin, M. F., Soares, A., Ferreira, L. N., Dias, Z., & Interian, R.",
     year: 2026,
-    venue: "National Meeting on Artificial and Computational Intelligence (ENIAC 2026)",
-    details: "Presented in Cuiabá, Brazil.",
+    venue: "Proceedings of the National Meeting on Artificial and Computational Intelligence (ENIAC 2026)",
+    details: "SBC OpenLib, Cuiabá, Brazil.",
     role: "Co-first author",
-    links: [],
+    links: [
+      { label: "DOI", href: "https://doi.org/10.5753/eniac.2026.31313" },
+      { label: "SBC OpenLib", href: "https://sol.sbc.org.br/index.php/eniac/article/view/47050" },
+    ],
     bibtex: `@inproceedings{leme2026slm,
   title     = {How Well Do Small Language Models Understand the Brazilian Educational Context? An Evaluation on ENEM, FUVEST and Unicamp},
   author    = {Leme, G. M. and Scatolin, M. F. and Soares, A. and Ferreira, L. N. and Dias, Z. and Interian, R.},
   booktitle = {Proceedings of the National Meeting on Artificial and Computational Intelligence (ENIAC 2026)},
   address   = {Cuiab{\\'a}, Brazil},
-  year      = {2026}
+  publisher = {Sociedade Brasileira de Computa{\\c{c}}{\\~a}o},
+  year      = {2026},
+  doi       = {10.5753/eniac.2026.31313}
 }`,
   },
 ];
