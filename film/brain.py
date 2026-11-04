@@ -127,6 +127,9 @@ def tumor(mat, parent, center=(-0.10, -0.43, 0.10), r=0.11):
 
 
 def build_brain(M):
+    # noise_vector draws on Blender's random seed, which is the clock unless set,
+    # so without this every run grows different folds and split renders don't match
+    noise.seed_set(1)
     root = lib.empty("brain", (-0.15, 0, AXIS_Z))
     root.scale = (1.25,) * 3
     hemisphere(-1, M["clay"], root)
