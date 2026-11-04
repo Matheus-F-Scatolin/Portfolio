@@ -4,7 +4,7 @@
 
 AI Engineer @ Valor Capital Group | Computer Engineering @ Unicamp (Ranked 1st of 102) | Fellow Estudar '25 | Published AI Researcher
 
-*Last updated: August 2026*
+*Last updated: November 2026*
 
 ---
 
@@ -23,7 +23,7 @@ AI Engineer @ Valor Capital Group | Computer Engineering @ Unicamp (Ranked 1st o
 - Top-ranked Computer Engineering student at Unicamp: **1st of 102**, GPA **3.94/4.0**
 - **AI Engineer at Valor Capital Group** (Tech Summer 2026, San Francisco), working directly with José, the firm's Head of AI
 - **Fellow Estudar '25**: one of Brazil's most prestigious merit-based scholarships (Fundação Estudar)
-- **4 scientific publications**: first author of a journal paper (Journal of the Brazilian Computer Society), co-author of 2 MICCAI 2025 LNCS chapters, co-first author of an arXiv challenge paper
+- **6 scientific publications**: first author of a journal paper (Journal of the Brazilian Computer Society), co-author of 2 MICCAI 2025 LNCS chapters, co-first author of an arXiv challenge paper, and 2 papers presented at BRACIS/ENIAC 2026 (1 as co-first author)
 - **2nd place, Itaú Asset Quant AI Challenge 2025**, among ~1,000 teams and 2,500+ participants
 - **Best Team Award, MBZUAI UGRIP 2025** (selected in the top 3% of 2,000+ international applicants)
 - **7 olympiad gold medals and 2 honorable mentions** across national and international competitions
@@ -44,6 +44,7 @@ Top-ranked Computer Engineering student at Unicamp (1st of 102), focused on LLMs
 
 - Ranked **1st out of 102** students in the program, with a GPA of **3.94/4.0**
 - Admitted straight from high school to Computer Engineering at both Unicamp and USP, Brazil's two best universities (USP ranks higher overall; Unicamp is stronger in Computer Science), choosing Unicamp
+- Research on language and vision-language model evaluation with Prof. Zanoni Dias and Prof. Ruben Interian, resulting in 2 papers at BRACIS/ENIAC 2026
 - Skills developed: Natural Language Processing (NLP), Statistics, and 23+ others
 
 ### IE University, Madrid, Spain
@@ -156,6 +157,18 @@ Banerjee, M., Ji, Q., Hashmi, S., Elsayed, A., Tikhonov, D., Scatolin, M. F., Ja
 - Two-stage generative framework for 3D brain MRI synthesis operating entirely in the wavelet domain (conditional wavelet diffusion with CAFF and Multi-Switchable SPADE), for the BraSyn task
 - DOI: https://doi.org/10.1007/978-3-032-16370-7_4
 - Code: https://github.com/mohrsalt/MISFIT
+
+### 5. Enem-VL: A Multimodal Benchmark of Brazilian Exams for Evaluating Vision-Language Models (Co-author)
+Soares, A. L. B., Ferreira, L. N., Leme, G. M., Scatolin, M. F., Interian, R., & Dias, Z. (2026). Presented at *BRACIS 2026, the 36th Brazilian Conference on Intelligent Systems*, Cuiabá, Brazil, October 19-22, 2026.
+
+- Multimodal benchmark built from ENEM questions that depend on images, used to evaluate how vision-language models perform in the Brazilian educational context
+- Research conducted at Unicamp with Prof. Zanoni Dias and Prof. Ruben Interian
+
+### 6. How Well Do Small Language Models Understand the Brazilian Educational Context? An Evaluation on ENEM, FUVEST and Unicamp (Co-first author)
+Leme, G. M., Scatolin, M. F., Soares, A., Ferreira, L. N., Dias, Z., & Interian, R. (2026). Presented at *ENIAC 2026, the National Meeting on Artificial and Computational Intelligence*, Cuiabá, Brazil, October 19-22, 2026.
+
+- Evaluation of small language models on questions from Brazil's three most competitive admission exams: ENEM, FUVEST and Unicamp
+- Research conducted at Unicamp with Prof. Zanoni Dias and Prof. Ruben Interian
 
 **Additional research:** automatic Knowledge Graph generation and Graph-RAG techniques (Instituto Kunumi, 2025-2026).
 
@@ -370,6 +383,8 @@ I have a special feeling for Brazil, but I like helping people regardless of geo
 - Tumor response prediction (arXiv): https://arxiv.org/abs/2509.06511
 - EMedNeXt (Springer, MICCAI 2025): https://link.springer.com/chapter/10.1007/978-3-032-16365-3_21 | Code: https://github.com/BioMedIA-MBZUAI/EMedNeXt-BraTS-SSA-2025
 - MISFIT (Springer, MICCAI 2025): https://link.springer.com/chapter/10.1007/978-3-032-16370-7_4 | Code: https://github.com/mohrsalt/MISFIT
+- Enem-VL (BRACIS 2026): proceedings link pending
+- Small language models on Brazilian exams (ENIAC 2026): proceedings link pending
 
 **Media & Talks**
 - Enter AI Fellowship blog post: https://www.blog.getenter.ai/en/posts/ai-fellowship
