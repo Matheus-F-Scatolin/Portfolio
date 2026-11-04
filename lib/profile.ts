@@ -443,4 +443,45 @@ export const papers: Paper[] = [
   doi       = {10.1007/978-3-032-16370-7_4}
 }`,
   },
+  {
+    id: "enem-vl",
+    title:
+      "Enem-VL: A Multimodal Benchmark of Brazilian Exams for Evaluating Vision-Language Models",
+    authors:
+      "Soares, A. L. B., Ferreira, L. N., Leme, G. M., Scatolin, M. F., Interian, R., & Dias, Z.",
+    year: 2026,
+    venue: "Lecture Notes in Computer Science (BRACIS 2026)",
+    details: "pp. 309-324. Springer, Cham.",
+    role: "Co-author",
+    links: [{ label: "DOI", href: "https://doi.org/10.1007/978-3-032-39882-6_21" }],
+    bibtex: `@inproceedings{soares2026enemvl,
+  title     = {Enem-VL: A Multimodal Benchmark of Brazilian Exams for Evaluating Vision-Language Models},
+  author    = {Soares, A. L. B. and Ferreira, L. N. and Leme, G. M. and Scatolin, M. F. and Interian, R. and Dias, Z.},
+  booktitle = {Intelligent Systems (BRACIS 2026)},
+  series    = {Lecture Notes in Computer Science},
+  pages     = {309--324},
+  publisher = {Springer, Cham},
+  year      = {2026},
+  doi       = {10.1007/978-3-032-39882-6_21}
+}`,
+  },
+  {
+    id: "slm-brazilian-exams",
+    title:
+      "How Well Do Small Language Models Understand the Brazilian Educational Context? An Evaluation on ENEM, FUVEST and Unicamp",
+    authors:
+      "Leme, G. M., Scatolin, M. F., Soares, A., Ferreira, L. N., Dias, Z., & Interian, R.",
+    year: 2026,
+    venue: "National Meeting on Artificial and Computational Intelligence (ENIAC 2026)",
+    details: "Presented in Cuiabá, Brazil.",
+    role: "Co-first author",
+    links: [],
+    bibtex: `@inproceedings{leme2026slm,
+  title     = {How Well Do Small Language Models Understand the Brazilian Educational Context? An Evaluation on ENEM, FUVEST and Unicamp},
+  author    = {Leme, G. M. and Scatolin, M. F. and Soares, A. and Ferreira, L. N. and Dias, Z. and Interian, R.},
+  booktitle = {Proceedings of the National Meeting on Artificial and Computational Intelligence (ENIAC 2026)},
+  address   = {Cuiab{\\'a}, Brazil},
+  year      = {2026}
+}`,
+  },
 ];

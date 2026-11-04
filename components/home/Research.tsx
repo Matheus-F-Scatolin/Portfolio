@@ -85,7 +85,7 @@ export default function Research() {
         <SectionHeading
           id="research-title"
           lead="Research."
-          tail="Four papers, from LLM systems to medical imaging."
+          tail="Six papers, from LLM systems and benchmarks to medical imaging."
         />
 
         <ol role="list" className="mt-14 space-y-12 md:mt-20">
