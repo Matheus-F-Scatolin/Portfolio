@@ -450,16 +450,19 @@ export const papers: Paper[] = [
     authors:
       "Soares, A. L. B., Ferreira, L. N., Leme, G. M., Scatolin, M. F., Interian, R., & Dias, Z.",
     year: 2026,
-    venue: "36th Brazilian Conference on Intelligent Systems (BRACIS 2026)",
-    details: "Presented in Cuiabá, Brazil.",
+    venue: "Lecture Notes in Computer Science (BRACIS 2026)",
+    details: "pp. 309-324. Springer, Cham.",
     role: "Co-author",
-    links: [],
+    links: [{ label: "DOI", href: "https://doi.org/10.1007/978-3-032-39882-6_21" }],
     bibtex: `@inproceedings{soares2026enemvl,
   title     = {Enem-VL: A Multimodal Benchmark of Brazilian Exams for Evaluating Vision-Language Models},
   author    = {Soares, A. L. B. and Ferreira, L. N. and Leme, G. M. and Scatolin, M. F. and Interian, R. and Dias, Z.},
-  booktitle = {Proceedings of the 36th Brazilian Conference on Intelligent Systems (BRACIS 2026)},
-  address   = {Cuiab{\\'a}, Brazil},
-  year      = {2026}
+  booktitle = {Intelligent Systems (BRACIS 2026)},
+  series    = {Lecture Notes in Computer Science},
+  pages     = {309--324},
+  publisher = {Springer, Cham},
+  year      = {2026},
+  doi       = {10.1007/978-3-032-39882-6_21}
 }`,
   },
   {
