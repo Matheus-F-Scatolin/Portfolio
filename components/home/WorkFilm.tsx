@@ -298,13 +298,27 @@ export default function WorkFilm() {
 
     measure();
     onScroll();
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (!started && entries.some((e) => e.isIntersecting)) start();
-      },
-      { rootMargin: '150% 0px 150% 0px' },
-    );
+    // Warm the film as soon as the page has settled, so it is loaded by the
+    // time the reader scrolls to it. A reader who gets there first (a deep
+    // link, a fast scroll) starts it on the way; data saver waits for that.
+    const begin = () => {
+      if (!started) start();
+    };
+    const io = new IntersectionObserver((entries) => entries.some((e) => e.isIntersecting) && begin(), {
+      rootMargin: '150% 0px 150% 0px',
+    });
     io.observe(track);
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+    let idle = 0;
+    const warm = () => {
+      idle = window.requestIdleCallback
+        ? window.requestIdleCallback(begin, { timeout: 2000 })
+        : window.setTimeout(begin, 200);
+    };
+    if (!saveData) {
+      if (document.readyState === 'complete') warm();
+      else window.addEventListener('load', warm, { once: true });
+    }
     const ro = new ResizeObserver(() => {
       measure();
       onScroll();
@@ -313,6 +327,9 @@ export default function WorkFilm() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => {
       alive = false;
+      window.removeEventListener('load', warm);
+      if (window.cancelIdleCallback) window.cancelIdleCallback(idle);
+      else window.clearTimeout(idle);
       io.disconnect();
       ro.disconnect();
       window.removeEventListener('scroll', onScroll);
