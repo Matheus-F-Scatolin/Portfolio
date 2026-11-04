@@ -2,10 +2,10 @@
 // Frames live in public/film/<slug>/<width>/NNNN.webp with labels in film.json.
 
 export const filmChapters = [
-  { slug: 'brain-tumor-ai', frames: 176 },
-  { slug: 'enter-reports', frames: 200 },
-  { slug: 'kernelnet', frames: 160 },
-  { slug: 'stellar', frames: 160 },
+  { slug: 'brain-tumor-ai', frames: 351 },
+  { slug: 'enter-reports', frames: 399 },
+  { slug: 'kernelnet', frames: 319 },
+  { slug: 'stellar', frames: 319 },
 ] as const;
 
 export const filmWidths = [960, 1600] as const;

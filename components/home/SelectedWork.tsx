@@ -11,7 +11,7 @@ type WorkImage = { src: string; alt: string; ratio: number; fit?: 'cover' | 'con
 
 // Scroll length of one film frame. Each project's text sits in a segment as
 // tall as its chapter, so the film and the text change project together.
-const VH_PER_FRAME = 1.5;
+const VH_PER_FRAME = 0.75;
 // Extra scroll on the last project so the final frame holds before the section ends.
 const HOLD_VH = 30;
 

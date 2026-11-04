@@ -8,7 +8,7 @@ the driver, long the followers -> everything settles; the network rests alone.
 
 Opens on lib.report_page at the "page" handoff and ends on lib.network at the
 "network" handoff. Run with:
-  Blender -b --factory-startup --python film/kernelnet.py -- --out film/out/03-kernelnet [--frames all|a:b:step] [--pct 50] [--samples 64]
+  Blender -b --factory-startup --python film/kernelnet.py -- --out film/out/03-kernelnet [--frames all|between|a:b:step] [--pct 50] [--samples 64]
 """
 
 import math
@@ -316,7 +316,7 @@ def make_handler(H):
     net, pos, curves = H["net"], H["pos"], H["curves"]
 
     def update(scene, *_):
-        f = scene.frame_current
+        f = scene.frame_current_final  # film frames fall between whole frames
         for t, cv in curves.items():
             C, R, c = curve_state(cv, f)
             me = cv["ob"].data

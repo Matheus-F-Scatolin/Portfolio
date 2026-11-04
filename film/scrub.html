@@ -53,8 +53,8 @@ const CHAPTERS = [
 const Q = new URLSearchParams(location.search);
 const ONLY = Q.get('ch'); // ?ch=02-legal plays one chapter
 const PIN = Q.has('f') ? +Q.get('f') - 1 : null; // ?f=N shows global frame N without scrolling (for review)
-const FADE = 5; // frames a label takes to fade in or out
-const VH_PER_FRAME = 4.4; // scroll length per frame
+const FADE = 10; // frames a label takes to fade in or out
+const VH_PER_FRAME = 2.2; // scroll length per frame
 
 const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
 const ink = document.getElementById('ink'), box = document.getElementById('labels');

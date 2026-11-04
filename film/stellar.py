@@ -6,7 +6,7 @@ tree and morph into module blocks (rounded boxes; diamonds for the two
 decision modules), the tree's ink arrows draw on, then one message travels a
 single path through it, lighting each module and edge it passes in signal
 orange. Run with:
-  Blender -b --factory-startup --python film/stellar.py -- --out DIR [--frames all|a:b:step] [--pct 50] [--samples 64]
+  Blender -b --factory-startup --python film/stellar.py -- --out DIR [--frames all|between|a:b:step] [--pct 50] [--samples 64]
 """
 
 import math
