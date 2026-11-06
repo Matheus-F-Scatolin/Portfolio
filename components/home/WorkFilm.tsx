@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { filmChapters } from '@/lib/film';
+import { filmChapters, filmVersion } from '@/lib/film';
 
 // The Blender film of the four projects, scrubbed by scroll. Frames are WebP
 // stills under public/film/<slug>/<width>/, drawn to a canvas; the labels are
@@ -15,6 +15,11 @@ import { filmChapters } from '@/lib/film';
 // waits on a decode; the window leans the way the reader is scrolling. The
 // playhead glides toward the scroll position instead of jumping, so a wheel
 // notch plays as a run of frames rather than a cut.
+//
+// The whole film is about 18 MB at 1600px. Once the page settles only a
+// coarse pass (one frame in eight) loads; the rest waits until the reader
+// comes within a few screens of the film, so a visitor who never scrolls
+// that far does not pay for it.
 
 type Anchor = [number, number] | 0;
 type Label =
@@ -34,6 +39,7 @@ type Placed = { label: Label; el: HTMLElement; line?: SVGElement; tick?: SVGElem
 
 const FADE = 10; // frames a label takes to fade in or out
 const STRIDES = [16, 8, 4, 2, 1]; // load a coarse pass of the whole film first, then fill in
+const WARM_PASSES = 2; // passes that load before the reader nears the film (1 frame in 8)
 const WORKERS = 6;
 const NEAR = 12; // frames either side of the current one that load first
 const DECODERS = 4; // bitmaps decoding at once, nearest to the playhead first
@@ -43,7 +49,8 @@ const WINDOW = { 1600: [6, 20], 960: [10, 32] } as const;
 const GLIDE_MS = 50; // time constant of the playhead easing toward the scroll position
 const SNAP = 90; // frames; a longer jump (a link, a resize) cuts instead of gliding
 const SVG = 'http://www.w3.org/2000/svg';
-const POSTER = `url(/film/${filmChapters[0].slug}/960/0001.webp)`;
+const V = `?v=${filmVersion}`; // the film is cached for a year; a new render changes this
+const POSTER = `url(/film/${filmChapters[0].slug}/960/0001.webp${V})`;
 
 const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const edge = (x: number) => clamp(x / 0.04) * clamp((1 - x) / 0.04); // fade near the stage edge
@@ -88,6 +95,8 @@ export default function WorkFilm() {
     let last = 0;
     let raf = 0;
     let started = false;
+    let full = false; // the reader is near the film: load every frame, not just the warm passes
+    let spawn = () => {}; // starts loaders once the queue exists; set by start()
     let alive = true;
 
     // Layout is read here, on resize, and never while scrolling.
@@ -356,7 +365,7 @@ export default function WorkFilm() {
       const width = stage.clientWidth * dpr > 1000 ? 1600 : 960;
       [behind, ahead] = WINDOW[width];
       const loaded = await Promise.all(
-        filmChapters.map((ch) => fetch(`/film/${ch.slug}/film.json`).then((r) => r.json() as Promise<FilmData>)),
+        filmChapters.map((ch) => fetch(`/film/${ch.slug}/film.json${V}`).then((r) => r.json() as Promise<FilmData>)),
       );
       if (!alive) return;
       data = loaded;
@@ -367,14 +376,16 @@ export default function WorkFilm() {
       const strides = conn?.saveData ? STRIDES.slice(0, 2) : STRIDES;
       const order: number[] = [];
       const queued = new Uint8Array(seq.length);
-      for (const s of strides) {
+      let warm = 0; // order[0..warm) is what loads before the reader nears the film
+      strides.forEach((s, i) => {
         for (let g = 0; g < seq.length; g += s) {
           if (!queued[g]) {
             queued[g] = 1;
             order.push(g);
           }
         }
-      }
+        if (i < WARM_PASSES) warm = order.length;
+      });
       // Frames near the one on screen jump the queue, so a reader who lands
       // mid-section, or scrolls fast, gets their chapter before the rest.
       const taken = new Uint8Array(seq.length);
@@ -385,14 +396,15 @@ export default function WorkFilm() {
             if (queued[g] && !taken[g]) return g;
           }
         }
-        while (next < order.length && taken[order[next]]) next++;
-        return next < order.length ? order[next++] : -1;
+        const end = full ? order.length : warm;
+        while (next < end && taken[order[next]]) next++;
+        return next < end ? order[next++] : -1;
       };
       const worker = async () => {
         for (let g = pick(); alive && g >= 0; g = pick()) {
           taken[g] = 1;
           const { c, f } = seq[g];
-          const url = `/film/${filmChapters[c].slug}/${width}/${String(f + 1).padStart(4, '0')}.webp`;
+          const url = `/film/${filmChapters[c].slug}/${width}/${String(f + 1).padStart(4, '0')}.webp${V}`;
           try {
             const r = await fetch(url);
             if (!r.ok) continue;
@@ -403,21 +415,37 @@ export default function WorkFilm() {
           if (alive && g >= lo() && g <= hi()) keep();
         }
       };
-      for (let i = 0; i < WORKERS; i++) worker();
+      // Loaders stop when the warm passes are done; nearing the film restarts them.
+      let running = 0;
+      spawn = () => {
+        while (alive && running < WORKERS) {
+          running++;
+          worker().finally(() => running--);
+        }
+      };
+      spawn();
       onScroll();
     }
 
     measure();
     onScroll();
-    // Warm the film as soon as the page has settled, so it is loaded by the
-    // time the reader scrolls to it. A reader who gets there first (a deep
-    // link, a fast scroll) starts it on the way; data saver waits for that.
+    // Warm the coarse passes as soon as the page has settled, and load the
+    // rest once the reader is within three screens of the film. A reader who
+    // gets there first (a deep link, a fast scroll) starts it all on the way;
+    // data saver waits for that.
     const begin = () => {
       if (!started) start();
     };
-    const io = new IntersectionObserver((entries) => entries.some((e) => e.isIntersecting) && begin(), {
-      rootMargin: '150% 0px 150% 0px',
-    });
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        full = true;
+        io.disconnect();
+        begin();
+        spawn();
+      },
+      { rootMargin: '300% 0px 300% 0px' },
+    );
     io.observe(track);
     const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
     let idle = 0;
