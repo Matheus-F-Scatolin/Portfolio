@@ -9,3 +9,6 @@ export const filmChapters = [
 ] as const;
 
 export const filmWidths = [960, 1600] as const;
+
+// Changes whenever any file under public/film changes; busts the year-long cache.
+export const filmVersion = '0a48197aac';

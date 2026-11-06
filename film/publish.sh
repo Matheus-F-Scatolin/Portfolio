@@ -26,7 +26,7 @@ for pair in $CHAPTERS; do
 done
 
 $PY - "$CHAPTERS" <<'EOF'
-import json, sys
+import hashlib, json, pathlib, sys
 chapters = [p.split(":") for p in sys.argv[1].split()]
 counts = []
 for d, slug in chapters:
@@ -42,6 +42,15 @@ with open("lib/film.ts", "w") as f:
     for slug, n in counts:
         f.write(f"  {{ slug: '{slug}', frames: {n} }},\n")
     f.write("] as const;\n\nexport const filmWidths = [960, 1600] as const;\n")
+    # A hash of every published file. The site asks for the film with ?v=<this>,
+    # so the frames can be cached forever and a new render still reaches readers.
+    h = hashlib.sha1()
+    for p in sorted(pathlib.Path("public/film").rglob("*")):
+        if p.is_file():
+            h.update(str(p.relative_to("public/film")).encode())
+            h.update(p.read_bytes())
+    f.write("\n// Changes whenever any file under public/film changes; busts the year-long cache.\n")
+    f.write(f"export const filmVersion = '{h.hexdigest()[:10]}';\n")
 print(open("lib/film.ts").read())
 EOF
 du -sh public/film
