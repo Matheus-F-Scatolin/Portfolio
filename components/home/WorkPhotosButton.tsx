@@ -27,7 +27,7 @@ export default function WorkPhotosButton({
           setOpened(true);
           ref.current?.showModal();
         }}
-        className="rounded-full border border-line px-3.5 py-1.5 font-mono text-[12px] text-ink-2 transition-[border-color,color,transform] duration-300 active:scale-[0.98] [@media(hover:hover)_and_(pointer:fine)]:hover:border-ink/30 [@media(hover:hover)_and_(pointer:fine)]:hover:text-ink"
+        className="tap rounded-full border border-line px-3.5 py-1.5 font-mono text-[12px] text-ink-2 transition-[border-color,color,transform] duration-300 active:scale-[0.98] [@media(hover:hover)_and_(pointer:fine)]:hover:border-ink/30 [@media(hover:hover)_and_(pointer:fine)]:hover:text-ink"
       >
         {label}
         <span className="sr-only">: {title}</span>

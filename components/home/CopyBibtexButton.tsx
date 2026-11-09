@@ -99,7 +99,7 @@ export default function CopyBibtexButton({
       label="Copy BibTeX"
       announcement="BibTeX copied to clipboard."
       describedBy={describedBy}
-      className="rounded-full border border-line px-3 py-1 text-[13px] text-ink-2 transition-[border-color,color,transform] duration-300 ease-out active:scale-[0.98] [@media(hover:hover)_and_(pointer:fine)]:hover:border-ink/30 [@media(hover:hover)_and_(pointer:fine)]:hover:text-ink"
+      className="tap rounded-full border border-line px-3 py-1 text-[13px] text-ink-2 transition-[border-color,color,transform] duration-300 ease-out active:scale-[0.98] [@media(hover:hover)_and_(pointer:fine)]:hover:border-ink/30 [@media(hover:hover)_and_(pointer:fine)]:hover:text-ink"
     />
   );
 }

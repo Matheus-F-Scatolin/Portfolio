@@ -86,7 +86,7 @@ export default function Nav() {
             : 'border-ink/[0.06] bg-paper/75 text-ink shadow-[0_8px_30px_-18px_rgb(14_15_17/0.25)]'
         }`}
       >
-        <Link href="/" className="text-[15px] font-medium tracking-[-0.02em]">
+        <Link href="/" className="tap text-[15px] font-medium tracking-[-0.02em]">
           {person.shortName}
         </Link>
 
@@ -106,7 +106,7 @@ export default function Nav() {
 
         <Link
           href="/#contact"
-          className={`rounded-full px-5 py-2.5 text-[14px] font-medium transition-[background-color,color,transform] duration-300 active:scale-[0.98] ${
+          className={`tap rounded-full px-5 py-2.5 text-[14px] font-medium transition-[background-color,color,transform] duration-300 active:scale-[0.98] ${
             dark ? 'bg-stage-ink text-stage hover:bg-white' : 'bg-ink text-paper hover:bg-ink-2'
           }`}
         >

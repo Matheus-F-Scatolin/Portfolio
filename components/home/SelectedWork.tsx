@@ -78,7 +78,7 @@ function WorkText({ item }: { item: Work }) {
         <Link
           href={item.href}
           {...(item.external ? newTab : {})}
-          className="underline decoration-transparent decoration-1 underline-offset-[6px] transition-colors duration-300 [@media(hover:hover)_and_(pointer:fine)]:hover:decoration-ink/30"
+          className="tap underline decoration-transparent decoration-1 underline-offset-[6px] transition-colors duration-300 [@media(hover:hover)_and_(pointer:fine)]:hover:decoration-ink/30"
         >
           {item.title}
         </Link>
@@ -93,7 +93,7 @@ function WorkText({ item }: { item: Work }) {
         <Link
           href={item.href}
           {...(item.external ? newTab : {})}
-          className="group/link text-ink underline decoration-ink/25 underline-offset-[6px] transition-colors duration-300 [@media(hover:hover)_and_(pointer:fine)]:hover:decoration-ink"
+          className="tap group/link text-ink underline decoration-ink/25 underline-offset-[6px] transition-colors duration-300 [@media(hover:hover)_and_(pointer:fine)]:hover:decoration-ink"
         >
           {item.external ? item.external.label : 'Read the case study'}
           <span className="sr-only">: {item.title}</span>
@@ -143,7 +143,10 @@ export default function SelectedWork() {
               const height = `${(frames[item.slug] ?? 100) * VH_PER_FRAME + (last ? HOLD_VH : 0)}vh`;
               return (
                 <div key={item.slug} data-film-segment style={{ height }}>
-                  <article className={TEXT_STICKY}>
+                  {/* The padding is the gap between one project's text
+                      leaving and the next arriving; without it the two meet
+                      edge to edge at every handoff. */}
+                  <article className={`${TEXT_STICKY} pb-20 md:pb-28`}>
                     <WorkText item={item} />
                   </article>
                 </div>

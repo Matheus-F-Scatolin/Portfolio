@@ -247,6 +247,26 @@ html[data-intro="done"] .intro-floor {
   }
 }
 
+/* Touch screens only: a link or pill keeps its drawn size but answers a tap
+   anywhere in a 44px box centred on it. */
+@media (pointer: coarse) {
+  .tap {
+    position: relative;
+  }
+
+  .tap::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    min-width: 44px;
+    height: 100%;
+    min-height: 44px;
+    transform: translate(-50%, -50%);
+  }
+}
+
 /* The film's frames are flattened onto paper, so it sits on the page with
    no box. Objects enter and leave the camera sideways, so the sides dissolve
    into the page; top and bottom only soften over a thin band, enough to take

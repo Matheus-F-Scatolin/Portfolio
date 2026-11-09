@@ -12,7 +12,7 @@ import { ease, inView } from '@/lib/motion';
 const SELF = /(Scatolin, M\. F\.|Scatolin, M\.)/;
 
 const textLink =
-  'text-ink underline decoration-ink/25 underline-offset-[5px] transition-colors duration-300 [@media(hover:hover)_and_(pointer:fine)]:hover:decoration-ink';
+  'tap text-ink underline decoration-ink/25 underline-offset-[5px] transition-colors duration-300 [@media(hover:hover)_and_(pointer:fine)]:hover:decoration-ink';
 
 function Authors({ authors }: { authors: string }) {
   return (
@@ -96,7 +96,7 @@ export default function Research() {
                 as="li"
                 key={paper.id}
                 delay={i * 0.06}
-                className="grid gap-y-2 md:grid-cols-[72px_1fr] md:gap-y-0"
+                className="relative grid gap-y-2 md:grid-cols-[72px_1fr] md:gap-y-0"
               >
                 <span aria-hidden className="font-mono text-[14px] leading-6 text-muted">
                   [{i + 1}]
@@ -125,7 +125,10 @@ export default function Research() {
                         <span className="font-mono text-[13px] text-muted">{paper.metric}</span>
                       ) : null}
                     </div>
-                    <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+                    {/* From xl up the 760px measure leaves the right of the
+                        page empty, so the links move there and line up down
+                        the list as a column. */}
+                    <div className="flex flex-wrap items-center gap-x-5 gap-y-2 xl:absolute xl:right-0 xl:top-0 xl:justify-end">
                       {paper.links.map((link) => (
                         <ExternalLink
                           key={link.href}
