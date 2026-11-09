@@ -10,9 +10,12 @@ import { filmChapters, filmVersion } from '@/lib/film';
 // stage: each project's text sits in a segment as tall as its chapter, and the
 // frame is how far the line the text sticks to has travelled into it.
 //
-// Frames arrive as compressed blobs. Only a short window around the playhead
-// is decoded, off the main thread, into bitmaps, so drawing a frame never
-// waits on a decode; the window leans the way the reader is scrolling. The
+// Frames arrive as compressed blobs. Only the frames the playhead is about to
+// reach are decoded, off the main thread, into bitmaps, so drawing a frame
+// never waits on a decode. The screen shows one frame per refresh, so when
+// the reader scrolls fast the film skips frames; only the ones that will
+// actually be drawn are decoded, along the path the playhead is predicted to
+// take, and a decode that lands late is kept rather than thrown away. The
 // playhead glides toward the scroll position instead of jumping, so a wheel
 // notch plays as a run of frames rather than a cut.
 
@@ -34,12 +37,19 @@ type Placed = { label: Label; el: HTMLElement; line?: SVGElement; tick?: SVGElem
 
 const FADE = 10; // frames a label takes to fade in or out
 const STRIDES = [16, 8, 4, 2, 1]; // load a coarse pass of the whole film first, then fill in
-const WORKERS = 6;
+// Requests in flight at once. Vercel serves HTTP/2, so they share one
+// connection; with only a few, the download waits on round trips rather
+// than on the line.
+const WORKERS = 16;
+const TRIES = 3; // a frame that fails to load is asked for again, up to this many times
 const NEAR = 12; // frames either side of the current one that load first
 const DECODERS = 4; // bitmaps decoding at once, nearest to the playhead first
-// Decoded frames kept [behind, ahead of] the playhead, about 155 MB at 1600px
-// and 90 MB at 960px.
+// When the playhead is slow, decoded frames kept [behind, ahead of] it.
+// BUDGET caps the bitmaps held at once: about 150 MB at 1600px and 90 MB at 960px.
 const WINDOW = { 1600: [6, 20], 960: [10, 32] } as const;
+const BUDGET = { 1600: 26, 960: 42 } as const;
+const REFRESH_MS = 1000 / 60; // one display frame
+const LOOKAHEAD = 10; // display frames of the playhead's predicted path to decode for
 const GLIDE_MS = 50; // time constant of the playhead easing toward the scroll position
 const SNAP = 90; // frames; a longer jump (a link, a resize) cuts instead of gliding
 const SVG = 'http://www.w3.org/2000/svg';
@@ -79,6 +89,7 @@ export default function WorkFilm() {
     const decoding = new Set<number>();
     let behind: number = WINDOW[960][0];
     let ahead: number = WINDOW[960][1];
+    let budget: number = BUDGET[960];
     let data: FilmData[] | null = null;
     let placed: Placed[][] = [];
     let shownChapter = -1;
@@ -86,6 +97,8 @@ export default function WorkFilm() {
     let target = 0; // frame the scroll position asks for
     let head = 0; // frame the playhead is on, easing toward target
     let dir = 1; // which way the reader last moved
+    let speed = 0; // how fast the scroll position moves, in frames per ms (smoothed)
+    let lastTarget = 0;
     let last = 0;
     let raf = 0;
     let started = false;
@@ -133,49 +146,87 @@ export default function WorkFilm() {
       return first[c] + Math.round(t * (n - 1 - s0));
     }
 
-    const lo = () => Math.round(head) - (dir > 0 ? behind : ahead);
-    const hi = () => Math.round(head) + (dir > 0 ? ahead : behind);
+    // The frames worth decoding, most urgent first: the one under the
+    // playhead, then the frames between it and where it will be a few
+    // display frames from now if the scroll carries on at its speed, then
+    // the one it will settle on, then a window around it that leans the way
+    // the reader is scrolling. A fast scroll draws one frame in several, so
+    // the path is sampled on a fixed grid of every s-th frame: the same
+    // frames stay wanted from one display frame to the next, and a decode
+    // started now is still useful when it lands.
+    function plan() {
+      const out: number[] = [];
+      const seen = new Set<number>();
+      const add = (g: number) => {
+        if (g >= 0 && g < seq.length && blobs[g] && !seen.has(g)) {
+          seen.add(g);
+          out.push(g);
+        }
+      };
+      const c = Math.round(head);
+      add(c);
+      const k = 1 - Math.exp(-REFRESH_MS / GLIDE_MS);
+      let h = head;
+      let t = target;
+      for (let i = 0; i < LOOKAHEAD; i++) {
+        t += speed * REFRESH_MS;
+        h += (t - h) * k;
+      }
+      const far = Math.round(h);
+      const s = Math.max(1, Math.floor(Math.abs(speed) * REFRESH_MS));
+      if (far > c) for (let g = Math.ceil((c + 1) / s) * s; g <= far; g += s) add(g);
+      else if (far < c) for (let g = Math.floor((c - 1) / s) * s; g >= far; g -= s) add(g);
+      add(target);
+      for (let d = 1; d <= ahead; d++) {
+        add(c + d * dir);
+        if (d <= behind) add(c - d * dir);
+      }
+      return out.slice(0, budget);
+    }
 
-    // Decode the frames the playhead is about to reach, nearest first, and
-    // let go of the ones it has left behind.
+    // Decode the planned frames, a few at a time, and once over budget let go
+    // of the bitmaps furthest from the playhead that the plan no longer needs.
     function keep() {
-      const a = lo();
-      const b = hi();
-      bitmaps.forEach((bm, g) => {
-        if (g < a || g > b) {
-          bm.close();
+      const want = plan();
+      const wanted = new Set(want);
+      if (bitmaps.size > budget) {
+        const c = head;
+        const spare = Array.from(bitmaps.keys())
+          .filter((g) => !wanted.has(g) && g !== shown)
+          .sort((a, b) => Math.abs(b - c) - Math.abs(a - c));
+        for (const g of spare) {
+          if (bitmaps.size <= budget) break;
+          bitmaps.get(g)!.close();
           bitmaps.delete(g);
         }
-      });
-      const c = Math.round(head);
-      for (let d = 0; d <= ahead && decoding.size < DECODERS; d++) {
-        for (const g of [c + d * dir, c - d * dir]) {
-          if (decoding.size >= DECODERS) break;
-          if (g < a || g > b || !blobs[g] || bitmaps.has(g) || decoding.has(g)) continue;
-          decoding.add(g);
-          createImageBitmap(blobs[g]!)
-            .then((bm) => {
-              if (alive && g >= lo() && g <= hi()) bitmaps.set(g, bm);
-              else bm.close();
-            })
-            .catch(() => {})
-            .finally(() => {
-              decoding.delete(g);
-              if (alive) {
-                keep();
-                request();
-              }
-            });
-        }
+      }
+      for (const g of want) {
+        if (decoding.size >= DECODERS) break;
+        if (bitmaps.has(g) || decoding.has(g)) continue;
+        decoding.add(g);
+        createImageBitmap(blobs[g]!)
+          .then((bm) => {
+            if (alive) bitmaps.set(g, bm);
+            else bm.close();
+          })
+          .catch(() => {})
+          .finally(() => {
+            decoding.delete(g);
+            if (alive) {
+              keep();
+              request();
+            }
+          });
       }
     }
 
+    // The decoded frame closest to g.
     function nearest(g: number) {
-      for (let d = 0; d <= ahead + behind; d++) {
-        if (bitmaps.has(g - d)) return g - d;
-        if (bitmaps.has(g + d)) return g + d;
-      }
-      return -1;
+      let best = -1;
+      bitmaps.forEach((_, k) => {
+        if (best < 0 || Math.abs(k - g) < Math.abs(best - g)) best = k;
+      });
+      return best;
     }
 
     function make<K extends keyof HTMLElementTagNameMap>(tag: K, cls: string, text: string) {
@@ -325,9 +376,14 @@ export default function WorkFilm() {
       raf = 0;
       const dt = last ? Math.min(64, now - last) : 16;
       last = now;
+      // the scroll position's speed, for predicting where the playhead goes next
+      speed = speed * 0.6 + ((target - lastTarget) / dt) * 0.4;
+      lastTarget = target;
       const gap = target - head;
-      if (reduce || Math.abs(gap) > SNAP) head = target;
-      else head += gap * (1 - Math.exp(-dt / GLIDE_MS));
+      if (reduce || Math.abs(gap) > SNAP) {
+        head = target;
+        speed = 0; // a jump, not a scroll: nothing to predict
+      } else head += gap * (1 - Math.exp(-dt / GLIDE_MS));
       if (Math.abs(target - head) < 0.5) head = target;
       if (data) {
         keep();
@@ -335,7 +391,10 @@ export default function WorkFilm() {
         if (g >= 0 && g !== shown) paint(g);
       }
       if (head !== target) raf = requestAnimationFrame(tick);
-      else last = 0;
+      else {
+        last = 0;
+        speed = 0;
+      }
     }
 
     const request = () => {
@@ -356,6 +415,7 @@ export default function WorkFilm() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const width = stage.clientWidth * dpr > 1000 ? 1600 : 960;
       [behind, ahead] = WINDOW[width];
+      budget = BUDGET[width];
       const loaded = await Promise.all(
         filmChapters.map((ch) => fetch(`/film/${ch.slug}/film.json${V}`).then((r) => r.json() as Promise<FilmData>)),
       );
@@ -363,6 +423,7 @@ export default function WorkFilm() {
       data = loaded;
       placed = data.map(build);
       head = target;
+      lastTarget = target;
 
       const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
       const strides = conn?.saveData ? STRIDES.slice(0, 2) : STRIDES;
@@ -378,14 +439,20 @@ export default function WorkFilm() {
       }
       // Frames near the one on screen jump the queue, so a reader who lands
       // mid-section, or scrolls fast, gets their chapter before the rest.
+      // The warm-up itself asks for low priority, so it never holds up the
+      // page's own images; frames near the reader ask for high.
       const taken = new Uint8Array(seq.length);
+      const tries = new Uint8Array(seq.length);
       let next = 0;
+      let urgent = false;
       const pick = () => {
+        urgent = true;
         for (let d = 0; d <= NEAR; d++) {
           for (const g of [target + d, target - d]) {
             if (queued[g] && !taken[g]) return g;
           }
         }
+        urgent = false;
         while (next < order.length && taken[order[next]]) next++;
         return next < order.length ? order[next++] : -1;
       };
@@ -395,13 +462,18 @@ export default function WorkFilm() {
           const { c, f } = seq[g];
           const url = `/film/${filmChapters[c].slug}/${width}/${String(f + 1).padStart(4, '0')}.webp${V}`;
           try {
-            const r = await fetch(url);
-            if (!r.ok) continue;
+            const r = await fetch(url, { priority: urgent ? 'high' : 'low' });
+            if (!r.ok) throw new Error(`${r.status}`);
             blobs[g] = await r.blob();
           } catch {
+            // back of the queue, so one bad frame never stalls the rest
+            if (++tries[g] < TRIES) {
+              taken[g] = 0;
+              order.push(g);
+            }
             continue;
           }
-          if (alive && g >= lo() && g <= hi()) keep();
+          if (alive && decoding.size < DECODERS) keep();
         }
       };
       for (let i = 0; i < WORKERS; i++) worker();
