@@ -85,7 +85,7 @@ export default function FooterTabs({ previewLines }: { previewLines: string[] })
               tabIndex={selected ? 0 : -1}
               onClick={() => setActive(tab.key)}
               onKeyDown={(event) => onKeyDown(event, index)}
-              className={`relative rounded-full px-4 py-2 text-[14px] font-medium transition-colors duration-300 ${
+              className={`tap relative rounded-full px-4 py-2 text-[14px] font-medium transition-colors duration-300 ${
                 selected
                   ? 'text-stage'
                   : 'text-stage-label [@media(hover:hover)_and_(pointer:fine)]:hover:text-stage-ink'
@@ -184,7 +184,7 @@ function AgentPanel({
           source={CURL}
           label="Copy"
           announcement="Command copied to clipboard."
-          className="shrink-0 rounded-full border border-stage-ink/15 px-3 py-1 font-sans text-[13px] text-stage-label transition-[border-color,color,transform] duration-300 ease-out active:scale-[0.98] [@media(hover:hover)_and_(pointer:fine)]:hover:border-stage-ink/30 [@media(hover:hover)_and_(pointer:fine)]:hover:text-stage-ink"
+          className="tap shrink-0 rounded-full border border-stage-ink/15 px-3 py-1 font-sans text-[13px] text-stage-label transition-[border-color,color,transform] duration-300 ease-out active:scale-[0.98] [@media(hover:hover)_and_(pointer:fine)]:hover:border-stage-ink/30 [@media(hover:hover)_and_(pointer:fine)]:hover:text-stage-ink"
         />
       </div>
 
@@ -222,7 +222,7 @@ function AgentPanel({
           href={links.llms}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[15px] text-stage-ink underline decoration-stage-ink/25 underline-offset-[6px] transition-colors duration-300 [@media(hover:hover)_and_(pointer:fine)]:hover:decoration-stage-ink"
+          className="tap text-[15px] text-stage-ink underline decoration-stage-ink/25 underline-offset-[6px] transition-colors duration-300 [@media(hover:hover)_and_(pointer:fine)]:hover:decoration-stage-ink"
         >
           Open llms.txt <span aria-hidden>↗</span>
           <span className="sr-only"> (opens in a new tab)</span>

@@ -53,7 +53,7 @@ export default function Hero() {
             </a>
             <a
               href="#research"
-              className="text-[15px] font-medium text-ink underline decoration-ink/25 decoration-1 underline-offset-[6px] transition-colors duration-300 ease-out [@media(hover:hover)_and_(pointer:fine)]:hover:decoration-ink"
+              className="tap text-[15px] font-medium text-ink underline decoration-ink/25 decoration-1 underline-offset-[6px] transition-colors duration-300 ease-out [@media(hover:hover)_and_(pointer:fine)]:hover:decoration-ink"
             >
               Read the papers
             </a>
