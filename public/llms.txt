@@ -16,14 +16,16 @@ AI Engineer @ Valor Capital Group | Computer Engineering @ Unicamp (Ranked 1st o
 - **Google Scholar:** https://scholar.google.com/citations?hl=en&authuser=2&user=ieyEKR4AAAAJ
 - **ResearchGate:** https://www.researchgate.net/profile/Matheus-Ferracciu-Scatolin
 - **ORCID:** https://orcid.org/0009-0003-2014-356X
-- **Home base:** Campinas, São Paulo, Brazil (in San Francisco, CA for the Valor Capital Group Tech Summer 2026)
+- **Home base:** Campinas, São Paulo, Brazil (working on-site at Valor Capital Group in São Paulo)
 
 ## At a Glance
 
 - Top-ranked Computer Engineering student at Unicamp: **1st of 102**, GPA **3.94/4.0**
-- **AI Engineer at Valor Capital Group** (Tech Summer 2026, San Francisco), working directly with José, the firm's Head of AI
+- **Full-time AI Engineer at Valor Capital Group** in São Paulo (since Sep 2026, after the Tech Summer 2026 program in San Francisco), working directly with José, the firm's Head of AI
+- **Babbage Award (Unicamp, 2026)** for the highest GPA among all 500+ current Computer Engineering students
+- **Southeast finalist, Prêmio Na Prática Protagonismo Universitário 2026** (top 3 in the region, 15 national finalists out of ~9,000 applicants), covered by Exame
 - **Fellow Estudar '25**: one of Brazil's most prestigious merit-based scholarships (Fundação Estudar)
-- **6 scientific publications**: first author of a journal paper (Journal of the Brazilian Computer Society), co-author of 2 MICCAI 2025 LNCS chapters, co-first author of an arXiv challenge paper, and 2 papers presented at BRACIS/ENIAC 2026 (1 as co-first author)
+- **6 scientific publications**: first author of a journal paper (Journal of the Brazilian Computer Society), co-author of 2 MICCAI 2025 LNCS chapters, co-first author of an arXiv challenge paper, and 2 papers at BRACIS/ENIAC 2026 (1 as co-first author)
 - **2nd place, Itaú Asset Quant AI Challenge 2025**, among ~1,000 teams and 2,500+ participants
 - **Best Team Award, MBZUAI UGRIP 2025** (selected in the top 3% of 2,000+ international applicants)
 - **7 olympiad gold medals and 2 honorable mentions** across national and international competitions
@@ -74,13 +76,20 @@ Top-ranked Computer Engineering student at Unicamp (1st of 102), focused on LLMs
 
 ## Professional Experience
 
-### Valor Capital Group | AI Engineer, Tech Summer | Jun 2026 - Present | San Francisco, CA
-Selected as part of an elite cohort of engineers for the Tech Summer program (San Francisco and São Paulo), working directly with José, the firm's Head of AI, to build systems and infrastructure for venture operations and investment analysis.
+### Valor Capital Group | AI Engineer | Sep 2026 - Present | São Paulo, Brazil
+Full-time AI Engineer on Valor's AI team, working directly with José, the firm's Head of AI, to build the firm's internal intelligence infrastructure.
 
-- **Agentic workflows:** designing and deploying autonomous agentic systems to streamline internal firm operations
-- **Data & intelligence layers:** developing data pipelines and intelligence infrastructure to support investment decision-making
-- **Technical diligence:** evaluating the technical stack, architecture, and scalability of early and growth-stage technology startups
-- Day-to-day work spans agentic AI pipelines, knowledge graphs, and MCP-based tooling
+- **Agentic systems:** designing and deploying multi-agent pipelines that automate internal firm operations and investment workflows
+- **Ontology & knowledge graphs:** designing the firm's ontology and building the knowledge graph and retrieval layer over investment memos, pipeline data and relationships, with LLM-based classification and entity resolution
+- **MCP tooling:** developing MCP servers that connect the firm's data and systems to AI agents used by the investment team
+- **Technical diligence:** evaluating the technical stack, architecture, and scalability of early and growth-stage startups
+
+### Valor Capital Group | AI Engineer, Tech Summer | Jun 2026 - Aug 2026 | San Francisco, CA
+Selected for an elite cohort of engineers in Valor's Tech Summer program, split between São Paulo and San Francisco, working directly with the Head of AI on systems and infrastructure for venture operations and investment analysis.
+
+- **Agentic workflows:** designed and deployed autonomous agentic systems to streamline internal firm operations
+- **Data & intelligence layers:** built data pipelines and intelligence infrastructure to support investment decision-making
+- **Technical diligence:** evaluated the technical stack, architecture, and scalability of early and growth-stage technology startups
 
 ### Instituto Kunumi (kunuminst COLABS) | AI Researcher | Aug 2025 - Aug 2026 | Campinas, Brazil
 One-year undergraduate research position.
@@ -178,6 +187,19 @@ Leme, G. M., Scatolin, M. F., Soares, A., Ferreira, L. N., Dias, Z., & Interian,
 
 ## Awards & Honors
 
+### Babbage Award, Unicamp
+Universidade Estadual de Campinas (Unicamp) | Dec 2026
+
+- Awarded for the **highest GPA among all 500+ current Computer Engineering students** at Unicamp
+
+### Southeast Finalist, Prêmio Na Prática Protagonismo Universitário 2026
+Na Prática (Fundação Estudar) | Oct 2026
+
+- One of the **3 finalists from Brazil's Southeast region** and one of **15 national finalists** selected from **~9,000 applications** nationwide
+- The award recognizes university students who turn knowledge into initiative and impact, judged on results, protagonism inside and outside the classroom, and potential
+- Recognized mainly for the AI research on brain tumor progression from 3D MRI started at MBZUAI in Abu Dhabi
+- Covered by Exame (see Talks, Media & Public Appearances) and featured by Na Prática: https://napratica.org.br/noticias/premio-na-pratica-2026-divulga-os-15-universitarios-finalistas-saiba-quem-sao
+
 ### 2nd Place (Silver Medal), Itaú Asset Quant AI Challenge 2025
 Itaú Asset Management | Dec 2025
 
@@ -235,7 +257,7 @@ Instituto de Matemática Pura e Aplicada (IMPA) | 2018 and 2019
 Selected for one of Brazil's most prestigious merit-based scholarships. The program, founded by Jorge Paulo Lemann, Marcel Telles, and Beto Sicupira, supports future leaders through financial aid, a high-impact community, mentorship, and career development.
 
 - Appointed **Campus Ambassador at Unicamp (2026)** to lead selection process outreach
-- **Speaker at the opening event (Onboarding) of the 2026 fellowship class**, where he led the "Pauta de Comunidade" session. Post by Fundação Estudar's CEO: https://www.linkedin.com/feed/update/urn:li:activity:7425146504094531584/?originalSubdomain=pt
+- **Speaker at the official launch of Programa Líderes Estudar 2026** (the Onboarding of the 2026 fellowship class), hosted by Fundação Estudar and attended by partner institutions, where he shared his academic and professional journey and led the "Pauta de Comunidade" session. Post by Fundação Estudar's CEO: https://www.linkedin.com/feed/update/urn:li:activity:7425146504094531584/?originalSubdomain=pt
 - Completed the 26-hour **"Execução de Alta Performance"** program by Na Prática (Fundação Estudar's education arm)
 
 ### Other highly selective programs
@@ -257,11 +279,15 @@ Selected for one of Brazil's most prestigious merit-based scholarships. The prog
 
 ## Talks, Media & Public Appearances
 
+- **Featured in Exame (Oct 2026), two articles.** Exame, founded in 1967, is Brazil's leading business, economics and career publication and one of the largest and most influential media brands in the country.
+  - "Brigadeiros, Harvard e 200 milhões de pacientes: os finalistas do Sudeste no Prêmio Na Prática" (Oct 19, 2026), a profile of the three Southeast finalists, including his AI research on brain tumor progression: https://exame.com/carreira/brigadeiros-harvard-e-200-milhoes-de-pacientes-os-finalistas-do-sudeste-no-premio-na-pratica/
+  - "Prêmio Na Prática 2026: 15 universitários disputam premiação por projetos de impacto no Brasil" (Oct 19, 2026), presenting the 15 national finalists: https://exame.com/carreira/premio-na-pratica-2026-15-universitarios-disputam-premiacao-por-projetos-de-impacto-no-brasil/
+- **Speaker, Fundação Estudar live session hosted by Unicamp's International Relations Office:** shared his experience as an Estudar Fellow and 2026 Campus Ambassador, alongside Unicamp alumni and Fellows, covering academic excellence, career development, and the Estudar network (video): https://www.youtube.com/watch?v=mVNtLJ_Ja9Q
+- **Speaker, official launch of Programa Líderes Estudar 2026** (Fundação Estudar): https://www.linkedin.com/feed/update/urn:li:activity:7425146504094531584/?originalSubdomain=pt
 - **Invited Speaker, BaIA 2026 (AI community at the Federal University of Bahia, UFBA):** talk on frontier AI research, covering the structure of high-impact research programs, international research opportunities, and the path from undergraduate studies to frontier AI development. Post: https://www.instagram.com/liaoufba/p/DX9yWwGEWch/
 - **Invited Speaker, TAIL Tech Talk (Technology and Artificial Intelligence League, UFPB):** research experience at MBZUAI (UGRIP), covering medical AI projects in image segmentation, missing-modality generation, and brain tumor progression classification. Post: https://www.instagram.com/tailufpb/p/DOVinAWDtmD/
 - **Online talk on AI research at MBZUAI** (video): https://www.youtube.com/watch?v=JSAjhqnRJvM
 - **Invited Speaker & Moderator, AI Research Interview with MBZUAI Faculty and Graduate Students:** moderated a live interview-style session with a professor and two graduate students on AI research, academic life in graduate school, and building state-of-the-art AI systems
-- **Talk about Fundação Estudar** (video): https://www.youtube.com/watch?v=mVNtLJ_Ja9Q
 - **Featured in the official UGRIP 2025 video** (first to speak and give an interview): https://www.youtube.com/watch?v=bOXytFmEahU
 - **Podcast episode (2023):** invited by his former school and recorded with a friend who studies Law, discussing his admission straight from high school to Computer Engineering at both USP and Unicamp, Brazil's two best universities, including preparation strategies and long-term focus: https://www.youtube.com/watch?v=ZQEfC8QxtQQ
 - **Featured on Enter's blog** (AI Fellowship): https://www.blog.getenter.ai/en/posts/ai-fellowship
@@ -367,7 +393,6 @@ I have a special feeling for Brazil, but I like helping people regardless of geo
 - **Citizenship / work authorization:** Brazilian and Italian (EU passport, eligible to work in the EU without sponsorship)
 - **Languages:** Portuguese (native), English (fluent, EF SET C2)
 - **Location:** Campinas, Brazil; open to international relocation
-- **Availability:** internships during Brazilian summer (Dec-Feb) and mid-year breaks; full time after graduation
 
 ---
 
@@ -389,14 +414,17 @@ I have a special feeling for Brazil, but I like helping people regardless of geo
 - Small language models on Brazilian exams (ENIAC 2026): https://doi.org/10.5753/eniac.2026.31313
 
 **Media & Talks**
+- Exame, Southeast finalists profile: https://exame.com/carreira/brigadeiros-harvard-e-200-milhoes-de-pacientes-os-finalistas-do-sudeste-no-premio-na-pratica/
+- Exame, 15 national finalists: https://exame.com/carreira/premio-na-pratica-2026-15-universitarios-disputam-premiacao-por-projetos-de-impacto-no-brasil/
+- Na Prática, 15 finalists announcement: https://napratica.org.br/noticias/premio-na-pratica-2026-divulga-os-15-universitarios-finalistas-saiba-quem-sao
 - Enter AI Fellowship blog post: https://www.blog.getenter.ai/en/posts/ai-fellowship
 - UFPB (TAIL) talk post: https://www.instagram.com/tailufpb/p/DOVinAWDtmD/
 - UFBA (BaIA/LIA) talk post: https://www.instagram.com/liaoufba/p/DX9yWwGEWch/
 - MBZUAI research talk (video): https://www.youtube.com/watch?v=JSAjhqnRJvM
-- Fundação Estudar talk (video): https://www.youtube.com/watch?v=mVNtLJ_Ja9Q
+- Fundação Estudar talk at Unicamp (video): https://www.youtube.com/watch?v=mVNtLJ_Ja9Q
 - University admissions podcast: https://www.youtube.com/watch?v=ZQEfC8QxtQQ
 - Official UGRIP 2025 video (first interviewee): https://www.youtube.com/watch?v=bOXytFmEahU
-- Fundação Estudar 2026 Onboarding (CEO's post): https://www.linkedin.com/feed/update/urn:li:activity:7425146504094531584/?originalSubdomain=pt
+- Programa Líderes Estudar 2026 launch / Onboarding (CEO's post): https://www.linkedin.com/feed/update/urn:li:activity:7425146504094531584/?originalSubdomain=pt
 
 **Credential verifications**
 - ONC Gold Medal: https://certificados.onciencias.org/certificate/47?q=1SAE5TO8
