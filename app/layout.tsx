@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Schibsted_Grotesk, IBM_Plex_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import IntroCurtain from "@/components/IntroCurtain";
@@ -7,15 +7,23 @@ import MotionProvider from "@/components/MotionProvider";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-const sans = Schibsted_Grotesk({
-  subsets: ["latin"],
+// Self-hosted (latin subset) rather than next/font/google: the Google loader
+// hashes its class names from the CSS Google serves at build time, and on
+// Vercel the server and client compiles once got different CSS, so the HTML
+// named font classes the stylesheet never defined and every page fell back to
+// the browser's serif. Local files hash the same in both compiles.
+const sans = localFont({
+  src: "./fonts/SchibstedGrotesk-Latin.woff2",
+  weight: "400 900",
   display: "swap",
   variable: "--font-sans",
 });
 
-const mono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
+const mono = localFont({
+  src: [
+    { path: "./fonts/IBMPlexMono-Regular-Latin.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/IBMPlexMono-Medium-Latin.woff2", weight: "500", style: "normal" },
+  ],
   display: "swap",
   variable: "--font-mono",
 });

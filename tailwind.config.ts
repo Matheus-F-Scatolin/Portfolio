@@ -29,8 +29,8 @@ const config: Config = {
         signal: token("signal"),
       },
       fontFamily: {
-        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
-        mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
+        sans: ["var(--font-sans, system-ui)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono, ui-monospace)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       borderRadius: {
         // Shape rule: interactive elements are full pills; every surface
