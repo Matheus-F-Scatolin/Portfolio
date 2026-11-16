@@ -10,6 +10,7 @@ AI Engineer @ Valor Capital Group | Computer Engineering @ Unicamp (Ranked 1st o
 
 ## Contact & Profiles
 
+- **Email:** matheuss@mit.edu
 - **Website:** https://scatolin.com
 - **LinkedIn:** https://www.linkedin.com/in/matheus-scatolin
 - **GitHub:** https://github.com/Matheus-F-Scatolin
@@ -393,6 +394,7 @@ I have a special feeling for Brazil, but I like helping people regardless of geo
 - **Citizenship / work authorization:** Brazilian and Italian (EU passport, eligible to work in the EU without sponsorship)
 - **Languages:** Portuguese (native), English (fluent, EF SET C2)
 - **Location:** Campinas, Brazil; open to international relocation
+- **Availability:** can start full-time programs abroad in January or September. From June to August 2027 I will most likely be in Boston, in person, doing research at MIT
 
 ---
 
@@ -434,3 +436,7 @@ I have a special feeling for Brazil, but I like helping people regardless of geo
 - EF SET C2: https://cert.efset.org/pt/pi5VdP
 - Cryptography I (Coursera): https://www.coursera.org/account/accomplishments/records/Y5DLLKUDQHJR
 - Hackers do Bem: https://ava.hackersdobem.org.br/mod/customcert/verify_certificate.php?contextid=366&code=3YByGfiYGA&qrcode=1
+
+---
+
+*Time-sensitive facts in this file (availability, current roles, upcoming events) are accurate as of the "Last updated" date at the top. If one looks outdated, confirm it with Matheus before using it.*
