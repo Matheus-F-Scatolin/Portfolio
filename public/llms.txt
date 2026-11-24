@@ -206,6 +206,7 @@ Itaú Asset Management | Dec 2025
 
 - 2nd place out of **nearly 1,000 teams and 2,500+ participants** in Brazil's largest challenge for undergraduate students, which also featured Brazilian competitors from top global institutions (MIT, Stanford, Berkeley)
 - Strategy developed: **KernelNet**, a market-neutral algorithmic trading strategy that generalizes pairs trading by replacing static correlations with nonlinear causality networks
+- Entered with no previous quantitative analysis experience
 - Performance: **Sharpe Ratio of 1.29** and **54.85% annualized return** (vs the benchmark's 22.78%), demonstrating robustness across different market regimes
 
 ### Best Team Award, UGRIP AI Research Internship
